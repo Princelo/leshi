@@ -1,0 +1,1 @@
+<img src="<?php echo IMG_URL; ?>error.jpg" alt="" />

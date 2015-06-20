@@ -1,0 +1,683 @@
+{include file="inc/header.html"}
+
+<style type="text/css">
+div.shuffle{
+	position:fixed;
+	top:640px;
+	right:19px;
+	width:200px;
+	height:50px;
+	background:transparent url(/images/shuffle.png) no-repeat top left;
+	z-index:999;
+}
+div.hover{
+	position:fixed;
+	top:100px;
+	right:80px;
+	width:253px;
+	height:65px;
+	background:transparent url(/images/hover.png) no-repeat top left;
+	z-index:999;
+}
+.rp_list {
+	font-family:Verdana, Helvetica, sans-serif;
+	position:fixed;
+	right:-220px;
+	top:200px;
+	margin:0;
+	padding:0;
+	z-index:988;
+}
+span.rp_shuffle{
+	background:#222 url(/images/rightad/shuffle.png) no-repeat 10px 50%;
+	width:28px;
+	height:14px;
+	display:block;
+	margin:10px 0px 0px 20px;
+	cursor:pointer;
+	padding:4px;
+	border:1px solid #000;
+	-moz-border-radius:5px 0px 0px 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.rp_list ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.rp_list ul li{
+	width: 240px;
+	margin-bottom:5px;
+	display:none;
+}
+.rp_list ul li div{
+	display: block;
+	line-height:15px;
+	width: 240px;
+	height: 80px;
+	background:#333;
+	border:1px solid #000;
+	-moz-border-radius:5px 0px 0px 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.rp_list ul li div img{
+	width:70px;
+	border:none;
+	float:left;
+	margin:4px 10px 0px 4px;
+	border:1px solid #111;
+	-moz-box-shadow:1px 1px 3px #000;
+	-webkit-box-shadow:1px 1px 3px #000;
+	box-shadow:1px 1px 3px #000;
+}
+span.rp_title{
+	font-size:11px;
+	color:#ddd;
+	height:46px;
+	margin:4px 0px 0px 20px;
+	display:block;
+	text-shadow:1px 1px 1px #000;
+	padding-top:3px;
+	background:#222;
+	-moz-box-shadow:0px 0px 5px #000 inset;
+	-webkit-box-shadow:0px 0px 5px #000 inset;
+	box-shadow:0px 0px 5px #000 inset;
+}
+span.rp_links{
+	height:8px;
+	margin-top:6px;
+	display:block;
+}
+span.rp_links a{
+	background: #222 url(/images/rightad/bgbutton.png) repeat-x;
+	padding: 2px 15px;
+	font-size:10px;
+	color: #fff;
+	text-decoration: none;
+	line-height: 1;
+	-moz-box-shadow: 0 1px 3px #000;
+	-webkit-box-shadow: 0 1px 3px #000;
+	box-shadow:0 1px 3px #000;
+	text-shadow: 0 -1px 1px #222;
+	cursor: pointer;
+	outline:none;
+}
+span.rp_links a:hover{
+	background-color:#000;
+	color:#fff;
+}
+</style>
+
+<!--
+		<div class="shuffle"></div>
+		<div class="hover"></div>
+-->	
+<!--右则广告开始-->
+		<div id="rp_list" class="rp_list">
+			<ul>
+				<li>
+					<div>
+						<img src="images/rightAd/1.jpg" alt=""/>
+						<span class="rp_title">Star bucks</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.starbucks.cn">立即访问</a>
+							<a target="_blank" href="http://www.starbucks.cn">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/2.jpg" alt=""/>
+						<span class="rp_title">Adidas阿迪达斯</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.adidas.cn/">立即访问</a>
+							<a target="_blank" href="http://www.adidas.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/3.jpg" alt=""/>
+						<span class="rp_title">Apple苹果</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.apple.cn/">立即访问</a>
+							<a target="_blank" href="http://www.apple.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/4.jpg" alt=""/>
+						<span class="rp_title">小米（为发烧而生）</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.xiaomi.com/">立即访问</a>
+							<a target="_blank" href="http://www.xiaomi.com/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/5.jpg" alt=""/>
+						<span class="rp_title">Adidas三叶草</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.adidas.cn/">立即访问</a>
+							<a target="_blank" href="http://www.adidas.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/6.jpg" alt=""/>
+						<span class="rp_title">KFC肯德基</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.kfc.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.kfc.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/7.jpg" alt=""/>
+						<span class="rp_title">Nike莱克</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.nikestore.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.nikestore.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/8.jpg" alt=""/>
+						<span class="rp_title">Mcdonalds麦当劳</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.mcdonalds.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.mcdonalds.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/13.jpg" alt=""/>
+						<span class="rp_title">D.C 专家</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://avguloy.com/">立即访问</a>
+							<a target="_blank" href="http://avguloy.com/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/14.jpg" alt=""/>
+						<span class="rp_title">Angelsimple天使简约</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.angelsimple.com/">立即访问</a>
+							<a target="_blank" href="http://www.angelsimple.com/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/9.jpg" alt=""/>
+						<span class="rp_title">Samsung三星</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.samsung.com/cn">立即访问</a>
+							<a target="_blank" href="http://www.samsung.com/cn">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/10.jpg" alt=""/>
+						<span class="rp_title">Maun曼联俱乐部官方网站</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.manunited.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.manunited.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/11.jpg" alt=""/>
+						<span class="rp_title">Vans范斯</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.vans.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.vans.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/12.jpg" alt=""/>
+						<span class="rp_title">Hotwind热风</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.hotwind.net/">立即访问</a>
+							<a target="_blank" href="http://www.hotwind.net/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/15.jpg" alt=""/>
+						<span class="rp_title">Uniqlo优衣库</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.uniqlo.cn/">立即访问</a>
+							<a target="_blank" href="http://www.uniqlo.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/16.jpg" alt=""/>
+						<span class="rp_title">Pizzahut必胜客</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.pizzahut.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.pizzahut.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/17.jpg" alt=""/>
+						<span class="rp_title">Goldenladies金夫人婚纱摄影</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.goldenladies.com/">立即访问</a>
+							<a target="_blank" href="http://www.goldenladies.com/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/18.jpg" alt=""/>
+						<span class="rp_title">Crowneplaza皇冠假日酒店</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://cn.ihg.com/crowneplaza">立即访问</a>
+							<a target="_blank" href="http://cn.ihg.com/crowneplaza">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/19.jpg" alt=""/>
+						<span class="rp_title">Lukfook六福</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.lukfook.com/">立即访问</a>
+							<a target="_blank" href="http://www.lukfook.com/">更多...</a>
+						</span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<img src="images/rightAd/20.jpg" alt=""/>
+						<span class="rp_title">绿茵阁</span>
+						<span class="rp_links">
+							<a target="_blank" href="http://www.gcafe.com.cn/">立即访问</a>
+							<a target="_blank" href="http://www.gcafe.com.cn/">更多...</a>
+						</span>
+					</div>
+				</li>
+			</ul>
+
+			<span id="rp_shuffle" class="rp_shuffle">
+			</span>
+		</div>
+		
+		<script type="text/javascript">
+			$(function() {
+				/**
+				* the list of posts
+				*/
+				var $list 		= $('#rp_list ul');
+				/**
+				* number of related posts
+				*/
+				var elems_cnt 		= $list.children().length;
+				
+				/**
+				* show the first set of posts.
+				* 200 is the initial left margin for the list elements
+				*/
+				load(200);
+				
+				function load(initial){
+					$list.find('li').hide().andSelf().find('div').css('margin-left',-initial+'px');
+					var loaded	= 0;
+					//show 5 random posts from all the ones in the list. 
+					//Make sure not to repeat
+					while(loaded < 5){
+						var r 		= Math.floor(Math.random()*elems_cnt);
+						var $elem	= $list.find('li:nth-child('+ (r+1) +')');
+						if($elem.is(':visible'))
+							continue;
+						else
+							$elem.show();
+						++loaded;
+					}
+					//animate them
+					var d = 200;
+					$list.find('li:visible div').each(function(){
+						$(this).stop().animate({
+							'marginLeft':'-50px'
+						},d += 100);
+					});
+				}
+					
+				/**
+				* hovering over the list elements makes them slide out
+				*/	
+				$list.find('li:visible').live('mouseenter',function () {
+					$(this).find('div').stop().animate({
+						'marginLeft':'-220px'
+					},200);
+				}).live('mouseleave',function () {
+					$(this).find('div').stop().animate({
+						'marginLeft':'-50px'
+					},200);
+				});
+				
+				/**
+				* when clicking the shuffle button,
+				* show 5 random posts
+				*/
+				$('#rp_shuffle').unbind('click')
+								.bind('click',shuffle)
+								.stop()
+								.animate({'margin-left':'-18px'},700);
+								
+				function shuffle(){
+					$list.find('li:visible div').stop().animate({
+						'marginLeft':'60px'
+					},200,function(){
+						load(-60);
+					});
+				}
+            });
+		</script>
+<!--右则广告结束-->
+
+<!--
+<div class="qust_contach">
+<a class="tuijian" href="/youhui.php?ctl=store&act=view&id=15" target="_blank"></a>
+<a class="xinxing" href="/youhui.php?ctl=store&act=brand" target="_blank"></a>
+<a class="qinggou" href="/youhui.php?ctl=store&act=brand" target="_blank"></a>
+</div>
+<div class="qust_show" style="display:none;"></div>
+<script type="text/javascript" src="js/contact.js"></script>
+-->
+<script type="text/javascript" src="{$APP_ROOT}/app/runtime/app/lang.js"></script>
+<?php
+$this->_var['indexjs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['cpindexjs'][] = $this->_var['TMPL_REAL']."/js/index.js";
+$this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+?>
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/deal_cate_conf.js"></script>
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/deal_region_conf/{$deal_city.id}.js"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$indexjs" c="$cpindexjs"}"></script>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$indexcss"}" />
+	<link rel="stylesheet" type="text/css" href="banner/css/css.css" />
+    <script type="text/javascript" src="banner/js/min.js"></script>
+
+<div id="bd">
+		<div id="Y_bigshow">
+			<div class="tab-nav">
+				<div style="position: relative">
+					<div style="position: absolute; left: 50%; width: 980px;">
+						<div style="float: left;">
+							<ul class="tab-nav-list">
+								<li class='li-home run-on-home'><span class='run-on'><a href="javascript:void(0);"> 活动</a><i><b class="cur-arrow" style="display: block;"></b></i></span></li>
+								  <li><span class="r-b"><a href="javascript:void(0);"> 服装</a><i><b class="cur-arrow"></b></i></span></li>
+								  <li><span class="r-b"><a href="javascript:void(0);"> 美食</a><i><b class="cur-arrow"></b></i></span></li>
+								  <li><span class="r-b"><a href="javascript:void(0);"> 女性</a><i><b class="cur-arrow"></b></i></span></li>
+								  <li><span class="r-b"><a href="javascript:void(0);"> 休闲</a><i><b class="cur-arrow"></b></i></span></li>
+								  <li><span class="r-b"><a href="javascript:void(0);"> 娱乐</a><i><b class="cur-arrow"></b></i></span></li>						
+								  <li class="li-end run-on-end"><span class="run-on"><em><a href="javascript:void(0);"> 招商</a></em><i><b class="cur-arrow"></b></i></span></li>
+							 </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-content">
+			  <ul class="tab-panel">
+                  <!--<li class="w980h490" style="top:0;left:0;"><a href="http://www.leshi1.com/youhui.php?ctl=edetail&id=6" target="_blank"><img src="images/img01.jpg" /></a></li>-->
+                  <li class="w980h490" style="top:0;left:0;"><a href="http://www.leshi1.com/xiaojz" target="_blank"><img src="images/img01.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <li class="w560h350" style="top:0;left:0;"><a href="http://www.uniqlo.cn/" target="_blank"><img src="images/img02.jpg" /></a></li><li class="w350h140" style="top:350px;left:0;"><a href="http://www.hm.com/cn" target="_blank"><img src="images/img03.jpg" /></a></li><li class="w210h140" style="top:350px;left:350px;"><a  href="http://www.uniqlo.cn/" target="_blank"><img src="images/img04.jpg" /></a></li><li class="w420h140" style="top:0;left:560px;"><a href="http://www.hm.com/cn" target="_blank"><img src="images/img05.jpg"/></a></li><li class="w420h350" style="top:140px;left:560px;"><a href="http://www.hm.com/cn" target="_blank"><img src="images/img06.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <li class="w350h490" style="top:0;left:0;"><a href="www.gcafe.com.cn/"target="_blank"><img src="images/img07.jpg" /></a></li><li class="w350h280" style="top:0;left:350px;"><a href="http://sale.jd.com/act/uiH1gIJSZmM2K.html?erpad_source=erpad" ><img src="images/img08.jpg" /></a></li><li class="w210h210" style="top:280px;left:350px;"><a href="http://www.starbucks.com.cn/" target="_blank"><img src="images/img09.jpg" /></a></li><li class="w140h210" style="top:280px;left:560px;"><a href="http://www.starbucks.com.cn/" target="_blank"><img src="images/img10.jpg" /></a></li><li class="w280h490" style="top:0;left:700px;"><a href="http://www.starbucks.com.cn/" target="_blank"><img src="images/img11.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <li class="w560h350" style="top:0;left:0;"><a href="http://avguloy.com/" target="_blank"><img src="images/img12.jpg" /></a></li><li class="w350h140" style="top:350px;left:0;"><a href="http://www.goldenladies.com/" target="_blank"><img src="images/img13.jpg" /></a></li><li class="w210h140" style="top:350px;left:350px;"><a href="http://sale.jd.com/act/oxQZShK6RP7Msi2p.html&erpad_source=erpad" target="_blank"><img src="images/img14.jpg" /></a></li><li class="w420h140" style="top:0;left:560px;"><a href="http://www.goldenladies.com/" target="_blank"><img src="images/img15.jpg" /></a></li><li class="w420h350" style="top:140px;left:560px;"><a href="http://avguloy.com/" target="_blank"><img src="images/img16.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <li class="w560h490" style="top:0;left:0;"><a href="http://taobao.com" target="_blank"><img src="images/img17.jpg" /></a></li><li class="w210h140" style="top:0;left:560px;"><a href="http://taobao.com" target="_blank"><img src="images/img18.jpg" /></a></li><li class="w210h350" style="top:140px;left:560px;"><a href="http://taobao.com" target="_blank"><img src="images/img19.jpg" /></a></li><li class="w210h350" style="top:0;left:770px;"><a title="柯兰钻石 "  href="http://taobao.com" target="_blank"><img src="images/img20.jpg" /></a></li><li class="w210h140" style="top:350px;left:770px;"><a href="http://taobao.com" target="_blank"><img src="images/img21.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <li class="w560h350" style="top:0;left:0;"><a href="http://avguloy.com/" target="_blank"><img src="images/img12.jpg" /></a></li><li class="w350h140" style="top:350px;left:0;"><a href="http://www.goldenladies.com/" target="_blank"><img src="images/img13.jpg" /></a></li><li class="w210h140" style="top:350px;left:350px;"><a href="http://sale.jd.com/act/oxQZShK6RP7Msi2p.html&erpad_source=erpad" target="_blank"><img src="images/img14.jpg" /></a></li><li class="w420h140" style="top:0;left:560px;"><a href="http://www.goldenladies.com/" target="_blank"><img src="images/img15.jpg" /></a></li><li class="w420h350" style="top:140px;left:560px;"><a href="http://avguloy.com/" target="_blank"><img src="images/img16.jpg" /></a></li>
+			  </ul>
+			  <ul class="tab-panel">
+			  <!--
+			  <li class="w560h490" style="top:0;left:0;"><a href="http://taobao.com" target="_blank"><img src="images/img17.jpg" /></a></li><li class="w210h140" style="top:0;left:560px;"><a href="http://taobao.com" target="_blank"><img src="images/img18.jpg" /></a></li><li class="w210h350" style="top:140px;left:560px;"><a href="http://taobao.com" target="_blank"><img src="images/img19.jpg" /></a></li><li class="w210h350" style="top:0;left:770px;"><a  href="http://taobao.com" target="_blank"><img src="images/img20.jpg" /></a></li><li class="w210h140" style="top:350px;left:770px;"><a href="http://taobao.com" target="_blank"><img src="images/img21.jpg" /></a></li>
+			  -->
+			  <li class="w980h490" style="top:0;left:0;"><a href="http://leshi1.com/index.php?ctl=help&id=45" target="_blank"><img src="images/img22.jpg" /></a></li>
+			  </ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="banner/js/js.js"></script>
+	</div>
+<div class="blank"></div>
+
+<div class="index_left f_l">
+	<div class="index_left_box">
+		<div class="box_main clearfix">
+		<div class="box_top" style="background:#FFFFFF; height:13px;">
+			<div class="index_title_tag_box">
+				<div class="index_title_tag tag_index_left_hot"></div>				
+			</div>
+		</div>
+<div class="top-grid-l">
+		<ul class="bd-list">
+		
+			<li class="item">
+				<a class="main-cat main-cat-1" target="_blank" title="新闻" href="/youhui.php?ctl=store">新闻</a>	
+				
+						
+				<a class="sub-cat" target="_blank" title="社会时事" href="/youhui.php?ctl=store">社会时事</a>
+				|		
+				<a class="sub-cat" target="_blank" title="本地民生" href="/youhui.php?ctl=store">本地民生</a>
+				|		
+				<a class="sub-cat" target="_blank" title="活动消息" href="/youhui.php?ctl=store">活动消息</a>
+				|		
+				<a class="sub-cat" target="_blank" title="娱乐八卦" href="/youhui.php?ctl=store">娱乐八卦</a>
+				|		
+				<a class="sub-cat" target="_blank" title="体育消息" href="/youhui.php?ctl=store">体育消息</a>
+			</li>
+		
+			<li class="item">
+				<a class="main-cat main-cat-0" target="_blank" title="生活" href="/youhui.php?ctl=store">生活</a>
+						
+				<a class="sub-cat" target="_blank" title="购物" href="/youhui.php?ctl=store">购物</a>
+				|		
+				<a class="sub-cat" target="_blank" title="休闲" href="/youhui.php?ctl=store">休闲</a>
+				|		
+				<a class="sub-cat" style="color:#0066CC" target="_blank" title="旅游" href="/youhui.php?ctl=store">旅游</a>
+				|		
+				<a class="sub-cat" target="_blank" title="运动" href="/youhui.php?ctl=store">运动</a>
+				|		
+				<a class="sub-cat" target="_blank" title="娱乐" href="/youhui.php?ctl=store">娱乐</a>
+				|		
+				<a class="sub-cat" target="_blank" title="金融" href="/youhui.php?ctl=store">金融</a>
+				|		
+				<a class="sub-cat" target="_blank" title="抢购" href="/youhui.php?ctl=store">抢购</a>
+				|		
+				<a class="sub-cat" target="_blank" title="女性(美容)" href="/youhui.php?ctl=store">女性(美容)</a>
+				|		
+				<a class="sub-cat" target="_blank" title="微电影" href="/film">微电影</a>
+			</li>
+						
+			<li class="item">
+				<a class="main-cat main-cat-2" target="_blank" title="美食" href="/youhui.php?ctl=store">美食</a>
+						
+				<a class="sub-cat" target="_blank" title="中餐" href="/youhui.php?ctl=store">中餐</a>
+				|		
+				<a class="sub-cat" target="_blank" title="西餐" href="/youhui.php?ctl=store">西餐</a>
+				|		
+				<a class="sub-cat" target="_blank" title="自助餐" href="/youhui.php?ctl=store">自助餐</a>
+				|		
+				<a class="sub-cat" target="_blank" title="火锅" href="/youhui.php?ctl=store">火锅</a>
+				|
+				<a class="sub-cat" target="_blank" title="料理" href="/youhui.php?ctl=store">料理</a>
+				|		
+				<a class="sub-cat" target="_blank" title="海鲜" href="/youhui.php?ctl=store">海鲜</a>
+				|		
+				<a class="sub-cat" target="_blank" title="咖啡厅" href="/youhui.php?ctl=store">咖啡厅</a>
+				|		
+				<a class="sub-cat" target="_blank" title="甜品" href="/youhui.php?ctl=store">甜品</a>
+				|		
+				<a class="sub-cat" target="_blank" title="其他" href="/youhui.php?ctl=store">其他</a>
+			</li>
+						
+			<li class="item">
+				<a class="main-cat main-cat-3" target="_blank" title="优惠" href="/youhui.php?ctl=store">优惠</a>
+						
+				<a class="sub-cat" target="_blank" title="优惠券" href="/youhui.php?ctl=store">优惠券</a>
+				|		
+				<a class="sub-cat" target="_blank" title="现金券" href="/youhui.php?ctl=store">现金券</a>
+				|		
+				<a class="sub-cat" target="_blank" title="最新活动" href="/youhui.php?ctl=store">最新活动</a>
+			</li>
+						
+			<li class="item">
+				<a class="main-cat main-cat-6" target="_blank" title="汽车" href="javascript:alert('即将开放,敬请期待!')">汽车</a>
+						
+				  <a class="sub-cat" target="_blank" title="购车" href="javascript:alert('即将开放,敬请期待!')">购车</a>
+				|		
+				<a class="sub-cat" target="_blank" title="对比" href="javascript:alert('即将开放,敬请期待!')">对比</a>
+				|		
+				<a class="sub-cat" target="_blank" title="车友" href="javascript:alert('即将开放,敬请期待!')">车友</a>
+				|		
+				<a class="sub-cat" target="_blank" title="车型" href="javascript:alert('即将开放,敬请期待!')">车型</a>
+				|		
+				<a class="sub-cat" target="_blank" title="图库" href="javascript:alert('即将开放,敬请期待!')">图库</a>
+				|		
+				<a class="sub-cat" target="_blank" title="4S店" href="javascript:alert('即将开放,敬请期待!')">4S店</a>		 
+			</li>		
+		  </ul>
+	</div>
+
+			<div class="blank"></div>
+		</div><!--end box_main-->
+	</div>
+</div><!--end index_left-->
+<div class="index_right f_r">
+	<a href="{url x="shop" r="mobile"}" target="_blank" title="手机客户端下载" class="index_mobile_download"></a>
+	{insert name="load_index_daren_list" }
+	{$right_html}
+	{$right_dp_html}
+	
+</div>
+<div class="blank"></div>
+
+<div class="index_left_box">
+		<div class="box_top">
+			<div class="index_title_tag_box">
+				<div class="index_title_tag tag_index_left_news"></div>				
+			</div>
+			<div class="f_r top_right_nav">
+			<a href="http://news.leshi1.com/" title="更多">更多</a>&nbsp;&nbsp;
+			</div>
+		</div>
+		<div class="box_main clearfix rundefined" id="box_main">
+		<iframe frameborder="0" src="http://news.leshi1.com/a/hotnews.html" width="958" height="300" scrolling="no"></iframe>
+		</div><!--end box_main-->
+		<script type="text/javascript">
+		var myDate = new Date();
+		myDate.toLocaleString();
+		document.getElementById('box_main').innerHTML="<iframe frameborder='0' src='http://news.leshi1.com/a/hotnews.html?i=" + myDate.toLocaleString() + "' width='958' height='300' scrolling='no'></iframe>"
+		</script>
+</div>
+<div class="blank"></div>
+
+<adv adv_id="首页960px广告位" />
+<div style="width:960px;">
+{$left_html}
+</div>
+
+<!--hidden-->
+<div id="bcate_box_drop_down" class="select_drop"></div>
+<div id="scate_box_drop_down" class="select_drop"></div>
+<div id="area_box_drop_down" class="select_drop"></div>
+<div id="quan_box_drop_down" class="select_drop"></div>
+<!--hidden-->
+
+<!--客服
+<style type="text/css">
+.services {
+	float: left;
+	*width:127px;
+}
+.services .con {
+	background: url(/images/service.gif) no-repeat 0 0;
+	width: 127px;
+	height: 368px;
+	position: relative;
+}
+.services .shares {
+	position: absolute;
+	left: 10px;
+	top: 275px;
+	white-space: nowrap;
+	color: #666;
+}
+.services .shares img {
+	margin-right: 5px;
+}
+.services li {
+	text-align: center;
+}
+.services .qq {
+	padding-top: 105px;
+}
+.services .name {
+	padding-top: 8px;
+	float: left;
+	display: block;
+	width: 60px;
+	text-align: right;
+}
+#www97zzwcom .s-btn {
+	background-position: 0 -89px;
+	width: 38px;
+	height: 198px;
+	margin-top: 104px;
+	float: left;
+}
+#www97zzwcom .Obtn {
+	background: url(/images/service.gif) no-repeat -331px -53px;
+	float: left;
+	width: 39px;
+	height: 197px;
+	margin-top: 30px;
+	margin-left: -1px;
+}
+#www97zzwcom a.wx {
+	position: absolute;
+	top: 166px;
+	left: 15px;
+	overflow: hidden;
+	text-indent: -999em;
+	display: block;
+	width: 95px;
+	height: 95px;
+}
+</style>
+<script type="text/javascript" src="/js/kefu.js"></script>
+-->
+
+{include file="inc/footer.html"}

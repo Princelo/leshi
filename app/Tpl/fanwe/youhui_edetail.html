@@ -1,0 +1,74 @@
+{include file="inc/header.html"} 
+<div class="blank"></div>
+<div class="long f_l" style="width:960px;">
+	<div class="hongdong_info_box clearfix">
+	<div id="gameIMG"><img src="./images/eventlist/id={$event.id}.jpg"  width=960 alt="{$store.name}" width=960 /></div>
+	<div class="hongdong_btn" style="padding:10px; float:right;">
+			<!--
+			<div id="ckepop" style="margin-top:10px; float:left;">
+			{if $event.submit_begin_time gt get_gmtime()}
+			<input type="button" value="" name="submit_btn" class="input_baomin_nostart" />
+			{elseif $event.submit_end_time lt get_gmtime() and $event.submit_end_time neq 0}
+			<input type="button" value="" name="submit_btn" class="input_baomin_end" />
+			{else}
+			<input type="button" value="" name="submit_btn" class="input_baomin" onclick="event_submit({$event.id});" />
+			{/if}
+			</div>
+			-->
+			<div id="game" style="margin-top:10px; float:left;">
+			<a style="background:url(/images/eventList/eventBtn/gameA.jpg); width:300px; height:450px; display: block; float:left; line-height:1000px; margin-right:30px; overflow: hidden;" href="/index.php?ctl=goods&id=117">A区</a>
+			<a style="background:url(/images/eventList/eventBtn/gameBboy.jpg); width:300px; height:450px; display: block; float:left; line-height:1000px;overflow: hidden;" class="btn_gameBboy" href="/index.php?ctl=goods&id=118">B区男组</a>
+			<a style="background:url(/images/eventList/eventBtn/gameBlady.jpg); width:300px; height:450px; display: block; float:left; line-height:1000px; overflow: hidden;" class="btn_gameBlady" href="/index.php?ctl=goods&id=119">B区女组</a>
+			</div>
+			<!-- JiaThis Button BEGIN -->
+			<div id="ckepop" style="margin-top:10px; margin-left:10px; padding:7px; border-left:#6d6d6d solid 1px; float:right;">
+				<span class="jiathis_txt">分享到：</span>
+				<a class="jiathis_button_qzone"></a>
+				<a class="jiathis_button_tsina"></a>
+				<a class="jiathis_button_tqq"></a>
+				<a class="jiathis_button_renren"></a>
+				<a class="jiathis_button_kaixin001"></a>
+			</div>
+			<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
+			<!-- JiaThis Button END -->
+	</div>
+	<script type="text/javascript">
+	var str=window.location.href;
+	var array = str.split("&id=");
+	if (array[1]=="6")
+	{	
+		document.getElementById('gameIMG').style.display = "none";
+		document.getElementById('game').style.display = "";
+	}
+	else
+	{
+		document.getElementById('gameIMG').style.display = "";
+		document.getElementById('game').style.display = "none";
+	}
+	</script>
+	<!--
+	<div class="blank"></div>
+	<div class="youhui_detail_row_title" id="detail_box">参加者（{$event.submit_count}人）</div>
+	<div class="blank"></div>
+	{foreach from=$submit_result item=submit_item}
+	<div class="f_l tc" style="width:80px; overflow:hidden;">
+	{function name="show_avatar" uid=$submit_item.user_id  type="small"}
+	<div class="blank5"></div>
+	{function name="get_user_name" value=$submit_item.user_id} 
+	</div>
+	
+	
+	{/foreach}
+	
+	<div class="blank"></div>
+	{if $event.is_effect eq 1}
+	<div class="youhui_detail_row_title" id="detail_box">评论</div>
+	<div class="blank"></div>
+	{insert name='load_comment' rel_table="event" is_effect = "1" is_image = "1" width="700px" height="80px"} {* 动态点评 *}
+	{/if}
+	-->
+	</div><!--end youhui_info_box-->
+	
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}

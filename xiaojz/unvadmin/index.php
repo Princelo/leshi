@@ -1,0 +1,1 @@
+<?php header("Location: http://leshi1.com/xiaojz/index.php?r=administrator"); ?>

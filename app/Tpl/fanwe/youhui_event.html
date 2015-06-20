@@ -1,0 +1,86 @@
+{include file="inc/header.html"} 
+<div class="blank"></div>
+
+<div class="long f_l" style="width:960px;">
+<!--begin_list-->
+
+{if $list}
+<div class="hot_inc_hongdong">
+{foreach from=$list item=event key=key}
+{if $key eq 0}
+<iframe src="/youhui.php?ctl=eventhot&id={$event.id}" id="iframepage" name="iframepage" frameBorder=0 scrolling=no width="100%" onLoad="iFrameHeight()" ></iframe>
+<script type="text/javascript" language="javascript">
+function iFrameHeight() { 
+var ifm= document.getElementById("iframepage"); 
+var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument; 
+if(ifm != null && subWeb != null) { 
+ifm.height = subWeb.body.scrollHeight; 
+} 
+} 
+</script>
+{/if}
+{/foreach}
+</div>
+
+<div class="act_title_tuan">活动回顾</div>
+<div class="inc" style="border:0;">
+	<div class="inc_main cf">
+		{foreach from=$list item=event}
+		<div class="row_list">
+			<div class="row_image f_l">
+			<a href="{url x="youhui" r="edetail" p="id=$event.id"}" title="{$event.name}" class="goods_img_box"><img src="{function name="get_spec_image" v=$event.icon w="203" h="148" gen=1}"  width=203 height=148  class="lazy" alt="{$event.name}"/></a>
+			</div>
+			<div class="row_info f_l">
+				<div class="row_title"><a href="{url x="youhui" r="edetail" p="id=$event.id"}" title="{$event.name}">{function  name="msubstr" v=$event.name b=0 e=40}</a></div>
+				<!--
+				<div class="blank"></div>
+				<div class="row_info_2">{function name="msubstr" v=$event.brief b=0 e=30}</div>
+				<div class="blank"></div>
+				-->
+				<div class="row_info_3">
+				{$LANG.EVENT_TIME}：
+				{if $event.event_begin_time eq 0}
+				{else}
+				{function name="to_date" v=$event.event_begin_time f="Y-m-d"} 
+				{/if}	
+					
+				{if $event.event_end_time eq 0}
+				{$LANG.NO_END_TIME}
+				{else}
+				{$LANG.TO} {function name="to_date" v=$event.event_end_time f="Y-m-d"}
+				{/if}
+				</div>
+			
+			</div>
+			<!--
+			<div class="row_data f_l">
+			    {$event.submit_count}{$LANG.SUBMIT_COUNTED}
+				<br />
+				<span style="color:#666;">{$event.reply_count}{$LANG.REPLY_COUNTED}</span>
+			</div>
+			<div class="row_btn f_l">
+				<a href="{url x="youhui" r="edetail" p="id=$event.id"}" class="row_btn_link">{$LANG.VIEW_DETAIL_INFO}</a>
+			</div>
+			-->
+		</div>		
+		
+		
+		{/foreach}
+		
+			
+		
+		<div class="blank"></div>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+{else}
+{$LANG.NO_TUAN_LIST}
+{/if}
+
+<!--end_list-->
+<div class="blank"></div>
+<div class="pages">{$pages}</div>	
+</div>
+<div class="blank"></div>
+
+{include file="inc/footer.html"}

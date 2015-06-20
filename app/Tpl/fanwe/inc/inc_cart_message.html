@@ -1,0 +1,78 @@
+<div class="has-credit">
+							<div id="delivery" class="delivery order-pay-credit">
+								<h3>{$LANG.ORDER_MEMO}：</h3>
+								<table class="table-list">
+									<tbody><tr>
+										<td class="t1">&nbsp;</td>
+										<td class="t8"><nobr>{$LANG.ORDER_MEMO}：</nobr></td>
+										<td class="t9"><textarea id="memo" name="memo" class="f-textarea" rows=5 cols=80></textarea></td>
+									</tr>
+								</tbody></table>
+							</div>
+							<div id="gameBoy" style="line-height:22px; display:none;">
+							<h3>参赛资料：</h3>
+							<div class="blank"></div>
+    <span id="T1">&nbsp;&nbsp; 战队名称：<input id="teamname" onblur="InsertData()"> &nbsp; <b>*注意：红色为必填,须填写正确身份证</b></span><br />
+	<span id='contact-tel'> &nbsp;联系人电话：<input type="text" name="contacttel" id="contacttel" onblur="InsertData()"></span><br />
+    <span id="G1">队员1→姓名：<input type="text" name="member1name" id="member1name" onblur="InsertData()"> 身份证：<input name="member1cd" id="member1cd" onblur="InsertData()"> 游戏ID：<input name="member1id" id="member1id" onblur="InsertData()"></span><br>
+	<span id="G2">队员2→姓名：<input type="text" name="member2name" id="member2name" onblur="InsertData()"> 身份证：<input name="member2cd" id="member2cd" onblur="InsertData()"> 游戏ID：<input name="member2id" id="member2id" onblur="InsertData()"></span><br>
+	<span id="G3">队员3→姓名：<input type="text" name="member3name" id="member3name" onblur="InsertData()"> 身份证：<input name="member3cd" id="member3cd" onblur="InsertData()"> 游戏ID：<input name="member3id" id="member3id" onblur="InsertData()"></span><br>
+	<span id="G4">队员4→姓名：<input type="text" name="member4name" id="member4name" onblur="InsertData()"> 身份证：<input name="member4cd" id="member4cd" onblur="InsertData()"> 游戏ID：<input name="member4id" id="member4id" onblur="InsertData()"></span><br>
+	<span id="G5">队员5→姓名：<input type="text" name="member5name" id="member5name" onblur="InsertData()"> 身份证：<input name="member5cd" id="member5cd" onblur="InsertData()"> 游戏ID：<input name="member5id" id="member5id" onblur="InsertData()"></span><br>
+	<span id="G6">队员6→姓名：<input type="text" name="member6name" id="member6name" onblur="InsertData()"> 身份证：<input name="member6cd" id="member6cd" onblur="InsertData()"> 游戏ID：<input name="member6id" id="member6id" onblur="InsertData()"></span><br>
+	<span id="G7">队员7→姓名：<input type="text" name="member7name" id="member7name" onblur="InsertData()"> 身份证：<input name="member7cd" id="member7cd" onblur="InsertData()"> 游戏ID：<input name="member7id" id="member7id" onblur="InsertData()"></span><br> 
+        
+							</div>
+		<script type="text/javascript">
+		var memoStr = "";
+		if(document.getElementById('cartTitle').innerHTML=="乐时达人杯英雄联盟网吧冠军联赛报名")
+		{
+			document.getElementById('delivery').style.display = "none";
+			document.getElementById('gameBoy').style.display = "";
+			document.getElementById('T1').style.color = "red";
+			document.getElementById('G1').style.color = "red";
+			document.getElementById('G2').style.color = "red";
+			document.getElementById('G3').style.color = "red";
+			document.getElementById('G4').style.color = "red";
+			document.getElementById('G5').style.color = "red";
+			document.getElementById('contact-tel').style.color = "red";
+		}
+		else if(document.getElementById('cartTitle').innerHTML=="乐时达人杯英雄联盟男女对赛报名(男组)")
+		{
+			document.getElementById('delivery').style.display = "none";
+			document.getElementById('gameBoy').style.display = "";
+			document.getElementById('T1').style.color = "red";
+			document.getElementById('G1').style.color = "red";
+			document.getElementById('contact-tel').style.color = "red";
+		}
+		else if(document.getElementById('cartTitle').innerHTML=="乐时达人杯英雄联盟男女对赛报名(女组)")
+		{
+			document.getElementById('delivery').style.display = "none";
+			document.getElementById('gameBoy').style.display = "";
+			document.getElementById('T1').style.color = "red";
+			document.getElementById('G1').style.color = "red";
+			document.getElementById('contact-tel').style.color = "red";
+		}
+		
+		function InsertData()
+		{
+			if(document.getElementById('teamname').value!="")
+			memoStr = document.getElementById('cartTitle').innerHTML + "：" + document.getElementById('teamname').value + "|" + document.getElementById('contacttel').value;
+			if(document.getElementById('member1name').value!="")
+			memoStr += "|队员一:"+ document.getElementById('member1name').value + ((document.getElementById('member1cd').value=="")?"":(","+document.getElementById('member1cd').value)) + ((document.getElementById('member1id').value=="")?"":(","+document.getElementById('member1id').value));
+			if(document.getElementById('member2name').value!="")
+			memoStr += "|队员二:"+ document.getElementById('member2name').value + ((document.getElementById('member2cd').value=="")?"":(","+document.getElementById('member2cd').value)) + ((document.getElementById('member2id').value=="")?"":(","+document.getElementById('member2id').value));
+			if(document.getElementById('member3name').value!="")
+			memoStr += "|队员三:"+ document.getElementById('member3name').value + ((document.getElementById('member3cd').value=="")?"":(","+document.getElementById('member3cd').value)) + ((document.getElementById('member3id').value=="")?"":(","+document.getElementById('member3id').value));
+			if(document.getElementById('member4name').value!="")
+			memoStr += "|队员四:"+ document.getElementById('member4name').value + ((document.getElementById('member4cd').value=="")?"":(","+document.getElementById('member4cd').value)) + ((document.getElementById('member4id').value=="")?"":(","+document.getElementById('member4id').value));
+			if(document.getElementById('member5name').value!="")
+			memoStr += "|队员五:"+ document.getElementById('member5name').value + ((document.getElementById('member5cd').value=="")?"":(","+document.getElementById('member5cd').value)) + ((document.getElementById('member5id').value=="")?"":(","+document.getElementById('member5id').value));
+			if(document.getElementById('member6name').value!="")
+			memoStr += "|队员六:"+ document.getElementById('member6name').value + ((document.getElementById('member6cd').value=="")?"":(","+document.getElementById('member6cd').value)) + ((document.getElementById('member6id').value=="")?"":(","+document.getElementById('member6id').value));
+			if(document.getElementById('member7name').value!="")
+			memoStr += "|队员七:"+ document.getElementById('member7name').value + ((document.getElementById('member7cd').value=="")?"":(","+document.getElementById('member7cd').value)) + ((document.getElementById('member7id').value=="")?"":(","+document.getElementById('member7id').value));
+			document.getElementById('memo').innerHTML = memoStr;
+		}
+		</script>
+</div>

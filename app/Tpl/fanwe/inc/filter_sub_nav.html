@@ -1,0 +1,10 @@
+<ul class="filter_sub_nav" style="left:-1px; top:-1px;">
+{foreach from=$sub_nav key=key item=nav}
+{if ($key == 0)|($key ==1)}
+<li {if $nav.current eq 1}class="current"{/if}><a href="{$nav.url}" title="{$nav.name}">{$nav.name}</a></li>
+{/if}
+{if ($key == 2)}
+<li {if $nav.current eq 1}class="current"{/if}><a href="/tuan.php" title="{$nav.name}">{$nav.name}</a></li>
+{/if}
+{/foreach}
+</ul>
