@@ -15,7 +15,7 @@ class indexModule extends YouhuiBaseModule
 	{		
 		$GLOBALS['tmpl']->caching = true;
 		$GLOBALS['tmpl']->cache_lifetime = 600;  //优惠首页缓存10分钟
-		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
+		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);
 		if (!$GLOBALS['tmpl']->is_cached('youhui_index.html', $cache_id))
 		{		
 			make_deal_cate_js();

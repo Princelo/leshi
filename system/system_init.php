@@ -297,6 +297,10 @@ if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_caches/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/tpl_caches/',0777);	
 if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/',0777);
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/',0777);
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/',0777);
 $tmpl = new AppTemplate;
 
 //end 定义模板引擎

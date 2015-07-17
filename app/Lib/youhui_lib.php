@@ -198,6 +198,102 @@ function get_store_list($limit, $cate_id=0, $where='',$orderby = '',$cached = tr
 }
 
 
+function get_store_list_for_mobile($limit, $cate_id=0, $where='',$orderby = '',$cached = true,$count=true)
+{
+	$key = md5("MOBILE_STORE_LIST_".$limit.$cate_id.$where.$orderby);
+	if($cached)
+	{
+		$res = $GLOBALS['cache']->get($key);
+	}
+	else
+	{
+		$res = false;
+	}
+	if($res===false)
+	{
+		$time = get_gmtime();
+
+		if(strpos($orderby,"is_recommend")&&strpos($orderby,"is_verify")&&strpos($orderby,"dp_count"))
+		{
+			$key_sort = "search_idx5,sort_default";
+		}else
+		{
+			$key_sort = explode(" ",trim($orderby));
+			$key_sort = trim($key_sort[0]);
+			if($key_sort!='')
+				$key_sort = "$key_sort";
+		}
+		static $supplier_total;
+		if(empty($supplier_total))
+			$supplier_total = $GLOBALS['db']->getOne("select count(id) from ".DB_PREFIX."supplier_location");
+		if($supplier_total>50000)
+		{
+			$count_sql = "select count(1) from ".DB_PREFIX."supplier_location use index(search_idx5) where is_effect = 1 ";
+			$sql = "select id,mobile_brief,name,preview from ".DB_PREFIX."supplier_location use index($key_sort) where is_effect = 1 ";
+		}
+		else
+		{
+			$count_sql = "select count(1) from ".DB_PREFIX."supplier_location where is_effect = 1 ";
+			$sql = "select id,mobile_brief,name,preview from ".DB_PREFIX."supplier_location where is_effect = 1 ";
+		}
+
+		if($cate_id>0)
+		{
+			$ids =load_auto_cache("deal_sub_cate_ids",array("cate_id"=>$cate_id));
+
+			$sql .= " and deal_cate_id in (".implode(",",$ids).")";
+			$count_sql .= " and deal_cate_id in (".implode(",",$ids).")";
+		}
+
+
+		//$city = get_current_deal_city();
+		$city_id = $GLOBALS['deal_city']['id'];
+
+		if($city_id>0)
+		{
+			$ids = load_auto_cache("deal_city_belone_ids",array("city_id"=>$city_id));
+			if($ids)
+			{
+				$sql .= " and city_id in (".implode(",",$ids).")";
+				$count_sql .= " and city_id in (".implode(",",$ids).")";
+			}
+		}
+
+
+		if($where != '')
+		{
+			$sql.=" and ".$where;
+			$count_sql.=" and ".$where;
+		}
+
+		if($orderby=='')
+			$sql.="  limit ".$limit;
+		else
+			$sql.=" order by ".$orderby." limit ".$limit;
+
+
+
+		$stores = $GLOBALS['db']->getAll($sql);
+		if($count)
+			$stores_count = $GLOBALS['db']->getOne($count_sql);
+
+		if($stores)
+		{
+			foreach($stores as $k=>$store)
+			{
+				$durl = url("youhui","store#view",array("id"=>$store['id']));
+				$store['url'] = $durl;
+				$stores[$k] = $store;
+			}
+		}
+		$res = array('list'=>$stores,'count'=>$stores_count);
+		if($cached)
+			$GLOBALS['cache']->set($key,$res);
+	}
+	return $res;
+}
+
+
 /**
  * 获取购买优惠券列表
  */

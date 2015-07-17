@@ -1,0 +1,22 @@
+{if $event_list}
+<div class="cis_box">
+    <h3 onclick="goto('{url x="youhui" r="event"}')">
+    <img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/more.png" class="more">
+    <span><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/coupon.png">热门活动</span></h3>
+    <div class="cis_activitielist">
+        <ul>
+            {foreach from=$event_list item=event_item key=key}
+            <li class="cl" onclick="goto('{url x="youhui" r="edetail" p="id=$event_item.id"}')">
+                <div class="list_cover"><img src="{function name="get_spec_image" v=$event_item.icon w=100 h=100 g=1}"></div>
+                <h4>{$event_item.name}</h4>
+                <h5>地址 : {$event_item.address}</h5>
+                <p>
+                    <span class="ing">时间：{function name="to_date" v=$event_item.event_begin_time f="Y-m-d"} - {function name="to_date" v=$event_item.event_end_time f="Y-m-d"}</span>
+                </p>
+                <p class="num" style="display:none;">人数限制 : <span>1000</span>人<em>&nbsp;</em>已报名 : <span>7</span>人</p>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+</div>
+{/if}

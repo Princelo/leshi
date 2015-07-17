@@ -1,0 +1,131 @@
+{include file="mobile/inc/mobile_header.html"}
+<body id="cis_index">
+<div class="body">
+    {include file="mobile/inc/header_feature1.html"}
+    <div class="cis_wp" id="wp_menu"><section class="cis_slide cl">
+        <div class="flexslider">
+            <ul class="slides cl">
+                <li><a href="#" ><img src="{$TMPL}/images/mobile/1.jpg"/></a></li>
+                <li><a href="#" ><img src="{$TMPL}/images/mobile/2.jpg"/></a></li>
+            </ul>
+        </div>
+    </section>
+        <script type="text/javascript">
+            function ngrid_sel(obj, show) {
+                jQuery(obj).parent().addClass('active');
+                jQuery(obj).parent().siblings().removeClass('active');
+                jQuery(show).show();
+                jQuery(show).siblings().hide();
+            }
+
+            jQuery(window).load(function(){
+                jQuery('.flexslider').flexslider({
+                    animation: "slide",
+                    directionNav: false,
+                    start: function(slider){
+                        jQuery('body').removeClass('loading');
+                    }
+                });
+            });
+        </script><div class="cis_sitenv">
+            <ul class="cl">
+                <li><a href="{$APP_ROOT}/youhui.php?ctl=store"><img src="{$TMPL}/images/mobile/n1.png" /><br />店铺</a></li>
+                <li><a href="{$APP_ROOT}/index.php?ctl=goods&act=goods_list&list_type=1"><img src="{$TMPL}/images/mobile/n1.png" /><br />新品</a></li>
+                <li><a href="{$APP_ROOT}/youhui.php?ctl=store&order=hot"><img src="{$TMPL}/images/mobile/n1.png" /><br />热门</a></li>
+                <li><a href="{$APP_ROOT}/youhui.php?ctl=store&order=best"><img src="{$TMPL}/images/mobile/n1.png" /><br />推荐</a></li>
+                <li><a href="{$APP_ROOT}/youhui.php?ctl=event"><img src="{$TMPL}/images/mobile/n1.png" /><br />活动</a></li>
+                <li><a href="{$APP_ROOT}/youhui.php?ctl=fcate"><img src="{$TMPL}/images/mobile/n1.png" /><br />优惠</a></li>
+                <li><a href="{$APP_ROOT}/tuan.php"><img src="{$TMPL}/images/mobile/n1.png" /><br />团购</a></li>
+                <li><a href="{$APP_ROOT}/index.php?ctl=uc_center"><img src="{$TMPL}/images/mobile/n1.png" /><br />我的</a></li>
+            </ul>
+        </div>
+        {$youhui_html}
+        {$event_html}
+        {$store_html}
+        <script id="waterfall-tpl" type="text/x-handlebars-template">
+            {{#result}}
+            <div class="item">
+                <div class="info">
+                    <img src="{{img}}" width="100%" height="auto" style="height:auto" />
+                    <h2>{{title}}</h2>
+                    <h4><strong>￥{{current_price}}</strong><span>￥{{origin_price}}</span></h4>
+                </div>
+            </div>
+            {{/result}}
+        </script>
+        <div class="cis_box" style="margin-bottom:0px">
+            <h3 onclick="goto('')"><img src="{$TMPL}/images/mobile/more.png" class="more" /><span><img src="{$TMPL}/images/mobile/coupon.png" />推荐商品</span></h3>
+            <div id="container" style="background: #f5f5f5;">
+            </div>
+            <div class="waterfall-more pgbtn" style="display: none; padding:0;">
+                <a href="">查看更多商品 »</a>
+            </div>
+            <script>
+                $('#container').waterfall({
+                    itemCls: 'item',
+                    colWidth: $(window).width()/100 * 45,
+                    gutterWidth: $(window).width()/100 * 1,
+                    gutterHeight: $(window).width()/100 * 1,
+                    checkImagesLoaded: true,
+                    maxPage: 4,
+                    path: function(page) {
+                        return '{url x="index" r="ajax", p="act=waterfall_products"}' + '&page=' + page;
+                    },
+                    callbacks: {
+                        /*
+                         * loadingStart
+                         * @param {Object} loading $('#waterfall-loading')
+                         */
+                        loadingStart: function($loading) {
+                            $loading.show();
+                            //console.log('loading', 'start');
+                        },
+
+                        /*
+                         * loadingFinished
+                         * @param {Object} loading $('#waterfall-loading')
+                         * @param {Boolean} isBeyondMaxPage
+                         */
+                        loadingFinished: function($loading, isBeyondMaxPage) {
+                            if ( !isBeyondMaxPage ) {
+                                $loading.fadeOut();
+                                console.log('loading finished');
+                            } else {
+                                console.log('loading isBeyondMaxPage');
+                                $loading.remove();
+                                $('.waterfall-more').show();
+                            }
+                        },
+
+                        /*
+                         * loadingError
+                         * @param {String} xhr , "end" "error"
+                         */
+                        loadingError: function($message, xhr) {
+                            $message.html('Data load faild, please try again later.');
+                        },
+
+                        /*
+                         * renderData
+                         * @param {String} data
+                         * @param {String} dataType , "json", "jsonp", "html"
+                         */
+                        renderData: function (data, dataType) {
+                            var tpl,
+                                    template;
+
+                            if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+                                tpl = $('#waterfall-tpl').html();
+                                template = Handlebars.compile(tpl);
+
+                                return template(data);
+                            } else { // html format
+                                return data;
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+
+        {include file="mobile/inc/mobile_footer.html"}

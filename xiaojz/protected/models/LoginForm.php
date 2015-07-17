@@ -10,7 +10,7 @@ class LoginForm extends CFormModel
 	public $user_name;
 	public $user_pwd;
 	public $rememberMe;
-        public $verifyCode; //验证码属性
+    public $verifyCode; //验证码属性
         
 	private $_identity;
 

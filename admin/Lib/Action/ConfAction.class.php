@@ -81,8 +81,10 @@ class ConfAction extends CommonAction{
 				clear_auto_cache("store_filter_nav_cache");
 				clear_dir_file(get_real_path()."public/runtime/app/data_caches/");	
 				clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");	
-				clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");	
-				
+				clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
+				clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+				clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+
 				clear_dir_file(get_real_path()."public/runtime/app/data_caches/");	
 				clear_dir_file(get_real_path()."public/runtime/data/page_static_cache/");
 				clear_dir_file(get_real_path()."public/runtime/data/dynamic_avatar_cache/");	

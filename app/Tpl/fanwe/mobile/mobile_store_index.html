@@ -1,0 +1,116 @@
+{include file="mobile/inc/mobile_header.html"}
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature1.html"}
+    <div class="cis_wp" id="wp_menu">    <div class="cis_catnv cis_cn5">
+        <ul class="cl">
+            <li {if $smarty.get.type == 'newest'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=newest">最新</a></li>
+            <li {if $smarty.get.type == 'hot'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=hot">热门</a></li>
+            <li {if $smarty.get.type == 'recommend'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=recommend">推荐</a></li>
+
+            <li ><a href="javascript:;" onClick="shownv('nv','area')">分类<span>&or;</span></a></li>
+            <li id="end"><a href="javascript:;" onClick="shownv('area','nv')">地区<span>&or;</span></a></li>
+        </ul>
+    </div><div id="area_menu" class="cis_shownv" style="display:none">
+        <ul class="cl">
+            {if $area_list}
+            {foreach from=$area_list item=item key=key}
+            <li {if $smarty.get.aid == $item.id}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&type={$smarty.get.type}&cid={$smarty.get.cid}&aid={$item.id}"><span>{$item.name}</span></a></li>
+            {/foreach}
+            {/if}
+        </ul>
+    </div>
+        <div id="nv_menu" class="cis_shownv" style="display:none">
+            <ul class="cl">
+                {if $area_list}
+                {foreach from=$cate_list item=item key=key}
+                <li {if $smarty.get.cid == $item.id}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&type={$smarty.get.type}&aid={$smarty.get.aid}&cid={$item.id}"><span>{$item.name}</span></a></li>
+                {/foreach}
+                {/if}
+            </ul>
+        </div>
+        <table cellspacing="0" cellpadding="0" id="listtableid" class="cis_shoplist">
+        </table>
+        <script>
+            $('#listtableid').waterfall({
+                itemCls: 'item',
+                colWidth: $(window).width(),
+                gutterWidth: 0,
+                gutterHeight: 0,
+                checkImagesLoaded: true,
+                maxPage: 4,
+                path: function(page) {
+                    return '{url x="youhui" r="ajax", p="act=store_index"}' + '&page=' + page + '&type={$smarty.get.type}' + '&aid={$smarty.get.aid}' + '&cid={$smarty.get.cid}' + '&keyword={$smarty.get.keyword}';
+                },
+                callbacks: {
+                    /*
+                     * loadingStart
+                     * @param {Object} loading $('#waterfall-loading')
+                     */
+                    loadingStart: function($loading) {
+                        $loading.show();
+                        //console.log('loading', 'start');
+                    },
+
+                    /*
+                     * loadingFinished
+                     * @param {Object} loading $('#waterfall-loading')
+                     * @param {Boolean} isBeyondMaxPage
+                     */
+                    loadingFinished: function($loading, isBeyondMaxPage) {
+                        if ( !isBeyondMaxPage ) {
+                            $loading.fadeOut();
+                            console.log('loading finished');
+                        } else {
+                            console.log('loading isBeyondMaxPage');
+                            $loading.remove();
+                            $('.waterfall-more').show();
+                        }
+                    },
+
+                    /*
+                     * loadingError
+                     * @param {String} xhr , "end" "error"
+                     */
+                    loadingError: function($message, xhr) {
+                        $message.html('Data load faild, please try again later.');
+                    },
+
+                    /*
+                     * renderData
+                     * @param {String} data
+                     * @param {String} dataType , "json", "jsonp", "html"
+                     */
+                    renderData: function (data, dataType) {
+                        var tpl,
+                                template;
+
+                        if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+                            tpl = $('#waterfall-tpl').html();
+                            template = Handlebars.compile(tpl);
+
+                            return template(data);
+                        } else { // html format
+                            return data;
+                        }
+                    }
+                }
+            });
+        </script>
+        <script id="waterfall-tpl" type="text/x-handlebars-template">
+            {{#result}}
+            <tbody>
+            <tr onclick="goto('{url x="youhui" r="store", p="act=view&id={{id}}"}')">
+                    <td class="logo">
+                    <img src="{{preview}}"/>
+                    </td>
+                    <td class="info">
+                    <h4>{{name}}</h4>
+            <p class="about">{{mobile_brief}}</p>
+            <p class="score"><span><em style="width:87%"></em></span></p>
+            </td>
+            </tr>
+            </tbody>
+            {{/result}}
+        </script>
+        {include file="mobile/inc/mobile_footer.html"}

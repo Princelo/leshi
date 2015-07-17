@@ -32,7 +32,7 @@ class store_filter_nav_cache_auto_cache extends auto_cache{
 					unset($tmp_url_param['qid']);
 					$tmp_url_param['aid'] = $v['id'];
 					$area_list[$k]['url'] = url("youhui","store",$tmp_url_param);	
-					$condition = build_deal_filter_condition($tmp_url_param);	
+					$condition = build_deal_filter_condition($tmp_url_param);
 					
 					$area_list[$k]['count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."supplier_location where is_effect=1 $condition ");
 			}		
@@ -52,7 +52,7 @@ class store_filter_nav_cache_auto_cache extends auto_cache{
 						$tmp_url_param = $url_param;
 						$tmp_url_param['qid'] = $v['id'];
 						$quan_list[$k]['url'] = url("youhui","store",$tmp_url_param);	
-						$condition = build_deal_filter_condition($tmp_url_param);						
+						$condition = build_deal_filter_condition($tmp_url_param);
 						$quan_list[$k]['count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."supplier_location where is_effect=1 $condition ");
 				}			
 			}
@@ -75,7 +75,7 @@ class store_filter_nav_cache_auto_cache extends auto_cache{
 					else
 					$tmp_url_param['cid'] = $v['id'];
 					$cate_list[$k]['url'] = url("youhui","store",$tmp_url_param);	
-					$condition = build_deal_filter_condition($tmp_url_param);						
+					$condition = build_deal_filter_condition($tmp_url_param);
 					$cate_list[$k]['count'] = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."supplier_location where is_effect=1 $condition ");
 				
 			}		

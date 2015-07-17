@@ -1204,6 +1204,29 @@ class ajaxModule extends ShopBaseModule
 		header("Content-Type:text/html; charset=utf-8");
 		echo get_gopreview();		
 	}
+
+	public function waterfall_products()
+	{
+		if(isset($_GET['type']) && $_GET['type'] != null)
+            $type = $_GET['type'];
+		else
+			$type = "home";
+		if(isset($_GET['page']) && $_GET['page'] != null)
+            $page = intval($_GET['page']);
+		else
+			$page = 1;
+
+        $db_pre = DB_PREFIX;
+        switch(strval($type)) {
+            case "home":
+                $result = $GLOBALS['db']->getRow("select id,img,sub_name as title,origin_price,current_price from {$db_pre}deal where is_best = 1
+                                        and deal_type = 0 and is_effect = 1 and is_delete = 0 order by sort desc");
+                break;
+            default :
+                break;
+        }
+        exit(json_encode($result));
+	}
 	
 }
 ?>

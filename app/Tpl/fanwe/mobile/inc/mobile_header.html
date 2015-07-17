@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="keywords" content="微店,品牌店铺,商盟" />
+    <meta name="description" content="本地一体化店铺系统 ,乐时网演示站" />
+    <title>微店 -  乐时网演示站 -  手机版 - Powered by Discuz!</title>
+    <?php
+    $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/mobile_style.css";
+    $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/reset.css";
+    $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/waterfall.css";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery-1.8.3.min.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.flexslider-min.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/handlebars.js";
+    $this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/waterfall.min.js";
+    $this->_var['cpagejs'][] = "";
+    ?>
+    <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+    <script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
+
+
+    <script language="javascript">
+        function goto(url){window.location.href=url;}
+        function shownv(showid,hideid){
+            var showid_area=showid+'_menu';
+            var hideid_menu=hideid+'_menu';
+            var hideid_next=hideid+'_next';
+
+            if($("#"+showid_area).css('display') == 'none'){
+                $("#"+showid_area).show();
+                if($("#"+hideid_menu).css('display')!='none'){
+                    $("#"+hideid_menu).hide();
+                }
+                if($("#"+hideid_next).css('display')!='none'){
+                    $("#"+hideid_next).hide();
+                }
+            }else{
+                $("#"+showid_area).hide();
+            }
+        }
+
+        function showtop(show,hide){
+            var show_area=show+'_menu';
+            var hide_area=hide+'_menu';
+
+            if($("#"+show_area).css('display') == 'none'){
+                $("#"+show_area).show();
+                if($("#"+'wp_menu').css('display')!='none'){
+                    $("#"+'wp_menu').hide();
+                }
+                if($("#"+hide_area).css('display')!='none'){
+                    $("#"+hide_area).hide();
+                }
+            }else{
+                $("#"+show_area).hide();
+                $("#"+'wp_menu').show();
+            }
+        }
+    </script>
+</head>

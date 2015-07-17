@@ -1,0 +1,320 @@
+{include file="mobile/inc/header.html"}
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature1.html"}
+    <div class="cis_wp" id="wp_menu">
+        <div class="cis_catnv cis_cn5">
+            <ul class="cl">
+                <li class="a"><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new">最新</a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=hot">热门</a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=best">推荐</a></li>
+
+                <li ><a href="javascript:;" onClick="shownv('nv','area')">分类<span>&or;</span></a></li>
+                <li id="end"><a href="javascript:;" onClick="shownv('area','nv')">地区<span>&or;</span></a></li>
+            </ul>
+        </div><div id="area_menu" class="cis_shownv" style="display:none">
+        <ul class="cl">
+            <li class="a"><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new"><span>全部</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=1"><span>武昌</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=2"><span>洪山</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=3"><span>黄陂</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=4"><span>江岸</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=5"><span>东西湖</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=6"><span>江汉</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=7"><span>蔡甸</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=8"><span>汉阳</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=9"><span>硚口</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=10"><span>江夏</span></a></li>
+            <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&area=11"><span>青山</span></a></li>
+        </ul>
+    </div>
+        <div id="nv_menu" class="cis_shownv" style="display:none">
+            <ul class="cl">
+                <li class="a"><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new"><span>全部</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=1"><span>家居</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=2"><span>服装</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=3"><span>数码</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=4"><span>家电</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=5"><span>美食</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=6"><span>KTV</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=7"><span>宾馆</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=8"><span>游乐</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=9"><span>美发</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=10"><span>服务</span></a></li>
+                <li ><a href="v.php?mod=list&mid=activitie&mobile=2&id=comeing_vshop&order=new&shoptype=11"><span>摄影</span></a></li>
+
+            </ul>
+        </div><div class="cis_wp10 activitielist">
+        <table cellspacing="0" cellpadding="0" id="listtableid" class="cis_activitielist">
+            <tbody id="autolist_303">
+            <tr onclick="goto('v.php?mod=view&subid=303')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>测试活动2</h3>
+                        <div class="cover"><img src="data/attachment/temp/201412/31/095729i5d0hehh5t5b6beo.jpg.200_200.jpg" alt="测试活动2" class="cover"/></div>
+                        <h4>Comeings!</h4>
+                        <p>人数限制 : <span>101</span>人</p>
+                        <p>已报名 : <span>5</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_302">
+            <tr onclick="goto('v.php?mod=view&subid=302')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>测试活动1</h3>
+                        <div class="cover"><img src="data/attachment/temp/201412/31/095656p5hzuu0mmmn1oo00.jpg.200_200.jpg" alt="测试活动1" class="cover"/></div>
+                        <h4>Comeings!</h4>
+                        <p>人数限制 : <span>10</span>人</p>
+                        <p>已报名 : <span>1</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_190">
+            <tr onclick="goto('v.php?mod=view&subid=190')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>豪情派对聚享餐</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/29/150038aep1pp1iw98s8w1z.png.200_200.jpg" alt="豪情派对聚享餐" class="cover"/></div>
+                        <h4>麦当劳菱角湖万达店</h4>
+                        <p>人数限制 : <span>1000000</span>人</p>
+                        <p>已报名 : <span>6</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_189">
+            <tr onclick="goto('v.php?mod=view&subid=189')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>咖喱猪扒麦饭卷组合</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/29/145852ua8pkb11iee9016e.png.200_200.jpg" alt="咖喱猪扒麦饭卷组合" class="cover"/></div>
+                        <h4>麦当劳菱角湖万达店</h4>
+                        <p>人数限制 : <span>100000</span>人</p>
+                        <p>已报名 : <span>2</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_188">
+            <tr onclick="goto('v.php?mod=view&subid=188')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>开心乐园餐（麦乐鸡）</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/29/145731sjpe2mdxetfjmehe.png.200_200.jpg" alt="开心乐园餐（麦乐鸡）" class="cover"/></div>
+                        <h4>麦当劳菱角湖万达店</h4>
+                        <p>人数限制 : <span>100000</span>人</p>
+                        <p>已报名 : <span>0</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_187">
+            <tr onclick="goto('v.php?mod=view&subid=187')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>培根蔬萃双层牛堡</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/29/145537gylpgeo8gxmzmf5y.png.200_200.jpg" alt="培根蔬萃双层牛堡" class="cover"/></div>
+                        <h4>麦当劳菱角湖万达店</h4>
+                        <p>人数限制 : <span>1000000</span>人</p>
+                        <p>已报名 : <span>0</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_186">
+            <tr onclick="goto('v.php?mod=view&subid=186')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>麦旋风干脆可可口味</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/29/145401iwd11ndwzdbczp50.png.200_200.jpg" alt="麦旋风干脆可可口味" class="cover"/></div>
+                        <h4>麦当劳菱角湖万达店</h4>
+                        <p>人数限制 : <span>100000</span>人</p>
+                        <p>已报名 : <span>0</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_175">
+            <tr onclick="goto('v.php?mod=view&subid=175')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>杰克琼斯小西装2014男装韩版修身高品质西服潮流水洗外套</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/28/145712xzcco5qxco906e9c.png.200_200.jpg" alt="杰克琼斯小西装2014男装韩版修身高品质西服潮流水洗外套" class="cover"/></div>
+                        <h4>杰克琼斯</h4>
+                        <p>人数限制 : <span>300</span>人</p>
+                        <p>已报名 : <span>3</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_174">
+            <tr onclick="goto('v.php?mod=view&subid=174')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>杰克琼斯2014新款短袖T恤专柜正品</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/28/145550wkvuks3z8sgl6luo.png.200_200.jpg" alt="杰克琼斯2014新款短袖T恤专柜正品" class="cover"/></div>
+                        <h4>杰克琼斯</h4>
+                        <p>人数限制 : <span>2000</span>人</p>
+                        <p>已报名 : <span>1</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_173">
+            <tr onclick="goto('v.php?mod=view&subid=173')">
+                <td class="date">
+                    <div class="datearea end">
+                        <h3>已结束</h3>
+                    </div>
+                </td>
+                <td class="info">
+                    <div class="infoarea cl">
+                        <h3>>杰克琼斯男装长袖修身休闲衬衣2014正品个性纯色金属扣衬衫</h3>
+                        <div class="cover"><img src="data/attachment/temp/201404/28/145435y2csujobv1tccuff.png.200_200.jpg" alt=">杰克琼斯男装长袖修身休闲衬衣2014正品个性纯色金属扣衬衫" class="cover"/></div>
+                        <h4>杰克琼斯</h4>
+                        <p>人数限制 : <span>100000</span>人</p>
+                        <p>已报名 : <span>0</span>人</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <a href="javascript:;" rel="v.php?mod=list&mid=activitie&mobile=2&page=2" curpage="1" id="autopbn" totalpage="5">下一页</a><script language="javascript">
+        (function() {
+
+            var autopbn = $('autopbn');
+            var nextpageurl = autopbn.getAttribute('rel').valueOf();
+            var curpage = parseInt(autopbn.getAttribute('curpage').valueOf());
+            var totalpage = parseInt(autopbn.getAttribute('totalpage').valueOf());
+
+            var autopagenum = 100;
+            var maxpage = (curpage + autopagenum) > totalpage ? totalpage : (curpage + autopagenum);
+
+            var loadstatus = 0;
+
+            autopbn.onclick = function() {
+                var oldloadstatus = loadstatus;
+                loadstatus = 2;
+                autopbn.innerHTML = '正在加载, 请稍后......';
+                getnextpagecontent();
+                loadstatus = oldloadstatus;
+            };
+
+            if(autopagenum > 0) {
+                window.onscroll = function () {
+                    var curtop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+                    if(curtop + document.documentElement.clientHeight + 500 >= document.documentElement.scrollHeight && !loadstatus) {
+                        loadstatus = 1;
+                        autopbn.innerHTML = '正在加载, 请稍后......';
+                        setTimeout(getnextpagecontent, 1000);
+                    }
+                };
+            }
+
+            function getnextpagecontent() {
+
+                if(curpage + 1 > totalpage) {
+                    window.onscroll = null;
+                    autopbn.style.display = 'none';
+                    return;
+                }
+                if(loadstatus != 2 && curpage + 1 > maxpage) {
+                    autopbn.innerHTML = '下一页 &raquo;';
+                    if(curpage + 1 > maxpage) {
+                        window.onscroll = null;
+                    }
+                    return;
+                }
+                curpage++;
+                var url = nextpageurl + '&t=' + parseInt((+new Date()/1000)/(Math.random()*1000));
+                var x = new Ajax('HTML');
+                x.get(url, function (s) {
+                    s = s.replace(/\n|\r/g, '');
+                    if(s.indexOf("id=\"autopbn\"") == -1) {
+                        $("autopbn").style.display = "none";
+                        window.onscroll = null;
+                    }
+
+
+                    var tableobj = $('listtableid');
+                    var nexts = s.match(/\<tbody id="autolist_(\d+)"\>(.+?)\<\/tbody>/g);
+                    for(i in nexts) {
+                        if(i == 'index' || i == 'lastIndex') {
+                            continue;
+                        }
+                        var insertid = nexts[i].match(/<tbody id="autolist_(\d+)"\>/);
+                        if(!$('autolist_' + insertid[1])) {
+
+                            var newbody = document.createElement('tbody');
+                            tableobj.appendChild(newbody);
+                            var div = document.createElement('div');
+                            div.innerHTML = '<table>' + nexts[i] + '</table>';
+                            tableobj.replaceChild(div.childNodes[0].childNodes[0], tableobj.lastChild);
+                        }
+                    }
+
+                    var pageinfo = s.match(/\<span id="fd_page_bottom"\>(.+?)\<\/span\>/);
+                    nextpageurl = nextpageurl.replace(/&page=\d+/, '&page=' + (curpage + 1));
+
+                    $('fd_page_bottom').innerHTML = pageinfo[1];
+                    if(curpage + 1 > totalpage) {
+                        autopbn.style.display = 'none';
+                    } else {
+                        autopbn.innerHTML = '下一页 &raquo;';
+                    }
+                    loadstatus = 0;
+                });
+            }
+
+        })();
+    </script><span id="fd_page_bottom"><div class="pg"><strong>1</strong><a href="v.php?mod=list&mid=activitie&mobile=2&amp;page=2">2</a><a href="v.php?mod=list&mid=activitie&mobile=2&amp;page=3">3</a><a href="v.php?mod=list&mid=activitie&mobile=2&amp;page=4">4</a><a href="v.php?mod=list&mid=activitie&mobile=2&amp;page=5" class="last">.. 5</a><label><input type="text" name="custompage" class="px" size="2" title="输入页码，按回车快速跳转" value="1" onkeydown="if(event.keyCode==13) {window.location='v.php?mod=list&mid=activitie&mobile=2&amp;page='+this.value;; doane(event);}" /><span title="共 5 页"> / 5 页</span></label><a href="v.php?mod=list&mid=activitie&mobile=2&amp;page=2" class="nxt">下一页</a></div></span>
+        {include file="mobile/inc/footer.html"}

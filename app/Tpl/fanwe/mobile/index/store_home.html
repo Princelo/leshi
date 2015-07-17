@@ -1,0 +1,18 @@
+{if $store_list}
+<div class="cis_box">
+    <h3 onclick="goto('{url x="youhui" r="store"}')"><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/more.png" class="more"><span>
+    <img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/shop.png">推荐商户</span></h3>
+    <div class="cis_trowlist">
+        <ul class="cl">
+            {foreach from=$store_list item=store_item key=key}
+            <li onclick="goto('{url x="youhui" r="store#view" p="id=$store_item.id"}')">
+                <div class="item">
+                    <div class="logo"><div class="logo_area"><img src="{function name="get_spec_image" v=$store_item.preview w=100 h=100 g=1}"></div></div>
+                    <h4>{$store_item.name}</h4>
+                </div>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+</div>
+{/if}

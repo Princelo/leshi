@@ -29,7 +29,9 @@ class IndexAction extends Action{
 		
 		$this->clear_dir_file($this->getRealPath()."public/runtime/app/tpl_caches/");		
 		$this->clear_dir_file($this->getRealPath()."public/runtime/app/tpl_compiled/");
-		
+		$this->clear_dir_file($this->getRealPath()."public/runtime/app/mobile_tpl_caches/");
+		$this->clear_dir_file($this->getRealPath()."public/runtime/app/mobile_tpl_compiled/");
+
 		$this->clear_dir_file($this->getRealPath()."public/runtime/data/");	
 		$this->clear_dir_file($this->getRealPath()."public/runtime/app/data_caches/");				
 		$this->clear_dir_file($this->getRealPath()."public/runtime/app/db_caches/");

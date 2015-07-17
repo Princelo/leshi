@@ -1,0 +1,219 @@
+{include file="inc/header.html"}
+<body id="cis_list">
+<div class="body">
+    <div id="header">
+        <ul class="cl">
+            <li><a href="javascript:;" onClick="showtop('map','search')"><img src="{$TMPL}/images/mobile/tm1.png"></a></li>
+            <li><a href="javascript:;" onClick="showtop('search','map')"><img src="{$TMPL}/images/mobile/tm2.png"></a></li>
+            <li><a href="v.php?mod=uc&amp;mobile=2"><img src="{$TMPL}/images/mobile/tm3.png"></a></li>
+        </ul>
+        <h2>
+            <a href="v.php?mod=index&amp;mobile=2"><img src="{$TMPL}/images/mobile/logo.png"></a>
+        </h2>
+    </div>
+    <div id="map_menu" style="display:none" class="cis_sitemap"><h3>微店导航</h3><div class="cis_sitenv">
+        <ul class="cl">
+            <li><a href="{$APP_ROOT}/youhui.php?ctl=store"><img src="{$TMPL}/images/mobile/n1.png" /><br />店铺</a></li>
+            <li><a href="v.php?mod=list&mid=goods&order=new&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />新品</a></li>
+            <li><a href="v.php?mod=list&mid=goods&order=hot&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />热门</a></li>
+            <li><a href="v.php?mod=list&mid=goods&order=best&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />推荐</a></li>
+            <li><a href="v.php?mod=list&mid=activitie&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />活动</a></li>
+            <li><a href="v.php?mod=list&mid=coupon&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />优惠</a></li>
+            <li><a href="v.php?mod=list&mid=news&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />商讯</a></li>
+            <li><a href="v.php?mod=uc&amp;mobile=2"><img src="{$TMPL}/images/mobile/n1.png" /><br />我的</a></li>
+        </ul>
+    </div><h3>网站地图</h3>
+        <div class="cis_shownv">
+            <ul class="cl">
+                <li><a href="#"><span>自定义</span></a></li>
+                <li><a href="#"><span>自定义</span></a></li>
+                <li><a href="#"><span>自定义</span></a></li>
+                <li><a href="#"><span>自定义</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="search_menu" style="display:none" class="cis_search">
+        <form action="v.php?mod=search" method="get">
+            <input type="hidden" name="id" value="comeing_vshop" />
+            <input type="hidden" name="mod" value="search" />
+            <input type="hidden" name="searchsubmit" value="true" />
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="input"><input type="text" name="keyword" placeholder="请输入要搜索的内容"/></td>
+                    <td class="type">
+                        <select name="type">
+                            <option value="shop" selected="selected">找店铺</option>
+                            <option value="goods" >商品</option>
+                            <option value="activitie" >活动</option>
+                            <option value="news" >商讯</option>
+                            <option value="coupon" >优惠</option>
+                        </select>
+                    </td>
+                    <td class="btn"><button type="submit">搜索</button></td>
+                </tr>
+            </table>
+        </form></div>
+    <div class="cis_wp" id="wp_menu">    <div class="cis_catnv cis_cn5">
+        <ul class="cl">
+            <li class="a"><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new">最新</a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=hot">热门</a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=best">推荐</a></li>
+
+            <li ><a href="javascript:;" onClick="shownv('nv','area')">分类<span>&or;</span></a></li>
+            <li id="end"><a href="javascript:;" onClick="shownv('area','nv')">地区<span>&or;</span></a></li>
+        </ul>
+    </div><div id="area_menu" class="cis_shownv" style="display:none">
+        <ul class="cl">
+            <li class="a"><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new"><span>全部</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=1"><span>武昌</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=2"><span>洪山</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=3"><span>黄陂</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=4"><span>江岸</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=5"><span>东西湖</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=6"><span>江汉</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=7"><span>蔡甸</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=8"><span>汉阳</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=9"><span>硚口</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=10"><span>江夏</span></a></li>
+            <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&area=11"><span>青山</span></a></li>
+        </ul>
+    </div>
+        <div id="nv_menu" class="cis_shownv" style="display:none">
+            <ul class="cl">
+                <li class="a"><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new"><span>全部</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=1"><span>家居</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=2"><span>服装</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=3"><span>数码</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=4"><span>家电</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=5"><span>美食</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=6"><span>KTV</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=7"><span>宾馆</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=8"><span>游乐</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=9"><span>美发</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=10"><span>服务</span></a></li>
+                <li ><a href="v.php?mod=list&mobile=2&id=comeing_vshop&order=new&shoptype=11"><span>摄影</span></a></li>
+
+            </ul>
+        </div><table cellspacing="0" cellpadding="0" id="listtableid" class="cis_shoplist">
+            <tbody id="autolist_17">
+            <tr onclick="goto('v.php?mod=view&shopid=17')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/15/165339ym6veek7zelj6mrk.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>Comeings!</h4>
+                    <p class="about">Comeings!是恩斯道打造的最新旗舰品牌！依托恩斯道7年技术沉淀，大品牌值得信赖。将致...</p>
+                    <p class="score"><span><em style="width:87%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_9">
+            <tr onclick="goto('v.php?mod=view&shopid=9')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/230631bb1jhxy4hnnqb44q.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>巴黎春天</h4>
+                    <p class="about">巴黎春天是世界顶级的时尚品和零售业集团，总部位于法国巴黎，旗下拥有多个全球连锁的...</p>
+                    <p class="score"><span><em style="width:55%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_8">
+            <tr onclick="goto('v.php?mod=view&shopid=8')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/225535iz82ir48wol4r58f.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>香格里拉大酒店</h4>
+                    <p class="about">“香格里拉”是香港上市公司香格里拉（亚洲）有限公司的品牌，该酒店集团隶属于马来西...</p>
+                    <p class="score"><span><em style="width:92%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_7">
+            <tr onclick="goto('v.php?mod=view&shopid=7')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/224908qw4pm0tegf8nj08n.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>金汉斯</h4>
+                    <p class="about">南美烤肉乐享自助！金汉斯大贺12岁，大手笔惊喜亮瞎小伙伴，32个赞哦</p>
+                    <p class="score"><span><em style="width:76%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_6">
+            <tr onclick="goto('v.php?mod=view&shopid=6')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/224500dn1jz07yylrfyliz.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>大歌星量贩KTV</h4>
+                    <p class="about">KTV唱的不仅是经典，也是新鲜！KTV的歌就是流行风向标，约上三五个好友去K歌，不动声...</p>
+                    <p class="score"><span><em style="width:88%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_5">
+            <tr onclick="goto('v.php?mod=view&shopid=5')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/12/214251zobpzjtjmp2xvm1a.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>恩斯道科技</h4>
+                    <p class="about">湖北恩斯道科技有限公司是disucz应用中心十大优秀开发团队</p>
+                    <p class="score"><span><em style="width:100%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_4">
+            <tr onclick="goto('v.php?mod=view&shopid=4')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/222241idqzsojzawe8ez9e.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4> 57度湘</h4>
+                    <p class="about">都还不错，值得一去！很适合我这种喜欢一样吃点的～铜锣烧和鹅肝炒饭还有飞鱼籽蒸蛋推...</p>
+                    <p class="score"><span><em style="width:100%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_3">
+            <tr onclick="goto('v.php?mod=view&shopid=3')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/220817aom5jd7jx3kk57ml.png_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>肯德基(武昌店)</h4>
+                    <p class="about">对这家店没有什么不好的评价，唯一的不满，也是所有都给四颗星的原因就在于性价比！！...</p>
+                    <p class="score"><span><em style="width:90%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_2">
+            <tr onclick="goto('v.php?mod=view&shopid=2')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/171341un3ea2nsebszoqqw.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>杰克琼斯</h4>
+                    <p class="about">Jack & Jones是针对年龄在18岁到30岁之间的喜欢穿着随意、流行和时尚的男士们设计的。...</p>
+                    <p class="score"><span><em style="width:90%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+            <tbody id="autolist_1">
+            <tr onclick="goto('v.php?mod=view&shopid=1')">
+                <td class="logo">
+                    <img src="data/attachment/temp/201404/11/165127bo3pkpmkom34p5cb.jpg_thumb.jpg"/>
+                </td>
+                <td class="info">
+                    <h4>麦当劳菱角湖万达店</h4>
+                    <p class="about">麦当劳（英语：McDonald's）是全球大型跨国连锁餐厅，1940年创立于美国，在世界上大约...</p>
+                    <p class="score"><span><em style="width:60%"></em></span></p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {include file="mobile/inc/footer.html"}

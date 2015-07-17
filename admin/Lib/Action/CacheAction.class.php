@@ -34,7 +34,9 @@ class CacheAction extends CommonAction{
 		
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");		
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
-		
+		clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+		clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+
 		header("Content-Type:text/html; charset=utf-8");
        	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}
@@ -53,7 +55,9 @@ class CacheAction extends CommonAction{
 			$GLOBALS['cache']->clear();
 			clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");		
 			clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
-			@unlink(get_real_path()."public/runtime/app/lang.js");				
+			clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+			clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+			@unlink(get_real_path()."public/runtime/app/lang.js");
 			
 			//删除相关未自动清空的数据缓存
 			clear_auto_cache("page_image");
@@ -73,7 +77,9 @@ class CacheAction extends CommonAction{
 			$GLOBALS['cache']->clear();
 			clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");		
 			clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
-			@unlink(get_real_path()."public/runtime/app/lang.js");	
+			clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+			clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+			@unlink(get_real_path()."public/runtime/app/lang.js");
 			
 			//后台
 			clear_dir_file(get_real_path()."public/runtime/admin/Cache/");	
@@ -183,7 +189,9 @@ class CacheAction extends CommonAction{
 	
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");		
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
-		
+		clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+		clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+
 		header("Content-Type:text/html; charset=utf-8");
        	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}

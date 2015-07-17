@@ -16,8 +16,17 @@ if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_caches/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/tpl_caches/',0777);
 if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/',0777);
-$GLOBALS['tmpl']->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/tpl_caches';
-$GLOBALS['tmpl']->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/tpl_compiled';
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/',0777);
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/',0777);
+if(is_mobile() === false) {
+    $GLOBALS['tmpl']->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/tpl_caches';
+    $GLOBALS['tmpl']->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/tpl_compiled';
+} else {
+    $GLOBALS['tmpl']->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/mobile_tpl_caches';
+    $GLOBALS['tmpl']->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/mobile_tpl_compiled';
+}
 $GLOBALS['tmpl']->template_dir   = APP_ROOT_PATH . 'app/Tpl/' . app_conf("TEMPLATE");
 //定义当前语言包
 $GLOBALS['tmpl']->assign("LANG",$lang);

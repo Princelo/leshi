@@ -1767,4 +1767,17 @@ function run_info()
 
 	return "<div style='width:940px; padding:10px; line-height:22px; border:1px solid #ccc; text-align:left; margin:30px auto; font-size:14px; color:#999; height:150px; overflow-y:auto;'>".$str."</div>";*/
 }
+function is_mobile()
+{
+    $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $is_mobile = (strpos($http_user_agent, "BlackBerry")>0 || strpos($http_user_agent,"Phone")>0 || strpos($http_user_agent,"Android")>0 ||
+        strpos($http_user_agent,"BB10")>0 || strpos($http_user_agent,"BlackBerry")>0 || strpos($http_user_agent,"developer")>0 ||
+        strpos($http_user_agent,"iPad")>0 ||strpos($http_user_agent,"MicroMessenger")>0 || strpos($http_user_agent,"Wechat")>0 ||
+        strpos($http_user_agent,"Kindle")>0
+    );
+    if($is_mobile === true)
+        return true;
+    else
+        return false;
+}
 ?>

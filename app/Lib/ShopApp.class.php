@@ -16,28 +16,53 @@ class ShopApp{
 	private $module_obj;
 	//网站项目构造
 	public function __construct(){
-		$module = strtolower($_REQUEST[CTL]?$_REQUEST[CTL]:"index");
-		$action = strtolower($_REQUEST[ACT]?$_REQUEST[ACT]:"index");
+        if(is_mobile() === false){
+            $module = strtolower($_REQUEST[CTL]?$_REQUEST[CTL]:"index");
+            $action = strtolower($_REQUEST[ACT]?$_REQUEST[ACT]:"index");
 
-		
-		if(!file_exists(APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php"))
-		$module = "index";
-		
-		require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";				
-		if(!class_exists($module."Module"))
-		{
-			$module = "index";
-			require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";	
-		}
-		if(!method_exists($module."Module",$action))
-		$action = "index";
-		
-		define("MODULE_NAME",$module);
-		define("ACTION_NAME",$action);
-		
-		$module_name = $module."Module";
-		$this->module_obj = new $module_name;
-		$this->module_obj->$action();
+
+            if(!file_exists(APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php"))
+                $module = "index";
+
+            require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";
+            if(!class_exists($module."Module"))
+            {
+                $module = "index";
+                require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";
+            }
+            if(!method_exists($module."Module",$action))
+                $action = "index";
+
+            define("MODULE_NAME",$module);
+            define("ACTION_NAME",$action);
+
+            $module_name = $module."Module";
+            $this->module_obj = new $module_name;
+            $this->module_obj->$action();
+        } else {
+            $module = strtolower($_REQUEST[CTL]?"mobile_".$_REQUEST[CTL]:"mobile_"."index");
+            $action = strtolower($_REQUEST[ACT]?$_REQUEST[ACT]:"index");
+
+
+            if(!file_exists(APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php"))
+                $module = "index";
+
+            require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";
+            if(!class_exists($module."Module"))
+            {
+                $module = "mobile_index";
+                require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";
+            }
+            if(!method_exists($module."Module",$action))
+                $action = "index";
+
+            define("MODULE_NAME",$module);
+            define("ACTION_NAME",$action);
+
+            $module_name = $module."Module";
+            $this->module_obj = new $module_name;
+            $this->module_obj->$action();
+        }
 	}
 	
 	public function __destruct()

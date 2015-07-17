@@ -182,7 +182,9 @@ function clear_cache()
 		//模板页面缓存
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_caches/");		
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
-		@unlink(get_real_path()."public/runtime/app/lang.js");	
+        clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_caches/");
+        clear_dir_file(get_real_path()."public/runtime/app/mobile_tpl_compiled/");
+		@unlink(get_real_path()."public/runtime/app/lang.js");
 		
 		//脚本缓存
 		clear_dir_file(get_real_path()."public/runtime/statics/");		

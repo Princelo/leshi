@@ -1,0 +1,23 @@
+{if $youhui_list}
+<div class="blank"></div>
+<div class="cis_box">
+    <h3 onclick="goto('{url x="youhui" r="fcate"}')"><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/more.png" class="more">
+    <span><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/coupon.png">优惠券下载</span></h3>
+    <div class="cis_trowlist couponlist">
+        <ul class="cl">
+            {foreach from=$youhui_list item=youhui_item key=key}
+            <li>
+                <div class="item">
+                    <div class="youhui_tag_{$youhui_item.youhui_type}"></div>
+                    <a href="{url x="youhui" r="fdetail" p="id=$youhui_item.id"}" title="{$youhui_item.name}"><img src="{function name="get_spec_image" v=$youhui_item.icon w=140 h=100 g=1}" alt="{$youhui_item.name}" class="lazy" /></a>
+                    <div class="blank"></div>
+                    <a href="{url x="youhui" r="fdetail" p="id=$youhui_item.id"}" title="{$youhui_item.name}" class="title_link">{function name="msubstr" v=$youhui_item.name b=0 e=8}</a>
+                    <div class="blank"></div>
+                    <div class="youhui_downcount">本券累计下载 <?php echo intval($this->_var['youhui_item']['sms_count'])+intval($this->_var['youhui_item']['print_count']);?></div>
+                </div>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+</div>
+{/if}

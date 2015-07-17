@@ -58,10 +58,20 @@ if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_caches/'))
 	
 if(!file_exists(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/tpl_compiled/',0777);
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_caches/',0777);
+
+if(!file_exists(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/'))
+	mkdir(APP_ROOT_PATH.'public/runtime/app/mobile_tpl_compiled/',0777);
 $tmpl = new AppTemplate;
 $tmpl->template_dir   = APP_ROOT_PATH . 'app/Tpl/' . app_conf("TEMPLATE");
-$tmpl->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/tpl_caches';
-$tmpl->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/tpl_compiled';
+if(is_mobile() === false) {
+	$tmpl->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/tpl_caches';
+	$tmpl->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/tpl_compiled';
+} else {
+	$tmpl->cache_dir      = APP_ROOT_PATH . 'public/runtime/app/mobile_tpl_caches';
+	$tmpl->compile_dir    = APP_ROOT_PATH . 'public/runtime/app/mobile_tpl_compiled';
+}
 //end 定义模板引擎
 
 require APP_ROOT_PATH.'system/utils/es_cookie.php';
