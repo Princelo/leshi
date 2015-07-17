@@ -12,6 +12,7 @@ class mobile_storeModule extends YouhuiBaseModule
     public function index()
     {
 
+        $GLOBALS['tmpl']->assign('load_total', app_conf("DEAL_PAGE_SIZE"));
         convert_req($_REQUEST);
         $_REQUEST['cid'] = intval($_REQUEST['cid']);
         $keyword = addslashes(htmlspecialchars(trim($_REQUEST['keyword'])));

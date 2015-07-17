@@ -51,8 +51,10 @@ class mobile_ajaxModule extends YouhuiBaseModule
         $keyword = addslashes(htmlspecialchars(trim($_REQUEST['keyword'])));
         $city_id = intval($GLOBALS['deal_city']['id']);
         //分页
-        $page = intval($_REQUEST['p']);
-        if($page==0)
+        $page = 0;
+        if(isset($_GET['page']) && $_GET['page'] != null)
+            $page = intval($_GET['page']);
+        if($page <= 0)
             $page = 1;
         $limit = (($page-1)*app_conf("DEAL_PAGE_SIZE")).",".app_conf("DEAL_PAGE_SIZE");
 
@@ -207,7 +209,7 @@ class mobile_ajaxModule extends YouhuiBaseModule
 
 
         $return = new stdClass();
-        $return->total = 10;
+        $return->total = count($result['list']);
         $return->result = $result['list'];
         echo json_encode($return);
         exit;

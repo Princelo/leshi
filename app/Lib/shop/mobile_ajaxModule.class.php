@@ -1211,35 +1211,84 @@ class mobile_ajaxModule extends ShopBaseModule
         if(isset($_GET['type']) && $_GET['type'] != null)
             $type = $_GET['type'];
         else
-            $type = "home";
+            $type = "default";
+        if(isset($_GET['cid']) && $_GET['cid'] != null)
+            $cid = intval($_GET['cid']);
+        else
+            $cid = 0;
         if(isset($_GET['page']) && $_GET['page'] != null)
             $page = intval($_GET['page']);
         else
             $page = 1;
 
-        if($page < 5) {
-            $limit = ($page - 1) * 6;
-            switch(strval($type)) {
-                case "home":
-                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from {$db_pre}deal where is_best = 1
-                                        and deal_type = 0 and is_effect = 1 and is_delete = 0 order by sort desc limit ".$limit.", 6");
-                    break;
-                default :
-                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from {$db_pre}deal where is_best = 1
-                                        and deal_type = 0 and is_effect = 1 and is_delete = 0 order by sort desc limit 0, 6");
-                    break;
-            }
-            $return = new stdClass();
-            $return->total = 6;
-            $return->result = $result;
-            echo str_replace(".0000", ".00", json_encode($return));
-            exit;
+        switch($type) {
+            case 'home':
+                $sort = ' sort desc ';
+                break;
+            case 'newest':
+                $sort = ' id desc ';
+                break;
+            case 'recommend':
+                $sort = ' is_recommend  desc ,is_best desc ,is_hot desc, is_new desc, sort desc ';
+                break;
+            case 'hot':
+                $sort = ' is_hot desc, buy_count desc, sort desc, id desc ';
+                break;
+            default:
+                $sort = ' sort desc ';
+                break;
         }
 
+        $limit = ($page - 1) * 6;
+        switch(strval($type)) {
+            case "home":
+                $key = md5($limit.'products_home');
+                if(app_conf('CACHE_ON') == 1) {
+                    $result = $GLOBALS['cache']->get($key);
+                } else {
+                    $result = false;
+                }
+                if($result === false) {
+                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from {$db_pre}deal where is_best = 1
+                                    and buy_type <> 1 and is_effect = 1 and is_delete = 0 order by sort desc limit ".$limit.", 6");
+                    if(app_conf('CACHE_ON') == 1)
+                        $GLOBALS['cache']->set($key,$result);
+                }
+                break;
+            default :
+                $key = md5($limit.$type.$cid);
+                if(app_conf('CACHE_ON') == 1) {
+                    $result = $GLOBALS['cache']->get($key);
+                } else {
+                    $result = false;
+                }
+                if($result === false) {
+                    if($cid !== 0) {
+                        require_once APP_ROOT_PATH."system/utils/child.php";
+                        $ids_util = new child("shop_cate");
+                        $ids = $ids_util->getChildIds($cid);
+                        $sub_ids = $ids_util->getChildIds($cid);
+                        $sub_ids[] = $cid;
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1 and shop_cate_id in (".implode(",",$sub_ids).")
+                            order by {$sort} limit ".$limit.", 6");
+                        if(app_conf('CACHE_ON') == 1) {
+                            $GLOBALS['cache']->set($key,$result);
+                        }
+
+                    } else {
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1
+                            order by {$sort} limit ".$limit.", 6");
+                        if(app_conf('CACHE_ON') == 1) {
+                            $GLOBALS['cache']->set($key,$result);
+                        }
+                    }
+                }
+                break;
+        }
         $return = new stdClass();
-        $return->total = 0;
-        $return->result = null;
-        echo json_encode($return);
+        $return->total = count($result);
+        $return->result = $result;
+        echo str_replace(".0000", ".00", json_encode($return));
         exit;
 
     }

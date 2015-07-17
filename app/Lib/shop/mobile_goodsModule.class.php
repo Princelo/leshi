@@ -217,7 +217,9 @@ class mobile_goodsModule extends ShopBaseModule
     public function goods_list()
     {
         $list_type = intval($_REQUEST['list_type']);
-        $GLOBALS['tmpl']->display('mobile/goods_list.html');
+        $tag_list = get_cate_tree();
+        $GLOBALS['tmpl']->assign('tag_list', $tag_list);
+        $GLOBALS['tmpl']->display('mobile/mobile_goods_list.html');
     }
 
     function load_goods_time_status()

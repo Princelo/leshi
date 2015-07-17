@@ -86,7 +86,7 @@ class CacheFileService extends CacheService
      */
 	public function get($name)
     {    	    
-    	if(app_conf("CACHE_ON")==0||IS_DEBUG)return false;    	
+    	if(app_conf("CACHE_ON")==0)return false;
     	$var_name = md5($name);    	
     	global $$var_name;
     	if($$var_name)
@@ -96,7 +96,7 @@ class CacheFileService extends CacheService
     	
         $filename   =   $this->filename($name);    
         $content = @file_get_contents($filename);
-        if( false !== $content) { 
+        if( false !== $content) {
         	$expire  =  (int)substr($content,8, 12);
             if($expire != -1 && time() > filemtime($filename) + $expire) {
                 //缓存过期删除缓存文件
@@ -128,7 +128,7 @@ class CacheFileService extends CacheService
      */
     public function set($name,$value,$expire ="-1")
     {
-    	if(app_conf("CACHE_ON")==0||IS_DEBUG)return false;
+    	/*if(app_conf("CACHE_ON")==0||IS_DEBUG)return false;
         $filename   =   $this->filename($name,true);
         $data   =   serialize($value);   
         $data    = "<?php\n//".sprintf('%012d',$expire).$check.$data."\n?>";        
@@ -136,7 +136,18 @@ class CacheFileService extends CacheService
 	    if($rs)
         return true;
         else
-        return false;
+        return false;*/
+        //copy from fanweo2o 2015.07.18
+        if(app_conf("CACHE_ON")==0)return false;
+        if($expire=='-1') $expire = 3600*24;
+        $filename   =   $this->filename($name,true);
+        $data   =   serialize($value);
+        $data    = "<?php\n//".sprintf('%012d',$expire).$check.$data."\n?>";
+        $rs = file_put_contents($filename,$data);
+        if($rs)
+            return true;
+        else
+            return false;
     }
 
     /**

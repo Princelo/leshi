@@ -2,45 +2,38 @@
 <body id="cis_list">
 <div class="body">
     {include file="mobile/inc/header_feature1.html"}
-    <div class="cis_wp" id="wp_menu">    <div class="cis_catnv cis_cn5">
+    <div class="cis_wp" id="wp_menu">    <div class="cis_catnv cis_cn4">
         <ul class="cl">
-            <li {if $smarty.get.type == 'newest'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=newest">最新</a></li>
-            <li {if $smarty.get.type == 'hot'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=hot">热门</a></li>
-            <li {if $smarty.get.type == 'recommend'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=recommend">推荐</a></li>
+            <li {if $smarty.get.type == 'newest'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/index.php?ctl=goods&act=goods_list&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=newest">最新</a></li>
+            <li {if $smarty.get.type == 'hot'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/index.php?ctl=goods&act=goods_list&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=hot">热门</a></li>
+            <li {if $smarty.get.type == 'recommend'}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/index.php?ctl=goods&act=goods_list&aid={$smarty.get.aid}&cid={$smarty.get.cid}&type=recommend">推荐</a></li>
 
-            <li ><a href="javascript:;" onClick="shownv('nv','area')">分类<span>&or;</span></a></li>
-            <li id="end"><a href="javascript:;" onClick="shownv('area','nv')">地区<span>&or;</span></a></li>
-        </ul>
-    </div><div id="area_menu" class="cis_shownv" style="display:none">
-        <ul class="cl">
-            {if $area_list}
-            {foreach from=$area_list item=item key=key}
-            <li {if $smarty.get.aid == $item.id}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&type={$smarty.get.type}&cid={$smarty.get.cid}&aid={$item.id}"><span>{$item.name}</span></a></li>
-            {/foreach}
-            {/if}
+            <li id="end"><a href="javascript:;" onClick="shownv('area','nv')">分类<span>&or;</span></a></li>
+            <!--<li id="end"><a href="javascript:;" onClick="shownv('area','nv')">地区<span>&or;</span></a></li>-->
         </ul>
     </div>
-        <div id="nv_menu" class="cis_shownv" style="display:none">
+        <div id="area_menu" class="cis_shownv" style="display:none">
             <ul class="cl">
-                {if $cate_list}
-                {foreach from=$cate_list item=item key=key}
-                <li {if $smarty.get.cid == $item.id}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/youhui.php?ctl=store&type={$smarty.get.type}&aid={$smarty.get.aid}&cid={$item.id}"><span>{$item.name}</span></a></li>
+                <li {if $smarty.get.cid == 0}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/index.php?ctl=goods&act=goods_list&type={$smarty.get.type}&aid={$smarty.get.cid}&cid=0"><span>全部</span></a></li>
+                {if $tag_list}
+                {foreach from=$tag_list item=item key=key}
+                <li {if $smarty.get.cid == $item.id}class="a"{/if}><a href="http://{$smarty.server.HTTP_HOST}/index.php?ctl=goods&act=goods_list&type={$smarty.get.type}&aid={$smarty.get.cid}&cid={$item.id}"><span>{$item.name}</span></a></li>
                 {/foreach}
                 {/if}
             </ul>
         </div>
-        <table cellspacing="0" cellpadding="0" id="listtableid" class="cis_shoplist">
-        </table>
+        <div id="container" style="background: #f5f5f5;">
+        </div>
         <script>
-            $('#listtableid').waterfall({
+            $('#container').waterfall({
                 itemCls: 'item',
-                colWidth: $(window).width(),
-                gutterWidth: 0,
-                gutterHeight: 0,
+                colWidth: $(window).width()/100 * 45,
+                gutterWidth: $(window).width()/100 * 1,
+                gutterHeight: $(window).width()/100 * 1,
                 checkImagesLoaded: true,
                 maxPage: undefined,
                 path: function(page) {
-                    return '{url x="youhui" r="ajax", p="act=store_index"}' + '&page=' + page + '&type={$smarty.get.type}' + '&aid={$smarty.get.aid}' + '&cid={$smarty.get.cid}' + '&keyword={$smarty.get.keyword}';
+                    return '{url x="index" r="ajax", p="act=waterfall_products"}' + '&page=' + page + '&type={$smarty.get.type}' + '&aid={$smarty.get.aid}' + '&cid={$smarty.get.cid}' + '&keyword={$smarty.get.keyword}';
                 },
                 callbacks: {
                     /*
@@ -66,9 +59,6 @@
                             $loading.remove();
                             $('.waterfall-more').show();
                         }
-                        $('#listtableid .item').each(function(){
-                            $(this).width($(window).width());
-                        });
                     },
 
                     /*
@@ -91,7 +81,7 @@
                         console.log(resultNum);
                         resultNum = parseInt(resultNum);
                         if ( resultNum == 0) {
-                            $('#listtableid').waterfall('pause', function() {
+                            $('#container').waterfall('pause', function() {
                                 console.log('no more data');
                             });
                         }
@@ -109,18 +99,13 @@
         </script>
         <script id="waterfall-tpl" type="text/x-handlebars-template">
             {{#result}}
-            <tbody class="item">
-            <tr onclick="goto('{url x="youhui" r="store", p="act=view&id={{id}}"}')">
-                    <td class="logo">
-                    <img src="{{preview}}"/>
-                    </td>
-                    <td class="info">
-                    <h4>{{name}}</h4>
-            <p class="about">{{mobile_brief}}</p>
-            <p class="score"><span><em style="width:87%"></em></span></p>
-            </td>
-            </tr>
-            </tbody>
+            <div class="item">
+                <div class="info">
+                    <img src="{{img}}" width="100%" height="auto" style="height:auto" />
+                    <h2>{{title}}</h2>
+                    <h4><strong>￥{{current_price}}</strong><span>￥{{origin_price}}</span></h4>
+                </div>
+            </div>
             {{/result}}
         </script>
         {include file="mobile/inc/mobile_footer.html"}

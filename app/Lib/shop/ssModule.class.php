@@ -55,8 +55,8 @@ class ssModule extends ShopBaseModule
 		}	
 			
 		//输出商城分类
-		$cate_tree = get_cate_tree();	
-		$all_cate_tree = get_cate_tree(0,1);		
+		$cate_tree = get_cate_tree();
+		$all_cate_tree = get_cate_tree(0,1);
 		$GLOBALS['tmpl']->assign("cate_tree",$cate_tree);
 		$GLOBALS['tmpl']->assign("all_cate_tree",$all_cate_tree);
 		convert_req($_REQUEST);		

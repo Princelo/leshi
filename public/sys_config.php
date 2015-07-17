@@ -125,7 +125,7 @@ return array(
 'INTEGRATE_CODE'=>'',
 'INTEGRATE_CFG'=>'',
 'SHOP_SEO_TITLE'=>'乐时网',
-'CACHE_ON'=>'1',
+'CACHE_ON'=>'0',
 'EXPIRED_TIME'=>'0',
 'FILTER_WORD'=>'',
 'STYLE_OPEN'=>'0',
