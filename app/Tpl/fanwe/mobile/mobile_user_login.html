@@ -1,0 +1,39 @@
+{include file="mobile/inc/mobile_header.html"}
+<body id="cis_list">
+<div class="body">
+    {include file="moible/inc/header_feature1.html"}
+    <div class="top" style="padding-top: 50px;">
+        <div class="inner-wrapper">
+            <div class="form-wrapper" id="js-form-wrapper">
+                <span style="display:block; margin: 0 auto; width:185px; height:65px; background:url(http://leshi.lo/public/attachment/201011/4cdd501dc023b.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://leshi.lo/public/attachment/201011/4cdd501dc023b.png, sizingMethod=scale);_background-image:none;"></span>
+
+                <div id="js-sign-flow" class="desk-front sign-flow clearfix" style="display: block;">
+                    <div class="view view-signup selected">
+                        <form class="zu-side-login-box" action="{url x="shop" r="user#dologin"}" id="sign-form-1" autocomplete="off" novalidate_bak="novalidate" method="post">
+                        <div class="title">
+                            <a class="js-signin signin-switch with-icon" href="#signin">注册<i class="icon-sign icon-sign-arrow"></i></a>
+                            <a class="with-icon return"><i class="icon-sign icon-sign-arrow-l"></i><span class="js-title-label">返回</span></a>
+                        </div>
+                        <div class="name input-wrapper">
+                            <input required="" type="text" name="email" placeholder="邮箱/帐号">
+                        </div>
+                        <div class="name input-wrapper">
+                            <input required="" type="password" name="user_pwd" placeholder="密码">
+                        </div>
+                        <div class="failure" id="summary"><ul></ul></div>
+                        <div class="button-wrapper command">
+                            <button class="sign-button submit" type="submit">登录乐时网</button>
+                        </div>
+                        <div class="weibo-signup-wrapper" style="display: none;">
+                            社交帐号登录 &nbsp;
+                            <a class="js-bindwechat" href="javascript:;"><i class="ico z-ico-wechat-unlogin-page"></i></a>
+                            <a class="js-bindweibo" href="javascript:;"><i class="icon-sign icon-sign-sina"></i></a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    </div>
+    {include file="mobile/inc/mobile_footer.html"}

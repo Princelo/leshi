@@ -251,7 +251,10 @@ function showErr($msg,$ajax=0,$jump='',$stay=0)
 		$jump = APP_ROOT."/";
 		$GLOBALS['tmpl']->assign('jump',$jump);
 		$GLOBALS['tmpl']->assign("stay",$stay);
-		$GLOBALS['tmpl']->display("error.html");
+		if(is_mobile() === false)
+            $GLOBALS['tmpl']->display("error.html");
+		else
+			$GLOBALS['tmpl']->display("mobile/mobile_error.html");
 		exit;
 	}
 }
@@ -279,7 +282,10 @@ function showSuccess($msg,$ajax=0,$jump='',$stay=0)
 		$jump = APP_ROOT."/";
 		$GLOBALS['tmpl']->assign('jump',$jump);
 		$GLOBALS['tmpl']->assign("stay",$stay);
-		$GLOBALS['tmpl']->display("success.html");
+		if(is_mobile() === false)
+            $GLOBALS['tmpl']->display("success.html");
+		else
+			$GLOBALS['tmpl']->display("mobile/mobile_success.html");
 		exit;
 	}
 }
@@ -1775,9 +1781,10 @@ function is_mobile()
         strpos($http_user_agent,"iPad")>0 ||strpos($http_user_agent,"MicroMessenger")>0 || strpos($http_user_agent,"Wechat")>0 ||
         strpos($http_user_agent,"Kindle")>0
     );
-    if($is_mobile === true)
-        return true;
-    else
-        return false;
+    if($is_mobile === true) {
+		return true;
+	} else {
+		return false;
+	}
 }
 ?>

@@ -116,7 +116,7 @@
                                     resultNum = data.total;
                             console.log(resultNum);
                             resultNum = parseInt(resultNum);
-                            if ( resultNum == 0) {
+                            if ( resultNum < 6) {
                                 $('#container').waterfall('pause', function() {
                                     console.log('no more data');
                                     $('.waterfall-more').show();

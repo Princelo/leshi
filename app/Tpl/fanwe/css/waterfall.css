@@ -1,9 +1,9 @@
-a:link, a:visited {
+/*a:link, a:visited {
     color: #333;
 }
 a:hover {
     color: #c30;
-}
+}*/
 
 /*
  * header
@@ -46,7 +46,16 @@ a:hover {
     -webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
     filter: progid:DXImageTransform.Microsoft.Shadow(color = #adacac, direction = 135, strength = 2);
 }
+#listtableid .item {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    line-height: 1.5;
+}
  #container .item img {
+    display: block;
+}
+#listtableid .item img {
     display: block;
 }
 

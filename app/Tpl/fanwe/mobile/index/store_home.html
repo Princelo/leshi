@@ -1,7 +1,7 @@
 {if $store_list}
 <div class="cis_box">
-    <h3 onclick="goto('{url x="youhui" r="store"}')"><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/more.png" class="more"><span>
-    <img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/shop.png">推荐商户</span></h3>
+    <h3 onclick="goto('{url x="youhui" r="store"}')"><img src="{$TMPL}/images/mobile/more.png" class="more"><span>
+    <img src="{$TMPL}/images/mobile/shop.png">推荐商户</span></h3>
     <div class="cis_trowlist">
         <ul class="cl">
             {foreach from=$store_list item=store_item key=key}

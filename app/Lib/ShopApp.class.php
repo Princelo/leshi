@@ -45,7 +45,7 @@ class ShopApp{
 
 
             if(!file_exists(APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php"))
-                $module = "index";
+                $module = "mobile_index";
 
             require_once APP_ROOT_PATH."app/Lib/shop/".$module."Module.class.php";
             if(!class_exists($module."Module"))

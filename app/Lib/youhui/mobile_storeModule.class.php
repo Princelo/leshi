@@ -53,16 +53,16 @@ class mobile_storeModule extends YouhuiBaseModule
         $cache_param['city_id'] = $city_id;
         $result = load_auto_cache("store_filter_nav_cache",$cache_param);
         //输出大区
-        $area_id = intval($_REQUEST['aid']);
-        $area_result = load_auto_cache("cache_area",array("city_id"=>$GLOBALS['deal_city']['id']));
-        if($area_id>0)
+        //$area_id = intval($_REQUEST['aid']);
+        //$area_result = load_auto_cache("cache_area",array("city_id"=>$GLOBALS['deal_city']['id']));
+        /*if($area_id>0)
         {
             $ids = load_auto_cache("deal_quan_ids",array("quan_id"=>$area_id));
             $unicode_quans = array();
             foreach($ids as $k=>$v){
                 $unicode_quans[] = str_to_unicode_string($area_result[$v]['name']);
             }
-        }
+        }*/
         $GLOBALS['tmpl']->assign("area_list",$result['area_list']);
         //输出分类
         $cate_id = $cate_item['id'];

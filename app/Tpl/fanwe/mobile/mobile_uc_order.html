@@ -1,0 +1,290 @@
+{include file="mobile/inc/mobile_header.html"}
+<style>
+    .field {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    input[type="text"]{
+
+        width: 70% !important;
+        margin: 0 auto !important;
+    }
+    .fsForm .fsFieldRow .fsRowBody {
+        background: transparent;
+        margin: 0 auto;
+    }
+    .fsBody .fsForm .fsCell {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .fsFirst.fsLast.fsFieldCell {
+        width: auto;
+        float: none;
+    }
+    .fsBody .fsForm input[type="text"].fsField, .fsBody .fsForm input[type="number"].fsField, .fsBody .fsForm input[type="email"].fsField, .fsBody .fsForm input[type="tel"].fsField, .fsBody .fsForm textarea.fsField {
+        background-image: none;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 2px;
+        text-indent: 10px;
+        font-weight: normal;
+        height: auto;
+        padding: 15px 0;
+    }
+    .fsBody .fsForm input[type=text].fsRequired, .fsBody .fsForm input[type=file].fsRequired, .fsBody .fsForm input[type=number].fsRequired, .fsBody .fsForm input[type=email].fsRequired, .fsBody .fsForm input[type=tel].fsRequired, .fsBody .fsForm textarea.fsRequired, .fsBody .fsForm select.fsRequired {
+        border-color: #EEEEEE;
+        background-color: #FFFFFF;
+    }
+    .fsBody .fsForm input[type=text].fsField, .fsBody .fsForm input[type=file].fsField, .fsBody .fsForm input[type=number].fsField, .fsBody .fsForm input[type=email].fsField, .fsBody .fsForm input[type=tel].fsField, .fsBody .fsForm textarea.fsField {
+        padding: 4px;
+    }
+    .fsBody .fsForm input[type=text].fsField, .fsBody .fsForm input[type=file].fsField, .fsBody .fsForm input[type=number].fsField, .fsBody .fsForm input[type=email].fsField, .fsBody .fsForm input[type=tel].fsField, .fsBody .fsForm textarea.fsField, .fsBody .fsForm select.fsField {
+        color: #000000;
+        border-color: #eeeeee;
+        background-color: #FFFFFF;
+    }
+    .fsFieldRow input[type=email], .fsFieldRow input[type=number], .fsFieldRow input[type=tel], .fsFieldRow input[type=text], .fsForm textarea {
+        border: 1px solid #999;
+        background-color: #fff;
+        background-image: url(../../images/3/fieldbg.png);
+        background-repeat: repeat-x;
+        background-position: top left;
+        border-top: 1px solid #7c7c7c;
+        border-left: 1px solid #c3c3c3;
+        border-right: 1px solid #c3c3c3;
+        border-bottom: 1px solid #ddd;
+        color: #333;
+        padding: 4px;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+        max-width: 95%;
+    }
+    input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+        background-color: white;
+        font-family: inherit;
+        border: 1px solid #cccccc;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        border-radius: 2px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        color: rgba(0, 0, 0, 0.75);
+        display: block;
+        font-size: 14px;
+        margin: 0 0 12px 0;
+        padding: 6px;
+        height: 32px;
+        width: 100%;
+        -webkit-transition: all 0.15s linear;
+        -moz-transition: all 0.15s linear;
+        -o-transition: all 0.15s linear;
+        transition: all 0.15s linear;
+    }
+    input {
+        white-space: normal;
+    }
+    .button.orange:hover {
+        color: white;
+        background-color: #da8605;
+        border-color: #c67b08;
+    }
+    .button.orange {
+        border: 1px solid #ed9d21;
+        color: white;
+        text-shadow: 1px 1px #da8605;
+        background: #ed9d21;
+    }
+    .button.large {
+        font-size: 17px;
+        padding: 15px 30px 16px;
+    }
+    .button:hover {
+        color: white;
+        background-color: #2284a1;
+    }
+    a:hover {
+        color: #ea9e0a;
+        cursor: pointer;
+    }
+    .button {
+        border-radius: 5px;
+        text-transform: uppercase;
+        background-repeat: repeat;
+        font-weight: 600;
+        padding: 12px 15px 10px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -moz-transition-property: all;
+        -o-transition-property: all;
+        -webkit-transition-property: all;
+        transition-property: all;
+        -moz-transition-duration: 0.15s;
+        -o-transition-duration: 0.15s;
+        -webkit-transition-duration: 0.15s;
+        transition-duration: 0.15s;
+        -moz-transition-timing-function: linear;
+        -o-transition-timing-function: linear;
+        -webkit-transition-timing-function: linear;
+        transition-timing-function: linear;
+        position: relative;
+    }
+    .header-back span{color: #fff;}
+    .header-back {display: inline-block; margin-right:50px;}
+    /*order*/
+    .order-ldetail{display: block;color: #6d6d6d;margin:0px 10px;padding:10px 0px;}
+
+    .order-lcnt{font-size:14px;}
+    .order-ltlt,.order-lcnt-shop{padding:8px 10px;}
+    .order-lcnt-shop p{padding:3px 0px;}
+
+    .order-list li.green-order-skin{border:solid 1px #D6E9C6;}
+    .green-order-skin .order-ltlt{background:#6cb248;color:#fff;}
+    .green-order-skin .order-lcnt{border-top:solid 1px #D6E9C6;}
+    .green-order-skin .order-lcnt-shop{border-bottom:solid 1px #D6E9C6;/*background:#D6E9C6;*/}
+
+    .order-list li.gray-order-skin{border:solid 1px #ccc;}
+    .gray-order-skin .order-ltlt{background:#999;color:#fff;}
+    .gray-order-skin .order-lcnt{border-top:solid 1px #ccc;}
+    .gray-order-skin .order-lcnt-shop{border-bottom:solid 1px #ccc;/*background:#ccc;*/}
+
+    .ot-finish,.ot-nofinish,.ot-cancel{padding:5px 10px; }
+    .ot-finish{color: #D9434E;}
+    .ot-nofinish{color:#6cb248;}
+    .ot-cancel{color:#999;}
+
+    .order-pdinfor{position: relative;margin-left:70px;}
+    .order-d-pdinfor p,.order-pay-type p{padding: 3px 0px;font-size: 14px;}
+    .order-pdinfor .grayrightarrow{position: absolute;right: 10px;top: 50%;}
+    .order-pdpic{float:left;width:60px;height:60px;overflow:hidden;}
+    .order-pdpic,.order-pdpic img{width:60px;height:60px;}
+    .order-pdinfor p{font-size:14px;}
+    .order-shop-total{background:#fffdf7;padding:10px;border-top:1px solid #dedede;text-align:right;}
+    .order-shop-total p,.order-ltlt p{padding:2px 0px;}
+    .sure-order,.cancel-order, .viewdelivery-order{padding:5px 20px;color:#fff;}
+    .cancel-order{background:#D9434E;}
+    .sure-order{background:#6cb248;}
+    .viewdelivery-order{background:rgb(73, 175, 205);}
+
+    .order-pay-type{padding-right: 50px;}
+    .opt-pay-total{border-top: 1px solid #ddd;}
+
+    .order-pd-pdinfor .opdinfor-wp{padding: 10px 0px;font-size: 14px;display: block;color: #6d6d6d;}
+    .opdinfor-pic{width: 50px;height: 50px;overflow: hidden;float: left;}
+    .opdinfor-pic img{width: 50px;height: 50px;}
+    .opdinforw-infor{margin-left: 60px;position: relative;}
+    .opdinforw-infor .grayrightarrow{position: absolute;right: 0px;top: 50%;margin-top: -5px;}
+
+    .order-delivery-wrapper {margin:15px;}
+    .order-delivery-express {}
+    .order-delivery-shipcode {}
+    .order-delivery-infolist {}
+    .order-delivery-infolist li {margin:15px; border-bottom:1px dotted #ccc; font-size:13px;}
+    </style>
+<body id="cis_list">
+<div class="body">
+    {include file="moible/inc/header_feature1.html"}
+<div class="inc" style="padding-top: 50px;">
+    <div class="inc_top button orange large" style="margin-bottom: 22px;"><a href="{url x="shop" r="uc_center"}" class="header-back"><span>返回</span></a>
+        {$page_title}</div>
+    <div class="inc_main">
+        <!--<div class="sub_nav">
+            <span {if $ACTION_NAME eq 'index'}class="act"{/if}><a href="{url x="shop" r="uc_order#index"}">{$LANG.UC_ORDER}</a></span>
+            <span {if $ACTION_NAME eq 'lottery'}class="act"{/if}><a href="{url x="shop" r="uc_order#lottery"}">{$LANG.UC_LOTTERY}</a></span>
+
+        </div>-->
+        <div class="blank1"></div>
+        <div  class="uc-table">
+            <div class="order-list">
+
+                <ul>
+
+                    {foreach from=$list item=order key=key}
+                    <li class="gray-order-skin " onclick="window.location.href='{url x="shop" r="uc_order#view" p="id=$order.id"}'">
+                        <div class="order-ltlt">
+                            <p>
+                                {$LANG.ORDER_CREATE_TIME}：
+                                {function name="to_date" value=$order.create_time}
+                            </p>
+                        </div>
+
+                        <div class="order-lcnt">
+                            <div class="order-lcnt-shop">
+                                <!--<p>店铺名称：拉合曼蜂业旗舰店</p>-->
+                                <p>{$LANG.ORDER_SN}： {$order.order_sn} </p>
+                            </div>
+                            <div class="order-shop-pd">
+
+                                <a class="order-ldetail clearfix " href="http://m.kakasell.com/tmpl/product_detail.html?goods_id=361">
+                                            <!--<span class="order-pdpic">
+                                                <img src="http://upload.kakasell.com/shop/store/goods/5/5_04854528602075657_240.jpg">
+                                            </span>-->
+                                    <div class="order-pdinfor">
+                                        <!--<p>拉合曼 野酸梅果酱 340克 纯天然果肉果酱 无添加剂 特价包邮 340g</p>
+                                        <p>
+                                            单价：<span class="clr-d94">￥36.00</span>
+                                        </p>
+                                        <p>
+                                            商品数目：1
+                                        </p>-->
+                                        {function name="get_order_item_list" value=$order.id}
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="order-shop-total">
+                                <!--<p>运费：<span class="clr-d94">￥0.00</span></p>-->
+                                <p class="clr-c07">{$LANG.PAY_TOTAL_PRICE}： {function name="format_price" value=$order.total_price} </p>
+                                <p class="mt5">
+
+                                    <span class="ot-cancel-bak">
+
+                    <?PHP echo $this->_var['LANG']['ORDER_PAY_STATUS_'.$this->_var['order']['pay_status']];?>
+                    <br />
+                                        <?PHP echo $this->_var['LANG']['ORDER_DELIVERY_STATUS_'.$this->_var['order']['delivery_status']];?>
+                    <br />
+                                        <?PHP echo $this->_var['LANG']['ORDER_ORDER_STATUS_'.$this->_var['order']['order_status']];?>
+
+                    {if $order.after_sale gt 0}
+                    <br />
+                                        <?PHP echo $this->_var['LANG']['AFTER_SALE_'.$this->_var['order']['after_sale']];?>
+                    {/if}
+                                    </span>
+                                </p>
+                                <p class="mt5">
+
+
+                                    {if $order.pay_status eq 0}
+                                    <br />
+                                    <a class="btn" href="{url x="shop" r="uc_order#del" p="id=$order.id"}">{$LANG.CANCEL}</a>
+                                    {/if}
+
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </li>
+                    {/foreach}
+
+
+
+
+
+
+                </ul>
+
+            </div>
+
+            <div class="blank"></div>
+            <div class="pages">{$pages}</div>
+        </div>
+
+    </div>
+    <div class="inc_foot"></div>
+</div>
+{include file="mobile/inc/mobile_footer.html"}

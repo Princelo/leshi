@@ -288,6 +288,7 @@ if(!file_exists(APP_ROOT_PATH.'public/runtime/app/db_caches/'))
 	mkdir(APP_ROOT_PATH.'public/runtime/app/db_caches/',0777);
 $pconnect = false;
 $db = new mysql_db(app_conf('DB_HOST').":".app_conf('DB_PORT'), app_conf('DB_USER'),app_conf('DB_PWD'),app_conf('DB_NAME'),'utf8',$pconnect);
+$pdo = new PDO("mysql:host=".app_conf('DB_HOST').";dbname=".app_conf('DB_NAME').";charset=utf8", app_conf('DB_USER'), app_conf('DB_PWD'));
 //end 定义DB
 
 

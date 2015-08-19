@@ -10,7 +10,7 @@ class mobile_indexModule extends ShopBaseModule
         $GLOBALS['tmpl']->cache_lifetime = 600;  //首页缓存10分钟
         //$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);
         $cache_id  = md5(MODULE_NAME.ACTION_NAME);
-        if (!$GLOBALS['tmpl']->is_cached('mobile/index.html', $cache_id) && true)
+        if (!$GLOBALS['tmpl']->is_cached('mobile/index.html', $cache_id))
         {
             $youhui_html = $this->index_youhui();
             $GLOBALS['tmpl']->assign("youhui_html",$youhui_html);

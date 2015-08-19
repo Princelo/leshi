@@ -1,8 +1,8 @@
 {if $event_list}
 <div class="cis_box">
     <h3 onclick="goto('{url x="youhui" r="event"}')">
-    <img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/more.png" class="more">
-    <span><img src="http://leshi.lo/app/Tpl/fanwe/images/mobile/coupon.png">热门活动</span></h3>
+    <img src="{$TMPL}/images/mobile/more.png" class="more">
+    <span><img src="{$TMPL}/images/mobile/coupon.png">热门活动</span></h3>
     <div class="cis_activitielist">
         <ul>
             {foreach from=$event_list item=event_item key=key}

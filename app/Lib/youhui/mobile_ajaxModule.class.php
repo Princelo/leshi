@@ -214,5 +214,103 @@ class mobile_ajaxModule extends YouhuiBaseModule
         echo json_encode($return);
         exit;
     }
+
+    public function event_index()
+    {
+        if(isset($_GET['type']) && $_GET['type'] != null)
+            $type = $_GET['type'];
+        else
+            $type = 'newest';
+        switch(strval($type))
+        {
+            case "newest":
+                $sortby = " id desc ";
+                break;
+            case "recommend":
+                $sortby = " is_recommend desc, sort desc ";
+                break;
+            case "hot":
+                $sortby = " submit_count desc, reply_count desc, is_recommend desc, sort desc ";
+                break;
+            default:
+                $sortby = " is_recommend desc, sort desc ";
+                break;
+        }
+        convert_req($_REQUEST);
+        $_REQUEST['cid'] = intval($_REQUEST['cid']);
+        $keyword = addslashes(htmlspecialchars(trim($_REQUEST['keyword'])));
+
+        $url_param = array(
+            "cid"	=> addslashes(trim($_REQUEST['cid'])),
+            "aid"	=>	intval($_REQUEST['aid']),
+            "qid"	=>	intval($_REQUEST['qid']),
+            "keyword"	=> $keyword
+        );
+        if(intval($_REQUEST['is_redirect'])==1)
+        {
+            app_redirect(url("youhui","event",$url_param));
+        }
+
+        $city_id = intval($GLOBALS['deal_city']['id']);
+
+        $id = intval($_REQUEST['cid']);
+        $cate_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."event_cate where id = ".$id);
+
+        $condition = " 1=1 ";  //条件
+
+
+
+        //输出大区
+        $area_id = intval($_REQUEST['aid']);
+
+        if($area_id>0)
+        {
+            //$area_name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."area where id = ".$area_id);
+            $ids = load_auto_cache("deal_quan_ids",array("quan_id"=>$area_id));
+            $quan_list = $GLOBALS['db']->getAll("select `name` from ".DB_PREFIX."area where id in (".implode(",",$ids).")");
+            $unicode_quans = array();
+            foreach($quan_list as $k=>$v){
+                $unicode_quans[] = str_to_unicode_string($v['name']);
+            }
+            $kw_unicode = implode(" ", $unicode_quans);
+            $condition .= " and (match(locate_match) against('".$kw_unicode."' IN BOOLEAN MODE))";
+        }
+
+
+
+        if($keyword)
+        {
+            $kws_div = div_str($keyword);
+            foreach($kws_div as $k=>$item)
+            {
+                $kw[$k] = str_to_unicode_string($item);
+            }
+            $ukeyword = implode(" ",$kw);
+            $condition.=" and (match(name_match) against('".$ukeyword."'  IN BOOLEAN MODE)  or name like '%".$keyword."%') ";
+        }
+
+        $page = 0;
+        if(isset($_GET['page']) && $_GET['page'] != null)
+            $page = intval($_GET['page']);
+        if($page <= 0)
+            $page = 1;
+        $limit = (($page-1)*6).", 6";
+
+        $result = search_event_list($limit,intval($cate_item['id']),$city_id,$condition,$sortby);
+        foreach($result['list'] as $k => $v)
+        {
+            $result['list'][$k]['event_begin_time'] = date('y年m月d日', $v['event_begin_time']);
+            $result['list'][$k]['event_end_time'] = date('y年m月d日', $v['event_end_time']);
+            $result['list'][$k]['status'] = ($v['event_end_time'] > $_SERVER['REQUEST_TIME'] && $v['event_end_time'] != '') ? '进行中' : '已结束';
+            $result['list'][$k]['status'] = ($v['event_end_time'] == '' &&  $v['submit_end_time'] < $_SERVER['REQUEST_TIME']) ? '已结束' : $result['list'][$k]['status'];
+            $result['list'][$k]['status_class'] = $result['list'][$k]['status'] == '进行中' ? 'ing' : 'end';
+        }
+
+        $return = new stdClass();
+        $return->total = count($result['list']);
+        $return->result = $result['list'];
+        echo json_encode($return);
+        exit;
+    }
 }
 ?>

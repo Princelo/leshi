@@ -1,0 +1,27 @@
+{include file="mobile/inc/mobile_header.html"}
+{if $stay eq 0}
+<meta http-equiv="refresh" content="3;URL={$jump}" />
+{/if}
+<div class="msg_box success_box">
+    <h2>
+        <div class="icon"><i></i></div>
+        <span class="tip">{$LANG.SUCCESS_TITLE}</span>
+    </h2>
+
+    <div class="notice">
+        <p>
+            {if $integrate_result}
+            {$integrate_result}
+            {/if}
+            {$msg}
+        </p>
+        <p>
+            {if $stay eq 0}
+            {function name="sprintf" format=$LANG.JUMP_TIP value=$jump}
+            {/if}
+        </p>
+    </div>
+
+
+</div>
+{include file="mobile/inc/mobile_footer.html"}

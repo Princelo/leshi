@@ -118,7 +118,7 @@ class AppTemplate
             }
             else
             {            	
-                if (app_conf("TMPL_CACHE_ON")==1&&$cache_id && $this->caching&&!IS_DEBUG)
+                if (app_conf("TMPL_CACHE_ON")==1&&$cache_id && $this->caching)
                 {                	
                     $out = $this->template_out;                                                     
                 }
@@ -359,7 +359,7 @@ class AppTemplate
     function is_cached($filename, $cache_id = '')
     {
         $cachename = basename($filename, strrchr($filename, '.')) . '_' . $cache_id;
-        if (app_conf("TMPL_CACHE_ON")==1&&$this->caching == true && $this->direct_output == false&&!IS_DEBUG)
+        if (app_conf("TMPL_CACHE_ON")==1&&$this->caching == true && $this->direct_output == false)
         {
             $hash_dir = $this->cache_dir . '/c' . substr(md5($cachename), 0, 1);
             //$hash_dir = $this->cache_dir;

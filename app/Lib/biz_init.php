@@ -60,6 +60,7 @@ $biz_nav[] = array("name"=>"活动","url"=>url("biz","event"),"ctl"=>"event");  
 $biz_nav[] = array("name"=>"验证","url"=>url("biz","verify"),"ctl"=>"verify");    //验证团购券，消费券，优惠券
 $biz_nav[] = array("name"=>"点评","url"=>url("biz","dp"),"ctl"=>"dp");    //点评的查看与回复
 $biz_nav[] = array("name"=>"结算","url"=>url("biz","balance"),"ctl"=>"balance");    //结算
+//$biz_nav[] = array("name"=>"消费录入","url"=>url("biz","o2o"),"ctl"=>"o2o");    //结算
 
 if(app_conf("SHOP_OPEN")==0)
 {

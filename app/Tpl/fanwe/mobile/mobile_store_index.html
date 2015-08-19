@@ -90,7 +90,7 @@
                                 resultNum = data.total;
                         console.log(resultNum);
                         resultNum = parseInt(resultNum);
-                        if ( resultNum == 0) {
+                        if ( resultNum < {$load_total}) {
                             $('#listtableid').waterfall('pause', function() {
                                 console.log('no more data');
                             });

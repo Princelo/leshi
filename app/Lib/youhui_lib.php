@@ -655,4 +655,74 @@ function search_event_list($limit, $cate_id=0, $city_id=0, $where='',$orderby = 
 }
 
 
+function search_event_list_mobile($limit, $cate_id=0, $city_id=0, $where='',$orderby = '',$cached = false)
+{
+	$key = md5("MOBILE_EVENT_".$limit.$cate_id.$city_id.$where.$orderby);
+	if($cached)
+	{
+		$res = $GLOBALS['cache']->get($key);
+	}
+	else
+	{
+		$res = false;
+	}
+	if($res===false)
+	{
+
+		$count_sql = "select count(1) from ".DB_PREFIX."event " ;
+		$sql = "select name,icon,event_begin_time,event_end_time,submit_begin_time,submit_end_time,address,submit_count,address from ".DB_PREFIX."event ";
+
+
+		$count_sql .= " where is_effect = 1 ";
+		$sql .= " where is_effect = 1  ";
+
+		if($cate_id>0)
+		{
+
+			$sql .= " and cate_id = ".$cate_id." ";
+			$count_sql .= " and cate_id = ".$cate_id." ";
+		}
+
+		if($city_id==0)
+		{
+			$city = get_current_deal_city();
+			$city_id = $city['id'];
+		}
+
+		if($city_id>0)
+		{
+			$ids = load_auto_cache("deal_city_belone_ids",array("city_id"=>$city_id));
+			if($ids)
+			{
+				$sql .= " and city_id in (".implode(",",$ids).")";
+				$count_sql .= " and city_id in (".implode(",",$ids).")";
+			}
+		}
+
+		if($where != '')
+		{
+			$sql.=" and ".$where;
+			$count_sql.=" and ".$where;
+		}
+
+		if($orderby=='')
+			$sql.=" order by is_recommend desc,sort desc  ";
+		else
+			$sql.=" order by is_recommend desc,".$orderby."  ";
+
+		if($limit != "")
+		{
+			$sql.=" limit ".$limit." ";
+		}
+
+		$events = $GLOBALS['db']->getAll($sql);
+		$events_count = $GLOBALS['db']->getOne($count_sql);
+
+		$res = array('list'=>$events,'count'=>$events_count);
+		$GLOBALS['cache']->set($key,$res);
+	}
+	return $res;
+}
+
+
 ?>

@@ -1,0 +1,35 @@
+{include file="biz/biz_header.html"}
+
+{include file="biz/biz_nav.html"}
+<div class="blank"></div>
+<div class="wrap">
+    {include file="biz/biz_info_header.html"}
+    <div class="biz_index_box clearfix">
+        <div class="short f_l">
+            {include file="biz/biz_left.html"}
+        </div>
+        <div class="long f_r">
+            <div class="blank"></div>
+            <form action="{url x="biz" r="o2o"}" method="post">
+                <label>消费名称</label>
+                <input name="title" />
+
+                <label>会员名</label>
+                <input name="consumer_name" />
+
+                <label>消费金额</label>
+                <input name="volume" />
+
+                <label>消费备注</label>
+                <input name="remark" />
+
+                <input type="submit" value="提交" />
+            </form>
+
+        </div>
+        <div class="blank"></div>
+    </div><!--end biz_index_box-->
+
+</div>
+<div class="blank"></div>
+{include file="biz/biz_footer.html"} 
