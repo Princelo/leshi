@@ -1,0 +1,303 @@
+{include file="mobile/inc/mobile_header.html"}
+<body id="cis_list">
+<div class="body">
+    {include file="moible/inc/header_feature1.html"}
+    <div class="" style="padding-top: 50px;">
+        <style>
+            .field {
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            input[type="text"]{
+
+                width: 70% !important;
+                margin: 0 auto !important;
+            }
+            .fsForm .fsFieldRow .fsRowBody {
+                background: transparent;
+                margin: 0 auto;
+            }
+            .fsBody .fsForm .fsCell {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        }
+        .fsFirst.fsLast.fsFieldCell {
+        width: auto;
+        float: none;
+        }
+            .fsBody .fsForm input[type="text"].fsField, .fsBody .fsForm input[type="number"].fsField, .fsBody .fsForm input[type="email"].fsField, .fsBody .fsForm input[type="tel"].fsField, .fsBody .fsForm textarea.fsField {
+                background-image: none;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 2px;
+                text-indent: 10px;
+                font-weight: normal;
+                height: auto;
+                padding: 15px 0;
+            }
+            .fsBody .fsForm input[type=text].fsRequired, .fsBody .fsForm input[type=file].fsRequired, .fsBody .fsForm input[type=number].fsRequired, .fsBody .fsForm input[type=email].fsRequired, .fsBody .fsForm input[type=tel].fsRequired, .fsBody .fsForm textarea.fsRequired, .fsBody .fsForm select.fsRequired {
+        border-color: #EEEEEE;
+        background-color: #FFFFFF;
+        }
+        .fsBody .fsForm input[type=text].fsField, .fsBody .fsForm input[type=file].fsField, .fsBody .fsForm input[type=number].fsField, .fsBody .fsForm input[type=email].fsField, .fsBody .fsForm input[type=tel].fsField, .fsBody .fsForm textarea.fsField {
+        padding: 4px;
+        }
+        .fsBody .fsForm input[type=text].fsField, .fsBody .fsForm input[type=file].fsField, .fsBody .fsForm input[type=number].fsField, .fsBody .fsForm input[type=email].fsField, .fsBody .fsForm input[type=tel].fsField, .fsBody .fsForm textarea.fsField, .fsBody .fsForm select.fsField {
+        color: #000000;
+        border-color: #eeeeee;
+        background-color: #FFFFFF;
+        }
+        .fsFieldRow input[type=email], .fsFieldRow input[type=number], .fsFieldRow input[type=tel], .fsFieldRow input[type=text], .fsForm textarea {
+        border: 1px solid #999;
+        background-color: #fff;
+        background-image: url(../../images/3/fieldbg.png);
+        background-repeat: repeat-x;
+        background-position: top left;
+        border-top: 1px solid #7c7c7c;
+        border-left: 1px solid #c3c3c3;
+        border-right: 1px solid #c3c3c3;
+        border-bottom: 1px solid #ddd;
+        color: #333;
+        padding: 4px;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+        max-width: 95%;
+        }
+        input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], textarea {
+        background-color: white;
+        font-family: inherit;
+        border: 1px solid #cccccc;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        border-radius: 2px;
+        -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        color: rgba(0, 0, 0, 0.75);
+        display: block;
+        font-size: 14px;
+        margin: 0 0 12px 0;
+        padding: 6px;
+        height: 32px;
+        width: 100%;
+        -webkit-transition: all 0.15s linear;
+        -moz-transition: all 0.15s linear;
+        -o-transition: all 0.15s linear;
+        transition: all 0.15s linear;
+        }
+        input {
+        white-space: normal;
+        }
+            .button.orange:hover {
+                color: white;
+                background-color: #da8605;
+                border-color: #c67b08;
+            }
+            .button.orange {
+                border: 1px solid #ed9d21;
+                color: white;
+                text-shadow: 1px 1px #da8605;
+                background: #ed9d21;
+            }
+            .button.large {
+                font-size: 17px;
+                padding: 15px 30px 16px;
+            }
+            .button:hover {
+                color: white;
+                background-color: #2284a1;
+            }
+            a:hover {
+                color: #ea9e0a;
+                cursor: pointer;
+            }
+            .button {
+                border-radius: 5px;
+                text-transform: uppercase;
+                background-repeat: repeat;
+                font-weight: 600;
+                padding: 12px 15px 10px;
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                -moz-transition-property: all;
+                -o-transition-property: all;
+                -webkit-transition-property: all;
+                transition-property: all;
+                -moz-transition-duration: 0.15s;
+                -o-transition-duration: 0.15s;
+                -webkit-transition-duration: 0.15s;
+                transition-duration: 0.15s;
+                -moz-transition-timing-function: linear;
+                -o-transition-timing-function: linear;
+                -webkit-transition-timing-function: linear;
+                transition-timing-function: linear;
+                position: relative;
+            }
+            .header-back span{color: #fff;}
+            .header-back {display: inline-block; margin-right:50px;}
+        </style>
+<div class="inc">
+    <div class="inc_top button orange large" style="margin-bottom: 22px;"><a href="{url x="shop" r="uc_center"}" class="header-back"><span>返回</span></a>
+        {$page_title}</div>
+    <div class="inc_main">
+        <form method="post" action="{url x="shop" r="uc_consignee#save"}" name="modify">
+        <div class="consignee-box order-pay-credit">
+            <div class="field consignee">
+                <input type="text" value="{$consignee_info.consignee}" class="f-input" name="consignee" size="30" placeholder="{$LANG.CONSIGNEE}">
+            </div>
+            <div class="blank"></div>
+            <div class="field region fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin: 0 auto;">
+            <label>{$LANG.REGION_INFO}：</label>
+            </div>
+            <div class="field region fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin: 0 auto;">
+                <label style="width: 30%; float:left">{$LANG.REGION_LV1}：</label><select name="region_lv1">
+                <option value="0">={$LANG.SELECT_PLEASE}=</option>
+                {foreach from=$region_lv1 item=lv1}
+                <option {if $lv1.selected eq 1}selected="selected"{/if} value="{$lv1.id}">{$lv1.name}</option>
+                {/foreach}
+            </select>
+            </div>
+
+            <div class="field region fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin: 0 auto;">
+                <label style="width: 30%; float:left">{$LANG.REGION_LV2}：</label><select name="region_lv2">
+                <option value="0">={$LANG.SELECT_PLEASE}=</option>
+                {foreach from=$region_lv2 item=lv2}
+                <option {if $lv2.selected eq 1}selected="selected"{/if} value="{$lv2.id}">{$lv2.name}</option>
+                {/foreach}
+            </select>
+                </div>
+
+            <div class="field region fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin: 0 auto;">
+                <label style="width: 30%; float:left">{$LANG.REGION_LV3}：</label><select name="region_lv3">
+                <option value="0">={$LANG.SELECT_PLEASE}=</option>
+                {foreach from=$region_lv3 item=lv3}
+                <option {if $lv3.selected eq 1}selected="selected"{/if} value="{$lv3.id}">{$lv3.name}</option>
+                {/foreach}
+            </select>
+                </div>
+
+            <div class="field region fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin: 0 auto;">
+                <label style="width: 30%; float:left">{$LANG.REGION_LV4}：</label><select name="region_lv4">
+                <option value="0">={$LANG.SELECT_PLEASE}=</option>
+                {foreach from=$region_lv4 item=lv4}
+                <option {if $lv4.selected eq 1}selected="selected"{/if} value="{$lv4.id}">{$lv4.name}</option>
+                {/foreach}
+            </select>
+                </div>
+            </div>
+            <div class="blank"></div>
+            <div class="field address fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100">
+                <input type="text" value="{$consignee_info.address}" class="f-input" name="address" size="30" placeholder="{$LANG.ADDRESS}">
+            </div>
+            <div class="blank"></div>
+            <div class="field zip fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100">
+                <input type="text" value="{$consignee_info.zip}" class="f-input" name="zip" size="30" placeholder="{$LANG.ZIP}">
+            </div>
+            <div class="blank"></div>
+            <div class="field mobile-phone fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100">
+                <input type="text" value="{$consignee_info.mobile}" class="f-input" name="mobile" size="30" placeholder="{$LANG.MOBILE}">
+            </div>
+            <div class="clear"></div>
+            <div class="field fsRowBody fsCell fsFieldCell fsFirst fsLast fsLabelVertical fsSpan100" style="width: 70%; margin:0 auto;">
+                <label for="act"></label>
+                <input type="hidden" value="{$consignee_info.id}" name="id" />
+                <input type="submit" class="formbutton button" id="settings-submit" name="commit" value="{$LANG.MODIFY}">
+            </div>
+        </div>
+        </form>
+        <div class="blank"></div>
+    </div>
+    <div class="inc_foot"></div>
+</div>
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/region.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("select[name='region_lv1']").bind("change",function(){
+            load_select("1");
+        });
+        $("select[name='region_lv2']").bind("change",function(){
+            load_select("2");
+        });
+        $("select[name='region_lv3']").bind("change",function(){
+            load_select("3");
+        });
+        $("select[name='region_lv4']").bind("change",function(){
+            load_select("4");
+        });
+        $("#settings-submit").click(function(){
+            if($.trim($("input[name='consignee']").val())=='')
+            {
+                $.showErr(LANG['FILL_CORRECT_CONSIGNEE']);
+                return false;
+            }
+            if($.trim($("input[name='address']").val())=='')
+            {
+                $.showErr(LANG['FILL_CORRECT_ADDRESS']);
+                return false;
+            }
+            if($.trim($("input[name='zip']").val())=='')
+            {
+                $.showErr(LANG['FILL_CORRECT_ZIP']);
+                return false;
+            }
+            if($.trim($("input[name='mobile']").val())=='')
+            {
+                $.showErr(LANG['FILL_MOBILE_PHONE']);
+                return false;
+            }
+            if(!$.checkMobilePhone($("input[name='mobile']").val()))
+            {
+                $.showErr(LANG['FILL_CORRECT_MOBILE_PHONE']);
+                return false;
+            }
+        });
+    });
+
+    function load_select(lv)
+    {
+        var name = "region_lv"+lv;
+        var next_name = "region_lv"+(parseInt(lv)+1);
+        var id = $("select[name='"+name+"']").val();
+
+        if(lv==1)
+            var evalStr="regionConf.r"+id+".c";
+        if(lv==2)
+            var evalStr="regionConf.r"+$("select[name='region_lv1']").val()+".c.r"+id+".c";
+        if(lv==3)
+            var evalStr="regionConf.r"+$("select[name='region_lv1']").val()+".c.r"+$("select[name='region_lv2']").val()+".c.r"+id+".c";
+
+        if(id==0)
+        {
+            var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+        }
+        else
+        {
+            var regionConfs=eval(evalStr);
+            evalStr+=".";
+            var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+            for(var key in regionConfs)
+            {
+                html+="<option value='"+eval(evalStr+key+".i")+"'>"+eval(evalStr+key+".n")+"</option>";
+            }
+        }
+        $("select[name='"+next_name+"']").html(html);
+
+        if(lv == 4)
+        {
+
+        }
+        else
+        {
+            load_select(parseInt(lv)+1);
+        }
+
+
+    }
+</script>
+        </div>
+
+    {include file="mobile/inc/mobile_footer.html"}
