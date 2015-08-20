@@ -36,15 +36,15 @@ require_once("lib/alipay_submit.class.php");
         $payment_type = "1";
         //必填，不能修改
         //服务器异步通知页面路径
-        $notify_url = "http://mall.unvweb.com/warteam/notify_url.php";
+        $notify_url = "http://m-ebuy.com/warteam/notify_url.php";
         //需http://格式的完整路径，不能加?id=123这类自定义参数
 
         //页面跳转同步通知页面路径
-        $return_url = "http://mall.unvweb.com/warteam/return_url.php";
+        $return_url = "http://m-ebuy.com/warteam/return_url.php";
         //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
         //卖家支付宝帐户
-        $seller_email = "unvweb@qq.com";
+        $seller_email = "hd-leshi@qq.com";
         //必填
 
         //商户订单号

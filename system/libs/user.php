@@ -85,14 +85,14 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$res['data'] = $field_item;
 			return $res;
 		}
-//		if($user_data['mobile']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where mobile = '".trim($user_data['mobile'])."' and id <> ".intval($user_data['id']))>0)
-//		{
-//			$field_item['field_name'] = 'mobile';
-//			$field_item['error']	=	EXIST_ERROR;
-//			$res['status'] = 0;
-//			$res['data'] = $field_item;
-//			return $res;
-//		}
+		if($user_data['mobile']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where mobile = '".trim($user_data['mobile'])."' and id <> ".intval($user_data['id']))>0)
+		{
+			$field_item['field_name'] = 'mobile';
+			$field_item['error']	=	EXIST_ERROR;
+			$res['status'] = 0;
+			$res['data'] = $field_item;
+			return $res;
+		}
 		//验证扩展字段
 		$user_field = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."user_field");
 		foreach($user_field as $field_item)
@@ -118,6 +118,17 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		if(isset($user_data['sex']))
 		$user['sex'] = intval($user_data['sex']);
 		$user['my_intro'] = addslashes(trim($user_data['my_intro']));
+		if(isset($user_data['bdate']) && count(explode('-', $user_data['bdate'])) == 3)
+		{
+			$bdate = explode('-', $user_data['bdate']);
+			$user_data['byear'] = $bdate[0];
+			$user_data['bmonth'] = $bdate[1];
+			$user_data['bday'] = $bdate[2];
+		} else {
+			showErr('出生日期无效');
+		}
+		if(!checkdate($bdate[1], $bdate[0], $bdate[2]))
+			showErr('出生日期无效');
 		if(isset($user_data['byear']))
 		$user['byear'] = intval($user_data['byear']);
 		if(isset($user_data['bmonth']))
@@ -769,14 +780,22 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$res['data'] = $field_item;
 			return $res;
 		}
-//		if($field_name=='mobile'&&$user_data['mobile']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where mobile = '".trim($user_data['mobile'])."' and id <> ".intval($user_data['id']))>0)
-//		{
-//			$field_item['field_name'] = 'mobile';
-//			$field_item['error']	=	EXIST_ERROR;
-//			$res['status'] = 0;
-//			$res['data'] = $field_item;
-//			return $res;
-//		}
+		if($field_name=='mobile'&&$user_data['mobile']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where mobile = '".trim($user_data['mobile'])."' and id <> ".intval($user_data['id']))>0)
+		{
+			$field_item['field_name'] = 'mobile';
+			$field_item['error']	=	EXIST_ERROR;
+			$res['status'] = 0;
+			$res['data'] = $field_item;
+			return $res;
+		}
+		if($field_name=='vcode'&&intval(app_conf("MOBILE_MUST"))==1&&trim($user_data['vcode'])=='')
+		{
+			$field_item['field_name'] = 'vcode';
+			$field_item['error']	=	EMPTY_ERROR;
+			$res['status'] = 0;
+			$res['data'] = $field_item;
+			return $res;
+		}
 		//验证扩展字段
 		$field_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user_field where field_name = '".$field_name."'");
 	

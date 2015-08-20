@@ -1227,6 +1227,115 @@ class ajaxModule extends ShopBaseModule
         }
         exit(json_encode($result));
 	}
-	
+
+	public function sms_register()
+	{
+		if(isset($_GET['mobile']) && $_GET['mobile'] != '') {
+			$mobile = $_GET['mobile'];
+			if(!$this->_is_mobile($mobile))
+				exit('{"state":"error", "message":"手机号码不正确"}');
+			$code = $this->random_string('numeric', 6);
+			$expire = intval($_SERVER['REQUEST_TIME']) - 3600;
+			$sql = "delete from ".DB_PREFIX."sms_verification where create_time < $expire";
+			$GLOBALS['db']->query($sql);
+			$sql = "insert into ".DB_PREFIX."sms_verification (mobile, code) values ('$mobile', '$code')";
+			$GLOBALS['db']->query($sql);
+			$content_arr = [
+				'title' => 'M平台',
+				'code' => $code,
+				'time' => 60,
+			];
+			$result = $this->sms_send(1, $mobile, $content_arr);
+			if($result === true)
+				exit('{"state":"success", "message":"发送成功"}');
+			else
+				exit('{"state":"error", "message":"发送失败 '.$result.'"}');
+		} else {
+			exit('{"state":"error", "message":"手机号码不正确"}');
+		}
+	}
+	private function _is_mobile($mobile)
+	{
+		return (bool) preg_match('/^1[0-9]{10}$/', $mobile);
+	}
+	private function sms_send($template = 1, $mobile, $content_arr)
+	{
+		switch(intval($template))
+		{
+			case 1:
+				$content = "【{title}】您的验证码为{code}，在{time}分钟内有效。";
+				break;
+			default:
+				$content = "【{title}】您的验证码为{code}，在{time}分钟内有效。";
+				break;
+		}
+		if (isset($content_arr['title']))
+			$content = str_replace('{title}', $content_arr['title'], $content);
+		if (isset($content_arr['code']))
+			$content = str_replace('{code}', $content_arr['code'], $content);
+		if (isset($content_arr['time']))
+			$content = str_replace('{time}', $content_arr['time'], $content);
+		$api_url = "http://api.smsbao.com/sms?u=chezone&p=PASSWORD&m=".$mobile."&c=".$content;
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL,$api_url);
+		/*curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,
+            "postvar1=value1&postvar2=value2&postvar3=value3");*/
+
+		// in real life you should use something like:
+		// curl_setopt($ch, CURLOPT_POSTFIELDS,
+		//          http_build_query(array('postvar1' => 'value1')));
+
+		// receive server response ...
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+		$server_output = curl_exec ($ch);
+
+		curl_close ($ch);
+
+        // further processing ....
+		if ($server_output == '0') {
+			return true;
+		} else {
+			return $server_output;
+		}
+	}
+
+	private function random_string($type = 'alnum', $len = 8)
+	{
+		switch ($type)
+		{
+			case 'basic':
+				return mt_rand();
+			case 'alnum':
+			case 'numeric':
+			case 'nozero':
+			case 'alpha':
+				switch ($type)
+				{
+					case 'alpha':
+						$pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						break;
+					case 'alnum':
+						$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						break;
+					case 'numeric':
+						$pool = '0123456789';
+						break;
+					case 'nozero':
+						$pool = '123456789';
+						break;
+				}
+				return substr(str_shuffle(str_repeat($pool, ceil($len / strlen($pool)))), 0, $len);
+			case 'unique': // todo: remove in 3.1+
+			case 'md5':
+				return md5(uniqid(mt_rand()));
+			case 'encrypt': // todo: remove in 3.1+
+			case 'sha1':
+				return sha1(uniqid(mt_rand(), TRUE));
+		}
+	}
+
 }
 ?>
