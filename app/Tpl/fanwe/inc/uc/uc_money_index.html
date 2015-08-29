@@ -44,5 +44,26 @@
 		</div>				
 		
 	</div>
+	<div class="inc_main">
+		<div class="inc_top">积分转移</div>
+		<form action="{url x="shop" r="uc_money#score_exchange"}" method="post">
+		<div class="pd10" style="width:600px;">
+			转移积分：&nbsp;&nbsp;
+			<input type="number" class="f-input" name="volume" id="volume" size="4" required>
+			&nbsp;&nbsp;
+			对方绑定手机号码：
+			&nbsp;&nbsp;
+			<input type="number" class="f-input" name="mobile" id="mobile" size="4" required>
+			&nbsp;&nbsp;
+			<span id="titlesrc"></span>
+			<div class="blank"></div>
+			登录密码：&nbsp;&nbsp;
+			<input type="password" name="user_pwd" id="user_pwd" class="f-input">
+			<div class="blank"></div>
+			<input type="submit" id="doexchange" value="提交" class="formbutton">
+		</div>
+		</form>
+		<div class="blank1"></div>
+	</div>
 	<div class="inc_foot"></div>
 </div>

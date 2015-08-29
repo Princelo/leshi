@@ -325,5 +325,49 @@ class uc_moneyModule extends ShopBaseModule
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_money_carry.html");
 		$GLOBALS['tmpl']->display("uc.html");
 	}
+
+	public function score_exchange()
+	{
+		$mobile = addslashes(trim($_REQUEST['mobile']));
+		if($mobile == "" || strlen($mobile) != 11 || substr($mobile, 0, 1) !== '1' )
+			showErr('手机号码不正确');
+		$volume = addslashes(trim($_REQUEST['volume']));
+		if(!is_numeric($volume))
+			showErr('积分格式不正确');
+		$obj_info = $GLOBALS['db']->getRow("select * from ". DB_PREFIX. "user where mobile = '" . $mobile. "' limit 1");
+		if(!$obj_info)
+			showErr('找不到会员');
+		$user_pwd = md5(addslashes(trim($_REQUEST['user_pwd'])));
+		$user_info = $GLOBALS['db']->getRow("select * from " . DB_PREFIX . "user where id = " . intval($GLOBALS['user_info']['id']));
+
+		if ($user_info['user_pwd'] == $user_pwd) {
+			if(intval($user_info['score']) < $volume)
+				showErr('积分不足');
+			$GLOBALS['pdo']->beginTransaction();
+			$sth = $GLOBALS['pdo']->prepare("
+				update ".DB_PREFIX."user set score = score - {$volume} where score >= {$volume} and id = {$user_info['id']}
+			");
+			$sth->execute();
+			if ($sth->rowCount() > 0) {
+				$sth = $GLOBALS['pdo']->prepare("
+				update ".DB_PREFIX."user set score = score + {$volume} where mobile = {$mobile} limit 1
+			");
+				$sth->execute();
+				if($sth->rowCount() < 1) {
+					$GLOBALS['pdo']->rollback();
+                    showErr('转移失败。');
+				} else {
+					$GLOBALS['pdo']->commit();
+					showSuccess('转移成功。');
+				}
+			} else {
+				$GLOBALS['pdo']->rollback();
+				showErr('转移失败。');
+			}
+		} else {
+			$data = array("status" => false, "message" => "登录密码不正确");
+			showErr($data["message"]);
+		}
+	}
 }
 ?>
