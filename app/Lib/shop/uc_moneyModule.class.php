@@ -150,7 +150,7 @@ class uc_moneyModule extends ShopBaseModule
 	
 	public function index()
 	{
-		$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));		
+		$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));
 		$level_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user_group where id = ".intval($user_info['group_id']));
 		$point_level = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user_level where id = ".intval($user_info['level_id']));
 		$user_info['user_level'] = $level_info['name'];
@@ -339,6 +339,8 @@ class uc_moneyModule extends ShopBaseModule
 			showErr('找不到会员');
 		$user_pwd = md5(addslashes(trim($_REQUEST['user_pwd'])));
 		$user_info = $GLOBALS['db']->getRow("select * from " . DB_PREFIX . "user where id = " . intval($GLOBALS['user_info']['id']));
+		if($obj_info['id'] == $user_info['id'])
+			showErr('不能向自己转移积分。');
 
 		if ($user_info['user_pwd'] == $user_pwd) {
 			if(intval($user_info['score']) < $volume)
