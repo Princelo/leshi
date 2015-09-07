@@ -125,8 +125,8 @@ function get_goods_list($limit, $cate_id=0, $where='',$orderby = '',$cached = tr
 			$sql.=" order by sort desc limit ".$limit;
 			else
 			$sql.=" order by ".$orderby." limit ".$limit;
-	
-			$deals = $GLOBALS['db']->getAll($sql);		
+
+			$deals = $GLOBALS['db']->getAll($sql);
 			$deals_count = $GLOBALS['db']->getOne($count_sql);
 			
 	 		if($deals)
@@ -142,7 +142,9 @@ function get_goods_list($limit, $cate_id=0, $where='',$orderby = '',$cached = tr
 					$durl = url("shop",$module,array("id"=>$deal['uname']));
 					else
 					$durl = url("shop",$module,array("id"=>$deal['id']));
-					
+					$deal['current_price_format'] = format_price($deal['current_price']);
+					$deal['origin_price_format'] = format_price($deal['origin_price']);
+
 					$deal['url'] = $durl;					
 					$deals[$k] = $deal;
 				}

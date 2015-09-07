@@ -126,11 +126,20 @@ class indexModule extends ShopBaseModule
 		$GLOBALS['tmpl']->assign("bcate_list",$bcate_list);
 		return $GLOBALS['tmpl']->fetch("index/index_left_tuan.html");
 	}
-	public function index_left_youhui()
+	/*ipublic function index_left_youhui()
 	{
 		$youhui_list = get_free_youhui_list(0,0," is_recommend = 1 ","");
 		$youhui_list = $youhui_list['list'];
 		$GLOBALS['tmpl']->assign("youhui_list",$youhui_list);		
+		$bcate_list = load_dynamic_cache("INDEX_RECOMMEND_BCATE");
+		$GLOBALS['tmpl']->assign("bcate_list",$bcate_list);
+		return $GLOBALS['tmpl']->fetch("index/index_left_youhui.html");
+	}*/
+	public function index_left_youhui()
+	{
+		$youhui_list = get_goods_list(10,0," is_recommend = 1 ","");
+		$youhui_list = $youhui_list['list'];
+		$GLOBALS['tmpl']->assign("youhui_list",$youhui_list);
 		$bcate_list = load_dynamic_cache("INDEX_RECOMMEND_BCATE");
 		$GLOBALS['tmpl']->assign("bcate_list",$bcate_list);
 		return $GLOBALS['tmpl']->fetch("index/index_left_youhui.html");
