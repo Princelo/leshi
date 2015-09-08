@@ -92,7 +92,12 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 							$.showErr("请填写结算价");
 							return false;
 						}
-						
+						if($.trim($(this).find("input[name='price_score']").val())=='')
+						{
+							$.showErr("请填写兑换积分");
+							return false;
+						}
+
 					});
 				});
 			</script>
@@ -135,6 +140,13 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						<td>
 							<input type="text" value="" class="f-input" id="balance_price" name="balance_price" size="30" tabindex="1">
 							<span class="red">&nbsp;&nbsp;商户与网站运营商的结算单价</span> 
+						</td>
+					</tr>
+					<tr>
+						<td>兑换积分：</td>
+						<td>
+							<input type="number" value="" class="f-input" id="price_score" name="price_score" size="30" tabindex="1">
+							<span class="red">&nbsp;&nbsp;定分建议：1元 = 100分</span>
 						</td>
 					</tr>
 					<tr>

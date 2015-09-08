@@ -263,8 +263,11 @@ function formError(obj,msg)
 function modify_cart(id,htmlobj)
 {
 	var number = $(htmlobj).val();
-	var ajaxurl = APP_ROOT+"/shop.php?ctl=cart&act=modifycart&id="+id+"&number="+number;
-	$.ajax({ 
+	if ($(htmlobj).attr('buy_type') == '0')
+        var ajaxurl = APP_ROOT+"/shop.php?ctl=cart&act=modifycart&id="+id+"&number="+number;
+	else if ($(htmlobj).attr('buy_type') == '1')
+		var ajaxurl = APP_ROOT+"/shop.php?ctl=cart&act=scoremodifycart&id="+id+"&number="+number;
+	$.ajax({
 		url: ajaxurl,
 		dataType: "json",
 		success: function(obj){
@@ -850,7 +853,9 @@ function add_cart(id,attr)
 		}
 		
 	}
-	var number = $("input[name='number']").val();
+	//var number = $("input[name='number']").val();
+	var number = $("#buy_number").val();
+	console.log(number);
 	if(number)
 	ajaxurl+="&number="+number;
 
@@ -876,6 +881,91 @@ function add_cart(id,attr)
 			}
 			else
 			{	
+				if($(".dialog-mask").css("display")=='block')
+				{
+					$(".dialog-mask,.dialog-box").remove();
+				}
+				$("#cart_count").html(parseInt(obj.number));
+				$.weeboxs.open(obj.html, {contentType:'text',showButton:false,title:LANG['ADDCART_SUCCESS'],width:570,type:'wee'});
+			}
+		},
+		error:function(ajaxobj)
+		{
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+		}
+	});
+
+}
+
+function score_add_cart(id)
+{
+	var ajaxurl = APP_ROOT+"/shop.php?ctl=ajax&act=check_login_status";
+	$.ajax({
+		url: ajaxurl,
+		dataType: "json",
+		type: "POST",
+		success: function(ajaxobj){
+			if(ajaxobj.status==0)
+			{
+				ajax_login();
+			}
+			else
+			{
+				score_add_cart_execute(id);
+			}
+		},
+		error:function(ajaxobj)
+		{
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+		}
+	});
+}
+
+function score_add_cart_execute(id,attr)
+{
+	var ajaxurl = APP_ROOT+"/shop.php?ctl=cart&act=scoreaddcart&id="+id;
+	if(attr&&attr != '')
+	{
+		ajaxurl += attr;
+
+	}
+	else
+	{
+		attrs = $("select[name='attr[]']");
+		for(i=0;i<attrs.length;i++)
+		{
+			ajaxurl += "&attr[]="+$(attrs[i]).val();
+		}
+
+	}
+	var number = $("input[name='number']").val();
+	if(number)
+		ajaxurl+="&number="+number;
+
+	$.ajax({
+		url: ajaxurl,
+		dataType: "json",
+		success: function(obj){
+			if(obj.open_win == 1)
+			{
+				if($(".dialog-mask").css("display")=='block')
+				{
+					$(".dialog-mask,.dialog-box").remove();
+				}
+
+				if(obj.err == 1)
+					$.weeboxs.open("<span class='cart-error'>"+obj.html+"</span>", {contentType:'text',showButton:false,title:LANG['ADD_CART_ERR'],width:570,type:'wee'});
+				else
+					$.weeboxs.open(obj.html, {contentType:'text',showButton:false,title:LANG['SELECT_AND_ADDCART'],width:570,type:'wee'});
+			}
+			else if(obj.open_win == 2)
+			{
+				$.showErr(obj.info);
+			}
+			else
+			{
 				if($(".dialog-mask").css("display")=='block')
 				{
 					$(".dialog-mask,.dialog-box").remove();

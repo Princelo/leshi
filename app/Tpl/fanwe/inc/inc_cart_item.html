@@ -6,6 +6,7 @@
 	{$LANG.BUY_NUMBER}：{$cart_item.add_number} 
 	{if $cart_item.add_total_price gt 0}{$LANG.PRICE}：{function name="format_price" v=$cart_item.add_total_price}{/if}
 	{if $cart_item.add_total_score lt 0}{$LANG.SCORE}：<?PHP echo format_score(abs($this->_var['cart_item']['add_total_score']));?>{/if}
+	{if $cart_item.add_total_price_score lt 0}购买积分：<?PHP echo format_score(abs($this->_var['cart_item']['add_total_price_score']));?>{/if}
 	<div class="blank"></div>
 	<input type="button" class="input_keep" value="{$LANG.KEEP_BUYING}" onclick="close_pop();" />
 	<input type="button" class="input_shopcart" value="{$LANG.TO_CART}" onclick="location.href=CART_URL;" />

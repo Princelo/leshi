@@ -344,6 +344,8 @@ function check_buy()
 	{		
 		$("*[name='buy_btn']").unbind("click");
 		$("*[name='buy_btn']").addClass("btn_disabled");
+		$("*[name='score_buy_btn']").unbind("click");
+		$("*[name='score_buy_btn']").addClass("btn_disabled");
 	}
 	else
 	{
@@ -352,6 +354,11 @@ function check_buy()
 			add_cart(goods_id);
 		});
 		$("*[name='buy_btn']").removeClass("btn_disabled");
+		$("*[name='score_buy_btn']").unbind("click");
+		$("*[name='score_buy_btn']").bind("click",function(){
+			score_add_cart(goods_id);
+		});
+		$("*[name='score_buy_btn']").removeClass("btn_disabled");
 	}
 }
 

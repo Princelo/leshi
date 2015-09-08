@@ -61,6 +61,9 @@ $this->_var['cgjs'][] = $this->_var['TMPL_REAL']."/js/goods_info.js";
 				<span class="s_price">{$LANG.CURRENT_PRICE}：{function name="format_price" v=$goods.current_price}<span id="attr_price"></span></span>
 				<input type="hidden" name="current_price" value="{$goods.current_price}" />
 			</li>
+				<li>
+					<span class="s_price">积分价：{$goods.price_score}</span>
+				</li>
 			
 			<li {if $goods.deal_attr_list or $goods.max_bought eq 0}style="display:none;"{/if} id="stock">库存：<span>{insert name="get_goods_stock" id=$goods.id}</span> <input type="hidden" name="origin_stock" value="{$goods.max_bought}" /></li>
 			<li>
@@ -88,9 +91,9 @@ $this->_var['cgjs'][] = $this->_var['TMPL_REAL']."/js/goods_info.js";
 				<span id="select_attr">{$LANG.PLEASE_SELECT} {foreach from=$goods.deal_attr_list item=attr key=key} [ {$attr.name} ] {/foreach}</span>
 			</dd>
 			{/if}
-			<dd>
+			<!--<dd>
 				<input type="hidden" type="text" name="number" maxlength="4" id="buy_number" />
-			</dd>
+			</dd>-->
 			<dd>
 				<input type="hidden" value="{$goods.id}" name="goods_id" />
 				{insert name="load_goods_time_status"}

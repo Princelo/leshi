@@ -62,7 +62,8 @@
 								{/if}
 								{if $goods.time_status eq 1}{*/已开始/*}									
 									<div name="buy_btn" id="buy_btn" style="display:inline-block; line-height:39px; float:left;" class="input_shopcart" >{$LANG.BUY_NOW}</div>
-									<a href="javascript:void(0);" id="collect" class="f_l"></a>	
+                                    <div name="score_buy_btn" id="score_buy_btn" style="display:inline-block; line-height:39px; float:left;" class="input_shopcart" >积分购买</div>
+									<a href="javascript:void(0);" id="collect" class="f_l"></a>
 									<div class="blank1"></div>								
 								{/if}
 								{if $goods.time_status eq 2} {*/已过期/*}									

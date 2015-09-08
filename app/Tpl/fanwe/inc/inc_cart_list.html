@@ -2,7 +2,8 @@
 					<table class="cart-table">
 								<tr>
 									<th class="deal-buy-desc">{$LANG.DEAL_ITEM}</th>
-									<th class="deal-buy-quantity">{$LANG.NUMBER}</th>									
+									<th class="deal-buy-quantity">{$LANG.NUMBER}</th>
+									<th class="deal-buy-quantity" style="display:none;">消费方式</th>
 									<th class="deal-buy-price">{$LANG.PRICE}</th>															
 									<th class="deal-buy-total">{$LANG.TOTAL_PRICE}</th>
 									<?PHP if(app_conf("CART_ON")==1){ ?>
@@ -19,23 +20,51 @@
 									</td>
 									
 									<td class="deal-buy-quantity">
-									<input type="text" style="ime-mode: disabled;" onblur="modify_cart({$cart_item.id},this);" id="deal-buy-quantity-input" value="{$cart_item.number}" name="quantity" maxlength="4" class="input-text f-input">
+									<input type="text" style="ime-mode: disabled;" onblur="modify_cart({$cart_item.id},this);" id="deal-buy-quantity-input" value="{$cart_item.number}" name="quantity" maxlength="4" class="input-text f-input" buy_type="{$cart_item.buy_type}">
+									</td>
+									<td class="deal-buy-quantity" style="display: none;">
+										<select name="consume_type" id="consume_type">
+											<option value="money">金额消费</option>
+											<option value="score">扣除积分</option>
+										</select>
+										<script>
+											/*$("#consume_type").change(function(){
+														if ($(this).val() == 'money') {
+															$('#score_single').hide();
+															$('#score_total').hide();
+															$('#money_single').show();
+															$('#money_total').show();
+                                                        } else {
+															$('#money_single').hide();
+															$('#money_total').hide();
+															$('#score_single').show();
+															$('#score_total').show();
+														}
+													});*/
+										</script>
 									</td>
 									
-									<td class="deal-buy-price">
+									<td class="deal-buy-price" id="money_single">
 										{if $cart_item.buy_type neq 1}
 										{function name="format_price" value=$cart_item.unit_price}
 										{else}
-										<?php echo format_score(abs($this->_var['cart_item']['return_score']));?>
+										<?php echo format_score(abs($this->_var['cart_item']['price_score']));?>
 										{/if}
 									</td>
 									
-									<td class="deal-buy-total">
+									<td class="deal-buy-total" id="money_total">
 										{if $cart_item.buy_type neq 1}
 										{function name="format_price" value=$cart_item.total_price}
 										{else}
-										<?php echo format_score(abs($this->_var['cart_item']['return_total_score']));?>
+										<?php echo format_score(abs($this->_var['cart_item']['price_total_score']));?>
 										{/if}
+									</td>
+									<td class="deal-buy-price" id="score_single" style="display: none;">
+										<?php echo format_score(abs($this->_var['cart_item']['price_score']));?>
+									</td>
+
+									<td class="deal-buy-total" id="score_total" style="display: none;">
+										<?php echo format_score(abs($this->_var['cart_item']['price_total_score']));?>
 									</td>
 									<?PHP if(app_conf("CART_ON")==1){ ?>
 									<td class="deal-buy-del"><a onclick="del_cart({$cart_item.id})" href="javascript:void(0);">{$LANG.DELETE}</a></td>

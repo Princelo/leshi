@@ -182,6 +182,7 @@ class tuanModule extends BizBaseModule
 		$data['sub_name'] = addslashes(htmlspecialchars(trim($_REQUEST['sub_name'])));
 		$data['origin_price'] = doubleval($_REQUEST['origin_price']);
 		$data['balance_price'] = doubleval($_REQUEST['balance_price']);
+		$data['price_score'] = intval($_REQUEST['price_score']);
 		$data['max_bought'] = intval($_REQUEST['max_bought']);
 		$data['brief'] = addslashes(htmlspecialchars(trim($_REQUEST['brief'])));
 		$data['is_shop'] = intval($_REQUEST['is_shop']);
