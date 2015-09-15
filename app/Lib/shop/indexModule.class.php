@@ -137,7 +137,7 @@ class indexModule extends ShopBaseModule
 	}*/
 	public function index_left_youhui()
 	{
-		$youhui_list = get_goods_list(10,0," is_recommend = 1 ","");
+		$youhui_list = get_goods_list(10,0," is_best = 1 ","");
 		$youhui_list = $youhui_list['list'];
 		$GLOBALS['tmpl']->assign("youhui_list",$youhui_list);
 		$bcate_list = load_dynamic_cache("INDEX_RECOMMEND_BCATE");
