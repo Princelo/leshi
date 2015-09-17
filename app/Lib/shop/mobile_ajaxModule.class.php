@@ -1249,7 +1249,7 @@ class mobile_ajaxModule extends ShopBaseModule
                     $result = false;
                 }
                 if($result === false) {
-                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from {$db_pre}deal where is_best = 1
+                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from {$db_pre}deal where is_best = 1
                                     and buy_type <> 1 and is_effect = 1 and is_delete = 0 order by sort desc limit ".$limit.", 6");
                     if(app_conf('CACHE_ON') == 1)
                         $GLOBALS['cache']->set($key,$result);
@@ -1269,14 +1269,14 @@ class mobile_ajaxModule extends ShopBaseModule
                         $ids = $ids_util->getChildIds($cid);
                         $sub_ids = $ids_util->getChildIds($cid);
                         $sub_ids[] = $cid;
-                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1 and shop_cate_id in (".implode(",",$sub_ids).")
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1 and shop_cate_id in (".implode(",",$sub_ids).")
                             order by {$sort} limit ".$limit.", 6");
                         if(app_conf('CACHE_ON') == 1) {
                             $GLOBALS['cache']->set($key,$result);
                         }
 
                     } else {
-                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1
                             order by {$sort} limit ".$limit.", 6");
                         if(app_conf('CACHE_ON') == 1) {
                             $GLOBALS['cache']->set($key,$result);
