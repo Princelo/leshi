@@ -23,7 +23,7 @@ $(document).ready(function() {
     html += '        <div class="con">';
     html += '        	<ul>';
     html += '            	<li class="qq">';
-    html += '                	<p><a href="javascript:;" class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=88888888&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:88888888:41" alt="乐时网" title="乐时网"/></a></p>';
+    html += '                	<p><a href="javascript:;" class="qq"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=88888888&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:88888888:41" alt="M网" title="M网"/></a></p>';
 
     html += '                 </li>';
     html += '            </ul>';
