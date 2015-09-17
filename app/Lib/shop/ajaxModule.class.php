@@ -1230,8 +1230,8 @@ class ajaxModule extends ShopBaseModule
 
 	public function sms_register()
 	{
-		if(isset($_GET['mobile']) && $_GET['mobile'] != '') {
-			$mobile = $_GET['mobile'];
+		if(isset($_REQUEST['mobile']) && $_REQUEST['mobile'] != '') {
+			$mobile = $_REQUEST['mobile'];
 			if(!$this->_is_mobile($mobile))
 				exit('{"state":"error", "message":"手机号码不正确"}');
 			$code = $this->random_string('numeric', 6);
@@ -1241,7 +1241,7 @@ class ajaxModule extends ShopBaseModule
 			$sql = "insert into ".DB_PREFIX."sms_verification (mobile, code) values ('$mobile', '$code')";
 			$GLOBALS['db']->query($sql);
 			$content_arr = [
-				'title' => 'M平台',
+				'title' => 'M网',
 				'code' => $code,
 				'time' => 60,
 			];

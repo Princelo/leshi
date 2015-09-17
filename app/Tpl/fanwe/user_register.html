@@ -81,37 +81,49 @@
                                 </div>
                                 <script>
                                     var sms_send = function () {
-                                        $.ajax( {
+                                        $('#vcode-btn').attr('disabled', 'disabled');
+                                        $.ajax({
                                             url: APP_ROOT+"/shop.php?ctl=ajax&act=sms_register",
-                                            type: 'get',
+                                            type: "post",
                                             data: {'mobile': $('#settings-mobile').val()},
-                                            success: function (text) {
-                                                json = eval("("+text+")");
-                                                if(json.state == 'error'){
+                                            success: function (json) {
+                                                json = eval("("+json+")");
+                                                if (json.state == "error") {
                                                     $('#vcode-btn').val('发送验证码');
                                                     $('#vcode-btn').removeAttr('disabled');
                                                     alert(json.message);
                                                 }
-                                                else if(json.state == 'success')
-                                                {
+                                                if (json.state == "success") {
                                                     $('#vcode-btn').attr('disabled', 'disabled');
                                                     countdown();
                                                 }
 
                                             }
-                                        } );
+                                        });
                                     }
                                     var countdown = function () {
                                         var timer = 60;
-                                        setInterval(function () {
+                                        var interval = setInterval(function () {
                                             if (timer > 0) {
                                                 $('#vcode-btn').val(timer+"秒后再次发送");
                                                 timer --;
                                             } else {
+                                                myclear();
                                                 $('#vcode-btn').val("发送验证码");
                                                 $('#vcode-btn').removeAttr('disabled');
                                             }
                                         }, 1000);
+                                        if (timer <= 0) {
+                                            clearInterval(interval);
+                                            $('#vcode-btn').val("发送验证码");
+                                            $('#vcode-btn').removeAttr('disabled');
+                                        }
+                                    }
+                                    var myclear = function () {
+                                        for (var i = 1; i < 99999; i++)
+                                            clearInterval(i);
+                                        $('#vcode-btn').val("发送验证码");
+                                        $('#vcode-btn').removeAttr('disabled');
                                     }
                                 </script>
                                 <div class="blank1"></div>

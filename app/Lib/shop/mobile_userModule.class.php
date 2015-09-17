@@ -57,6 +57,10 @@ class mobile_userModule extends ShopBaseModule
         {
             showErr('请正确填写电子邮箱');
         }
+        $sms_verification = $GLOBALS['db']->getOne("select count(1) from ".DB_PREFIX."sms_verification where mobile = '{$user_data['mobile']}'
+		and code = '{$user_data['code']}'");
+        if($sms_verification == 0)
+            showErr('手机验证码错误');
 
         $user_data['pid'] = $GLOBALS['ref_uid'];
 
