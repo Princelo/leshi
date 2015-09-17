@@ -1781,7 +1781,7 @@ function is_mobile()
         strpos($http_user_agent,"iPadbak")>0 ||strpos($http_user_agent,"MicroMessenger")>0 || strpos($http_user_agent,"Wechat")>0 ||
         strpos($http_user_agent,"Kindle")>0
     );
-	$is_mobile = (strpos($http_user_agent, "BB10") > 0);
+	//$is_mobile = (strpos($http_user_agent, "BB10") > 0);
     if($is_mobile === true) {
 		return true;
 	} else {
