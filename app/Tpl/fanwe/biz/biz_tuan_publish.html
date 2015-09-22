@@ -20,20 +20,6 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 	$(document).ready(function(){
 		$("input[name='begin_time']").datepicker({showAnim:'fadeIn'});
 		$("input[name='end_time']").datepicker({showAnim:'fadeIn'});
-		$('input[name="is_shop"]').change(
-				function() {
-					if ($(this).val() == 2) {
-						$('#mythumb').html('缩略图：        205px*135px');
-						$('#mycollect').html('图集：        440px*280px');
-					} else if ($(this).val() == 1) {
-						$('#mythumb').html('缩略图：        327px*327px');
-						$('#mycollect').html('图集：        327px*327px');
-					} else {
-						$('#mythumb').html('缩略图');
-						$('#mycollect').html('图集');
-					}
-				}
-		);
 	});
 </script>
 {include file="biz/biz_nav.html"}
@@ -55,8 +41,8 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						$("#tuan_img").show();
 						$("#deal_cate").show();
 						$("#shop_cate").hide();
-						$('#mythumb').html('缩略图：            205px*135px');
-						$('#mycollect').html('图集：            440px*280px');
+						$('#mythumb').html('商品 缩略图：            205px*135px');
+						$('#mycollect').html('商品 图集：            440px*280px');
 
 					}
 					if(is_shop==2)
@@ -65,8 +51,8 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						$("#tuan_img").hide();
 						$("#deal_cate").show();
 						$("#shop_cate").hide();
-						$('#mythumb').html('缩略图');
-						$('#mycollect').html('图集');
+						$('#mythumb').html('代金券缩略图');
+						$('#mycollect').html('代金券图集');
 
 					}
 					if(is_shop==1)
@@ -77,8 +63,8 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						$("#shop_cate").show();	
 						$("#deal_cate_type_row").hide();
 						$("#deal_cate_type_row").find("span").html("");
-						$('#mythumb').html('缩略图：            327px*327px');
-						$('#mycollect').html('图集：            327px*327px');
+						$('#mythumb').html('商品缩略图：            327px*327px');
+						$('#mycollect').html('商品 图集：            327px*327px');
 					}
 				}
 				$(document).ready(function(){
@@ -239,7 +225,7 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						</td>
 					</tr>
 					<tr>
-						<td id="mythumb">缩略图：        205px*135px</td>
+						<td id="mythumb">商品缩略图：        205px*135px</td>
 						<td class="no-border" style="padding-left:0">{function name="show_ke_image" v="icon"}</td>
 					</tr>
 					<tr id="daijin_img">
@@ -247,7 +233,7 @@ $this->_var['youhuijs'][] = $this->_var['TMPL_REAL']."/js/jquery.ui.datepicker.j
 						<td class="no-border" style="padding-left:0">{function name="show_ke_image" v="img"}</td>
 					</tr>
 					<tr id="tuan_img">
-						<td id="mycollect">图集：        440px*280px</td>
+						<td id="mycollect">商品 图集：        440px*280px</td>
 						<td class="no-border" style="padding-left:0">
 						{function name="show_ke_image" v="img0"}
 						{function name="show_ke_image" v="img1"}
