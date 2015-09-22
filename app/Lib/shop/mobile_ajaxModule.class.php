@@ -1306,7 +1306,7 @@ class mobile_ajaxModule extends ShopBaseModule
             $sql = "insert into ".DB_PREFIX."sms_verification (mobile, code) values ('$mobile', '$code')";
             $GLOBALS['db']->query($sql);
             $content_arr = [
-                'title' => 'M平台',
+                'title' => 'M网平台',
                 'code' => $code,
                 'time' => 60,
             ];
