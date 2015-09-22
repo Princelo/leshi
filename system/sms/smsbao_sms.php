@@ -63,7 +63,7 @@ class smsbao_sms implements sms
 					"u"=>$this->sms['user_name'],
 					"p"=>md5($this->sms['password']),
 					"m"=>$mobile_number,
-					"c"=>str_replace(urlencode(str_replace($content, 'M网平台', '宝讯'), 'M网平台', '宝讯'))
+					"c"=>urlencode($content)
 				);
 				
 				$result = $sms->request($this->sms['server_url'],$params);
