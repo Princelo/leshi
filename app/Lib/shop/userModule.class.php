@@ -58,7 +58,7 @@ class userModule extends ShopBaseModule
 			showErr($GLOBALS['lang']['USER_PWD_ERROR']);
 		}
 		$sms_verification = $GLOBALS['db']->getOne("select count(1) from ".DB_PREFIX."sms_verification where mobile = '{$user_data['mobile']}'
-		and code = '{$user_data['code']}'");
+		and code = '{$user_data['vcode']}'");
 		if($sms_verification == 0)
 			showErr('手机验证码错误');
 		
