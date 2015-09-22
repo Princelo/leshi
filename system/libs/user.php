@@ -127,7 +127,7 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		} else {
 			showErr('出生日期无效');
 		}
-		if(!checkdate($bdate[1], $bdate[0], $bdate[2]))
+		if(!checkdate($bdate[1], $bdate[2], $bdate[0]))
 			showErr('出生日期无效');
 		if(isset($user_data['byear']))
 		$user['byear'] = intval($user_data['byear']);
