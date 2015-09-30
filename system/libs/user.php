@@ -174,6 +174,7 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		
 		$user['email'] = $user_data['email'];
 		$user['mobile'] = $user_data['mobile'];
+		$user['p_biz_id'] = $user_data['p_biz_id'];
 		if($mode == 'INSERT')
 		{
 			$user['code'] = ''; //默认不使用code, 该值用于其他系统导入时的初次认证

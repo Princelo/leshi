@@ -11,6 +11,10 @@ class mobile_userModule extends ShopBaseModule
 {
     public function register()
     {
+        if (isset($_REQUEST['p_biz_id']) )
+            $GLOBALS['tmpl']->assign('p_biz_id', intval($_REQUEST['p_biz_id']));
+        else
+            $GLOBALS['tmpl']->assign('p_biz_id', '37');
         $GLOBALS['tmpl']->display("mobile/mobile_user_register.html");
     }
 
@@ -61,6 +65,12 @@ class mobile_userModule extends ShopBaseModule
 		and code = '{$user_data['code']}'");
         if($sms_verification == 0)
             showErr('手机验证码错误');
+
+        if ( !is_numeric($_REQUEST['p_biz_id']) )
+            showErr('邀请商家无效');
+        $is_valid_biz = $GLOBALS['db']->getOne("select count(1) from ".DB_PREFIX."supplier_location where id = '{$user_data['p_biz_id']}'");
+        if ( $is_valid_biz == 0 )
+            showErr('邀请商家无效');
 
         $user_data['pid'] = $GLOBALS['ref_uid'];
 

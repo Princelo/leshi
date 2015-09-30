@@ -11,10 +11,10 @@ class userModule extends ShopBaseModule
 {
 	public function register()
 	{		
-		$GLOBALS['tmpl']->caching = true;
-		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
-		if (!$GLOBALS['tmpl']->is_cached('user_register.html', $cache_id))	
-		{
+		//$GLOBALS['tmpl']->caching = true;
+		//$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);
+		//if (!$GLOBALS['tmpl']->is_cached('user_register.html', $cache_id))
+		//{
 			 
 			$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['USER_REGISTER']);
 			
@@ -24,8 +24,13 @@ class userModule extends ShopBaseModule
 			$GLOBALS['tmpl']->assign("reg_name",$api_uinfo['name']);
 			
 			$GLOBALS['tmpl']->assign("field_list",$field_list);
-		}
-		$GLOBALS['tmpl']->display("user_register.html",$cache_id);
+		//}
+		if (isset($_REQUEST['p_biz_id']) )
+			$GLOBALS['tmpl']->assign('p_biz_id', intval($_REQUEST['p_biz_id']));
+		else
+			$GLOBALS['tmpl']->assign('p_biz_id', '37');
+		//$GLOBALS['tmpl']->display("user_register.html",$cache_id);
+		$GLOBALS['tmpl']->display("user_register.html");
 	}
 	
 	public function doregister()
@@ -61,7 +66,13 @@ class userModule extends ShopBaseModule
 		and code = '{$user_data['vcode']}'");
 		if($sms_verification == 0)
 			showErr('手机验证码错误');
-		
+
+		if ( !is_numeric($_REQUEST['p_biz_id']) )
+			showErr('邀请商家无效');
+		$is_valid_biz = $GLOBALS['db']->getOne("select count(1) from ".DB_PREFIX."supplier_location where id = '{$user_data['p_biz_id']}'");
+		if ( $is_valid_biz == 0 )
+			showErr('邀请商家无效');
+
 		$user_data['pid'] = $GLOBALS['ref_uid'];
 		
 		
