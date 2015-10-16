@@ -14,11 +14,12 @@
 						<li><a href="{$help_item.url}" {if $help_item.new eq 1}target="_blank"{/if}>{$help_item.title}</a></li>
 						{/foreach}             
 					</ul>
-                </li>  
+                </li>
 				{/foreach}            
 				<li class="col end">
                     <div class=logo-footer>
-                    	<a href="{$APP_ROOT}/" title="{function name="app_conf" value="SHOP_TITLE"}">
+                    	<!--<a href="{$APP_ROOT}/" title="{function name="app_conf" value="SHOP_TITLE"}">-->
+						<a href="{url x="tuan" r="coupon#supplier_login"}" title="{function name="app_conf" value="SHOP_TITLE"}">
                     	<?php
 							$this->_var['logo_image'] = app_conf("FOOTER_LOGO");
 						?>
