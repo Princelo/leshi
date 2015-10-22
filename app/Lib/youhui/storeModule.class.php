@@ -761,8 +761,6 @@ class storeModule extends YouhuiBaseModule
 					where d.is_delete = 0 and d.is_effect = 1 and d.is_shop = 0 and d.time_status in (0,1) and l.location_id = ".$location_id." order by d.sort desc limit ".$limit;
 
 				$result_list = $GLOBALS['db']->getAll($t_sql);
-				echo "<pre>";
-				print_r($result_list);exit;
 				$count = $GLOBALS['db']->getOne($t_sql_count);
 				foreach($result_list as $k=>$v)
 				{
