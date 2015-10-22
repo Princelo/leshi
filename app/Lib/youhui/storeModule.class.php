@@ -759,10 +759,10 @@ class storeModule extends YouhuiBaseModule
 				$t_sql = "select id,name,img,uname from ".DB_PREFIX."deal as d 
 					left join ".DB_PREFIX."deal_location_link as l on l.deal_id = d.id 
 					where d.is_delete = 0 and d.is_effect = 1 and d.is_shop = 0 and d.time_status in (0,1) and l.location_id = ".$location_id." order by d.sort desc limit ".$limit;
+
+				$result_list = $GLOBALS['db']->getAll($t_sql);
 				echo "<pre>";
 				print_r($result_list);exit;
-			
-				$result_list = $GLOBALS['db']->getAll($t_sql);
 				$count = $GLOBALS['db']->getOne($t_sql_count);
 				foreach($result_list as $k=>$v)
 				{
