@@ -215,6 +215,7 @@ CSS;
       canvas.height = canvasWidth;
       canvas.width = canvasWidth;
   container.height = canvasWidth / 640 * 854;
+  alert(container.height);
    var canvasHeight = canvas.width,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
