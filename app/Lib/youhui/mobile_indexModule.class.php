@@ -197,7 +197,7 @@ body {
 .canvas {
   position: absolute;
   top: 41%;
-  left:20%;
+  left:19.5%;
 }
 
 .form {
