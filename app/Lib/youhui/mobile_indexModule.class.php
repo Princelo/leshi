@@ -219,6 +219,12 @@ CSS;
   var myHeight = window.innerWidth / 640 * 854;
   container.style.backgroundSize = window.innerWidth+'px '+myHeight+'px';
   canvas.style.top = myHeight / 854 * 340 + 'px';
+  document.querySelectorAll('.solution')[0].style.position = 'absolute';
+  document.querySelectorAll('.solution')[0].style.width = canvas.width+'px';
+  document.querySelectorAll('.solution')[0].style.height = canvas.width+'px';
+  document.querySelectorAll('.solution')[0].style.top = myHeight / 854 * 340 + 'px';
+  document.querySelectorAll('.solution')[0].style.left = '20%';
+
    var canvasHeight = canvas.width,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
