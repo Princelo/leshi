@@ -218,8 +218,7 @@ CSS;
   container.height = canvasWidth / 640 * 854;
   var myHeight = window.innerWidth / 640 * 854;
   container.style.backgroundSize = window.innerWidth+'px '+myHeight+'px';
-  alert(canvasWidth);
-  alert(container.height);
+  canvas.style.top = myHeight / 854 * 338 + 'px';
    var canvasHeight = canvas.width,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
