@@ -182,10 +182,9 @@ body {
 }
 
 .container {
-  border: 3px solid yellow;
   position: relative;
-  width: 640px;
-  height: 854px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
