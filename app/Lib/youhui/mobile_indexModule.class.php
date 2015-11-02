@@ -209,10 +209,11 @@ CSS;
   'use strict';
 
   var isDrawing, lastPoint;
-  var container    = document.getElementById('js-container'),
-      canvas       = document.getElementById('js-canvas'),
-      canvasWidth  = canvas.width,
-      canvasHeight = canvas.height,
+  var container    = document.getElementById('js-container');
+  var canvas       = document.getElementById('js-canvas');
+  var canvasWidth  = canvas.width;
+      canvas.height = canvas.width;
+   var canvasHeight = canvas.width,
       ctx          = canvas.getContext('2d'),
       image        = new Image(),
       brush        = new Image();
@@ -335,7 +336,7 @@ JS;
 </head>
 <body id="cis_index">
     <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png'); background-size: 100% 100%;">
-      <canvas class="canvas" id="js-canvas" width="387" height="387" style="border-radius: 141px;"></canvas>
+      <canvas class="canvas" id="js-canvas" width="60%" style="border-radius: 141px;"></canvas>
       <div class="solution" style="visibility:hidden; background:url('http://m-ebuy.com/images/scratch-bg.png')">
         恭喜您获得: $bonus !
       </div>
