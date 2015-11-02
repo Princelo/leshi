@@ -101,6 +101,7 @@ class ShopBaseModule{
             $GLOBALS['dynamic_avatar_cache'] = $GLOBALS['fcache']->get("AVATAR_DYNAMIC_CACHE"); //头像的动态缓存
             if(
                 MODULE_NAME=="mobile_index"&&ACTION_NAME=="index"||
+                MODULE_NAME=="mobile_index"&&ACTION_NAME=="scratch_bonus"||
                 MODULE_NAME=="mobile_ajax"&&ACTION_NAME=="waterfall_products"||
                 MODULE_NAME=="mobile_user"&&ACTION_NAME=="register" ||
                 MODULE_NAME=="mobile_user"&&ACTION_NAME=="doregister" ||
