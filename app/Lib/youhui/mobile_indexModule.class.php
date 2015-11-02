@@ -184,8 +184,8 @@ body {
 .container {
   border: 3px solid yellow;
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 640px;
+  height: 854px;
   margin: 0 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
