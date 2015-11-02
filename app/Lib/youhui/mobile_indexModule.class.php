@@ -216,8 +216,7 @@ CSS;
       canvas.height = canvasWidth;
       canvas.width = canvasWidth;
   container.height = canvasWidth / 640 * 854;
-  container.style.background = "url('http://m-ebuy.com/images/scratch-bg.png')";
-  container.style.backgroundSize =  "100% 100%";
+  container.style.backgroundSize = canvasWidth+'px '+container.height+'px';
   alert(canvasWidth);
   alert(container.height);
    var canvasHeight = canvas.width,
@@ -341,7 +340,7 @@ JS;
     </style>
 </head>
 <body id="cis_index">
-    <div class="container" id="js-container" style="">
+    <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png'); background-size: 100% 100%;">
       <canvas class="canvas" id="js-canvas" style="border-radius: 141px;"></canvas>
       <div class="solution" style="visibility:hidden; background:url('http://m-ebuy.com/images/scratch-bg.png')">
         恭喜您获得: $bonus !
