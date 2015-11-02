@@ -185,7 +185,7 @@ body {
 .container {
   position: relative;
   width: 100%;
-  height: 100%;
+  _height: 100%;
   margin: 0 auto;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -336,7 +336,7 @@ JS;
     </style>
 </head>
 <body id="cis_index">
-    <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png'); background-size: 100% 100%;">
+    <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png'); background-size: 100%;">
       <canvas class="canvas" id="js-canvas" style="border-radius: 141px;"></canvas>
       <div class="solution" style="visibility:hidden; background:url('http://m-ebuy.com/images/scratch-bg.png')">
         恭喜您获得: $bonus !
