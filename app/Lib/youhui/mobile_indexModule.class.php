@@ -216,7 +216,7 @@ CSS;
       canvas.height = canvasWidth;
       canvas.width = canvasWidth;
   container.height = canvasWidth / 640 * 854;
-  container.style.background = "url('http://m-ebuy.com/images/scratch-bg.png');";
+  container.style.background = "url('http://m-ebuy.com/images/scratch-bg.png')";
   container.style.backgroundSize =  "100% 100%";
   alert(canvasWidth);
   alert(container.height);
