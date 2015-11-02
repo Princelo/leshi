@@ -196,7 +196,7 @@ body {
 
 .canvas {
   position: absolute;
-  top: 39%;
+  top: 41%;
   left:20%;
 }
 
