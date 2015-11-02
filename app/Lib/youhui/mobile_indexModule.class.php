@@ -334,7 +334,7 @@ JS;
     </style>
 </head>
 <body id="cis_index">
-    <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png')">
+    <div class="container" id="js-container" style="background:url('http://m-ebuy.com/images/scratch-bg.png'); background-size: 100% 100%;">
       <canvas class="canvas" id="js-canvas" width="387" height="387" style="border-radius: 141px;"></canvas>
       <div class="solution" style="visibility:hidden; background:url('http://m-ebuy.com/images/scratch-bg.png')">
         恭喜您获得: $bonus !
