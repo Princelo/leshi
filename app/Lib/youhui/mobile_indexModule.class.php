@@ -216,7 +216,8 @@ CSS;
       canvas.height = canvasWidth;
       canvas.width = canvasWidth;
   container.height = canvasWidth / 640 * 854;
-  container.style.backgroundSize = canvasWidth+'px '+container.height+'px';
+  var myHeight = window.innerWidth / 640 * 854;
+  container.style.backgroundSize = window.innerWidth+'px '+myHeight+'px';
   alert(canvasWidth);
   alert(container.height);
    var canvasHeight = canvas.width,
