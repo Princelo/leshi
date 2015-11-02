@@ -178,7 +178,8 @@ class mobile_indexModule extends YouhuiBaseModule
         }
         $css = <<<CSS
 body {
-  padding: 20px 0;
+  padding: 0;
+  margin: 0;
 }
 
 .container {
