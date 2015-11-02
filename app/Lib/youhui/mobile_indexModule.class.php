@@ -212,7 +212,7 @@ CSS;
   var isDrawing, lastPoint;
   var container    = document.getElementById('js-container');
   var canvas       = document.getElementById('js-canvas');
-  var canvasWidth  = window.innerWidth * 0.6;
+  var canvasWidth  = window.innerWidth * 0.61;
       canvas.height = canvasWidth;
       canvas.width = canvasWidth;
   container.height = canvasWidth / 640 * 854;
