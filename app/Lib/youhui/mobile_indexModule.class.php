@@ -376,7 +376,7 @@ HTML;
         $bonus_no = rand(0, 9);
         if ($error == '') {
             $has_participated = $GLOBALS['db']->getOne('select * from fanwe_scratch_bonus where user_id = '.$user_id);
-            $error = 'has participated';
+            if ($has_participated) $error = 'has participated';
             if ($error == '') {
                 $GLOBALS['db']->query('insert into fanwe_scratch_bonus (user_id, bonus_no) values ('.$user_id.', '.$bonus_no.')');
                 $user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where is_delete = 0 and is_effect = 1 and id = ".$user_id);
