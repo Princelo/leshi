@@ -8,6 +8,15 @@
         <a href="/"><img src="{$TMPL}/images/mobile/logo.png"></a>
     </h2>
 </div>
+<script>
+    if ('ontouchstart' in window) {
+        $(document).on('focus', 'textarea,input,select', function() {
+            $('#header').css('position', 'absolute');
+        }).on('blur', 'textarea,input,select', function() {
+            $('#header').css('position', 'fixed');
+        });
+    }
+</script>
 <div id="map_menu" style="display:none" class="cis_sitemap"><h3>微店导航</h3><div class="cis_sitenv">
     <ul class="cl">
         <li><a href="{$APP_ROOT}/youhui.php?ctl=store"><img src="{$TMPL}/images/mobile/bn1.png" /><br />店铺</a></li>
