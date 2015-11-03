@@ -369,53 +369,63 @@ HTML;
 
     function scratch_bonus2() {
         $user_id = intval($GLOBALS['user_info']['id']);
-        $bonus_no = rand(0, 9);
-        $GLOBALS['db']->query('insert into fanwe_scratch_bonus (user_id, bonus_no) values ('.$user_id.', '.$bonus_no.')');
-        $user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where is_delete = 0 and is_effect = 1 and id = ".$user_id);
-        switch ($bonus_no) {
-            case 0:
-                $bonus = '尚城50元现金券';
-                break;
-            case 1:
-                $bonus = '尚城50元现金券';
-                break;
-            case 3:
-                $bonus = '尚城50元现金券';
-                break;
-            case 4:
-                $bonus = '尚城50元现金券';
-                break;
-            case 5:
-                $bonus = '尚城50元现金券';
-                break;
-            case 6:
-                $bonus = 'M网200积分';
-                break;
-            case 7:
-                $bonus = 'M网200积分';
-                break;
-            case 8:
-                $bonus = 'M网200积分';
-                break;
-            case 9:
-                $bonus = 'M网200积分';
-                break;
-            default:
-                $bonus = '';
-                break;
+        $error = '';
+        if (! intval($user_id) > 0) {
+            $error = 'not login';
         }
-        $msg_data['dest'] = $user_info['mobile'];
-        //$msg_data['dest'] = '13642724255';
-        $msg_data['send_type'] = 0;
-        $msg_data['content'] = "【M网平台】尊敬的{$user_info['user_name']}, 您在幸运刮刮卡活动中, 赢得了{$bonus}奖品 ";
-        $msg_data['send_time'] = 0;
-        $msg_data['is_send'] = 0;
-        $msg_data['create_time'] = get_gmtime();
-        $msg_data['user_id'] = $user_info['id'];
-        $msg_data['is_html'] = 0;
-        $msg_data['is_youhui'] = 0;
-        $msg_data['youhui_id'] = 0;
-        $GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入
+        $bonus_no = rand(0, 9);
+        if ($error == '') {
+            $has_participated = $GLOBALS['db']->getOne('select * from fanwe_scratch_bonus where user_id = '.$user_id);
+            $error = 'has participated';
+            if ($error == '') {
+                $GLOBALS['db']->query('insert into fanwe_scratch_bonus (user_id, bonus_no) values ('.$user_id.', '.$bonus_no.')');
+                $user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where is_delete = 0 and is_effect = 1 and id = ".$user_id);
+                switch ($bonus_no) {
+                    case 0:
+                        $bonus = '尚城50元现金券';
+                        break;
+                    case 1:
+                        $bonus = '尚城50元现金券';
+                        break;
+                    case 3:
+                        $bonus = '尚城50元现金券';
+                        break;
+                    case 4:
+                        $bonus = '尚城50元现金券';
+                        break;
+                    case 5:
+                        $bonus = '尚城50元现金券';
+                        break;
+                    case 6:
+                        $bonus = 'M网200积分';
+                        break;
+                    case 7:
+                        $bonus = 'M网200积分';
+                        break;
+                    case 8:
+                        $bonus = 'M网200积分';
+                        break;
+                    case 9:
+                        $bonus = 'M网200积分';
+                        break;
+                    default:
+                        $bonus = '';
+                        break;
+                }
+                $msg_data['dest'] = $user_info['mobile'];
+                //$msg_data['dest'] = '13642724255';
+                $msg_data['send_type'] = 0;
+                $msg_data['content'] = "【M网平台】尊敬的{$user_info['user_name']}, 您在幸运刮刮卡活动中, 赢得了{$bonus}奖品 ";
+                $msg_data['send_time'] = 0;
+                $msg_data['is_send'] = 0;
+                $msg_data['create_time'] = get_gmtime();
+                $msg_data['user_id'] = $user_info['id'];
+                $msg_data['is_html'] = 0;
+                $msg_data['is_youhui'] = 0;
+                $msg_data['youhui_id'] = 0;
+                $GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入
+            }
+        }
         switch ($bonus_no) {
             case 0:
                 $bonus = 'jiang0';
@@ -771,6 +781,25 @@ $(function() {
 })();
 
 JS;
+        if ($error == 'not login') {
+            $error_tmpl = <<<ERROR
+<script>
+alert('您还未登录M网');
+window.location.href='m-ebuy.com/index.php?ctl=user&act=login#signin';
+</script>
+ERROR;
+        } elseif ($error == 'has participated'){
+            $error_tmpl = <<<ERROR
+<script>
+alert('您已经参加过了本活动');
+//window.location.href='m-ebuy.com/index.php?ctl=user&act=login#signin';
+document.getElementById('maincanvas').style.display = 'none';
+</script>
+ERROR;
+        } else {
+            $error_tmpl = '';
+        }
+
         $html = <<<HTML
 <!DOCTYPE html>
 <html>
@@ -827,6 +856,7 @@ $js
 		<a href="http://windows.microsoft.com/en-us/internet-explorer/products/ie/home">IE9</a>.
 		只有这样,你才能参加这个活动，对不起！
 	</div>
+	$error_tmpl
 </body>
 </html>
 
