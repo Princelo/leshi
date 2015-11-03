@@ -371,6 +371,50 @@ HTML;
         $user_id = intval($GLOBALS['user_info']['id']);
         $bonus_no = rand(0, 9);
         $GLOBALS['db']->query('insert into fanwe_scratch_bonus (user_id, bonus_no) values ('.$user_id.', '.$bonus_no.')');
+        $user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where is_delete = 0 and is_effect = 1 and id = ".$user_id);
+        switch ($bonus_no) {
+            case 0:
+                $bonus = '尚城50元现金券';
+                break;
+            case 1:
+                $bonus = '尚城50元现金券';
+                break;
+            case 3:
+                $bonus = '尚城50元现金券';
+                break;
+            case 4:
+                $bonus = '尚城50元现金券';
+                break;
+            case 5:
+                $bonus = '尚城50元现金券';
+                break;
+            case 6:
+                $bonus = 'M网200积分';
+                break;
+            case 7:
+                $bonus = 'M网200积分';
+                break;
+            case 8:
+                $bonus = 'M网200积分';
+                break;
+            case 9:
+                $bonus = 'M网200积分';
+                break;
+            default:
+                $bonus = '';
+                break;
+        }
+        $msg_data['dest'] = $user_info['mobile'];
+        $msg_data['send_type'] = 0;
+        $msg_data['content'] = "【M网平台】尊敬的{$user_info['user_name']}, 您在幸运刮刮卡活动中, 赢得了{$bonus}奖品 ";
+        $msg_data['send_time'] = 0;
+        $msg_data['is_send'] = 0;
+        $msg_data['create_time'] = get_gmtime();
+        $msg_data['user_id'] = $user_info['id'];
+        $msg_data['is_html'] = 0;
+        $msg_data['is_youhui'] = 0;
+        $msg_data['youhui_id'] = 0;
+        $GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入
         switch ($bonus_no) {
             case 0:
                 $bonus = 'jiang0';
