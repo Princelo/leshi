@@ -7,6 +7,7 @@ $query = <<<QUERY
 select l.user_id, l.bonus_no, l.create_time, l.is_exchanged, u.user_name, u.mobile from fanwe_scratch_bonus l join fanwe_user u on u.id = l.user_id
 QUERY;
 $statement = $dbh->prepare($query);
+$statement->execute();
 $list = $statement->fetchAll();
 echo "<pre>";
 print_r($list);
