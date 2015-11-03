@@ -762,8 +762,8 @@ $js
 	</div>
 	<script>
         document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
-        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 63 + 'px';
-        document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 503 + 'px';
+        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 503 + 'px';
+        document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 63 + 'px';
     </script>
 	<!-- main -->
 	<div id="loading"><p>[正在拼命加载中<span class="blink">...</span>]</div>
