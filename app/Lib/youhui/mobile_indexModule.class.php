@@ -766,7 +766,7 @@ $js
 	    document.getElementById('body').style.backgroundRepeat = 'no-repeat';
 	    document.getElementById('body').style.backgroundSize = '100% 100%';
         document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
-        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 505 + 'px';
+        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 490 + 'px';
         document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 71 + 'px';
     </script>
 	<!-- main -->
