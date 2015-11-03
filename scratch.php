@@ -174,8 +174,8 @@ $list = $statement->fetchAll();
                                 url: 'http://m-ebuy.com/scratch_ajax.php',
                                 success: function (response) {
                                     if (response === 'success') {
-                                        $('#exchange'+uid).hide();
-                                        $('#unexchange'+uid).show();
+                                        $('#unexchange'+uid).hide();
+                                        $('#exchange'+uid).show();
                                     }
                                 }
                             });
