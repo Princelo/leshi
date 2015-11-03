@@ -10,11 +10,8 @@
 class ScratchAction extends CommonAction{
     public function index()
     {
-        if(trim($_REQUEST['dest'])!='')
-            $condition['dest'] = array('like','%'.trim($_REQUEST['dest']).'%');
-        if(trim($_REQUEST['content'])!='')
-            $condition['content'] = array('like','%'.trim($_REQUEST['content']).'%');
-        $this->assign("default_map",$condition);
+        $bonus_list = M("ScratchBonus")->where('is_delete = 0')->findAll();
+        $this->assign("bonus_list",$bonus_list);
         parent::index();
     }
     public function show_content()
