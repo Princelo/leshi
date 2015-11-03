@@ -373,31 +373,31 @@ HTML;
         $GLOBALS['db']->query('insert into fanwe_scratch_bonus (user_id, bonus_no) values ('.$user_id.', '.$bonus_no.')');
         switch ($bonus_no) {
             case 0:
-                $bonus = '奖品一';
+                $bonus = 'jiang0';
                 break;
             case 1:
-                $bonus = '奖品二';
+                $bonus = 'jiang0';
                 break;
             case 3:
-                $bonus = '奖品三';
+                $bonus = 'jiang0';
                 break;
             case 4:
-                $bonus = '奖品四';
+                $bonus = 'jiang0';
                 break;
             case 5:
-                $bonus = '奖品五';
+                $bonus = 'jiang0';
                 break;
             case 6:
-                $bonus = '奖品六';
+                $bonus = 'jiang1';
                 break;
             case 7:
-                $bonus = '奖品七';
+                $bonus = 'jiang1';
                 break;
             case 8:
-                $bonus = '奖品八';
+                $bonus = 'jiang1';
                 break;
             case 9:
-                $bonus = '奖品九';
+                $bonus = 'jiang1';
                 break;
             default:
                 $bonus = '';
@@ -436,7 +436,7 @@ CSS;
 
 (function() {
 var image = { // back and front images
-	'back': { 'url':'./images/jiang2.jpg', 'img':null },
+	'back': { 'url':'./images/$bonus.jpg', 'img':null },
 	'front': { 'url':'./images/eye2.jpg', 'img':null }
 };
 
