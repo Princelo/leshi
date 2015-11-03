@@ -15,6 +15,7 @@
             {/if}
             {$msg}
         </p>
+        <script>alert("{$msg}");</script>
         <p>
             {if $stay eq 0}
             {function name="sprintf" format=$LANG.JUMP_TIP value=$jump}
