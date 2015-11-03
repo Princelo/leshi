@@ -435,7 +435,6 @@ CSS;
         // depends on jQuery
 
 (function() {
-document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
 var image = { // back and front images
 	'back': { 'url':'./images/jiang2.jpg', 'img':null },
 	'front': { 'url':'./images/eye2.jpg', 'img':null }
@@ -761,6 +760,9 @@ $js
 			<input style="display:none;" id="resetbutton" type="button" value="再刮一次"></input>
 		</div>
 	</div>
+	<script>
+        document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
+    </script>
 	<!-- main -->
 	<div id="loading"><p>[正在拼命加载中<span class="blink">...</span>]</div>
 
