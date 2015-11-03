@@ -8,6 +8,9 @@ select l.user_id, l.bonus_no, l.create_time, l.is_exchanged, u.user_name, u.mobi
 QUERY;
 $statement = $dbh->prepare($query);
 $list = $statement->fetchAll();
+echo "<pre>";
+print_r($list);
+exit;
 ?>
 <html lang="en">
 
