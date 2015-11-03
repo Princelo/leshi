@@ -762,7 +762,7 @@ $js
 	</div>
 	<script>
 	alert(window.innerWidth/720 * 1118);
-        document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
+        document.getElementById('main').style.height = 1118 + 'px';
         document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 503 + 'px';
         document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 63 + 'px';
     </script>
