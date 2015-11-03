@@ -588,8 +588,10 @@ function setupCanvases() {
 
 	// set the width and height of the main canvas from the first image
 	// (assuming both images are the same dimensions)
-	c.width = image.back.img.width;
-	c.height = image.back.img.height;
+	//c.width = image.back.img.width;
+	c.width = window.innerWidth / 720 * 579;
+	//c.height = image.back.img.height;
+	c.height = window.innerWidth / 720 * 203;
 
 	// create the temp and draw canvases, and set their dimensions
 	// to the same as the main canvas:
