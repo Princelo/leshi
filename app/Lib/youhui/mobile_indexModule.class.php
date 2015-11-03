@@ -408,7 +408,7 @@ body {
   padding: 0;
   margin: 0;
 }
-
+/*
 .container {
   position: relative;
   width: 100%;
@@ -429,7 +429,7 @@ body {
 
 .form {
   padding: 20px;
-}
+}*/
 CSS;
         $js = <<<JS
         // depends on jQuery
@@ -756,7 +756,7 @@ $js
 		</div>
 		<div>
 			<p></p>
-			<input style="hidden" id="resetbutton" type="button" value="再刮一次"></input>
+			<input style="display:none;" id="resetbutton" type="button" value="再刮一次"></input>
 		</div>
 	</div>
 	<!-- main -->
