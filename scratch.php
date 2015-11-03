@@ -200,8 +200,8 @@ $list = $statement->fetchAll();
                                 <td><?=$item['create_time']?></td>
                                 <td><?=$item['bonus_no']?></td>
                                 <td>
-                                    <a <?if($item['is_exchanged']=='1') echo "style=\"display:none;\""?>)?> id='exchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="exchange(<?=$item['user_id']?>)">兑换</a>
-                                    <a <?if($item['is_exchanged']=='0') echo "style=\"display:none;\""?>)?> id='unexchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="unexchange(<?=$item['user_id']?>)">取消兑换</a>
+                                    <a <?if($item['is_exchanged']=='1') echo "style=\"display:none;\""?> id='exchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="exchange(<?=$item['user_id']?>)">兑换</a>
+                                    <a <?if($item['is_exchanged']=='0') echo "style=\"display:none;\""?> id='unexchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="unexchange(<?=$item['user_id']?>)">取消兑换</a>
                                 </td>
                             </tr>
                             <?}?>
