@@ -750,7 +750,7 @@ JS;
 $js
 </script>
 </head>
-<body style="background-image: url('http://m-ebuy.com/images/backimg.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
+<body id="body" style="">
 	<div class="hidden" id="main" style="">
 		<div>
 			<canvas id="maincanvas" style="">
@@ -762,13 +762,15 @@ $js
 		</div>
 	</div>
 	<script>
-	alert(window.innerWidth/720 * 1118);
+	    document.getElementById('body').style.backgroundImage = 'url("http://m-ebuy.com/images/backimg.jpg")';
+	    document.getElementById('body').style.backgroundRepeat = 'no-repeat';
+	    document.getElementById('body').style.backgroundSize = '100% 100%';
         document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
         document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 505 + 'px';
         document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 65 + 'px';
     </script>
 	<!-- main -->
-	<div id="loading"><p>[正在拼命加载中<span class="blink">...</span>]</div>
+	<div id="loading hidden"><p>[正在拼命加载中<span class="blink">...</span>]</div>
 
 	<div class="hidden" id="lamebrowser">
 		<p>
