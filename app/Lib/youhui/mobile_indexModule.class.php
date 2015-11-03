@@ -785,14 +785,14 @@ JS;
             $error_tmpl = <<<ERROR
 <script>
 alert('您还未登录M网');
-window.location.href='m-ebuy.com/index.php?ctl=user&act=login#signin';
+window.location.href='http://m-ebuy.com/index.php?ctl=user&act=login#signin';
 </script>
 ERROR;
         } elseif ($error == 'has participated'){
             $error_tmpl = <<<ERROR
 <script>
 alert('您已经参加过了本活动');
-//window.location.href='m-ebuy.com/index.php?ctl=user&act=login#signin';
+//window.location.href='http://m-ebuy.com/index.php?ctl=user&act=login#signin';
 document.getElementById('maincanvas').style.display = 'none';
 </script>
 ERROR;
