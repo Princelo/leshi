@@ -751,7 +751,7 @@ $js
 </script>
 </head>
 <body style="width: 100%; height: 100%;background-image: url('http://m-ebuy.com/images/backimg.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
-	<div class="hidden" id="main">
+	<div class="hidden" id="main" style="width:100%; height: 100%;">
 		<div>
 			<canvas id="maincanvas" style="">
 			</canvas>
