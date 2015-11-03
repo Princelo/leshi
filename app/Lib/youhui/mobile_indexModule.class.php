@@ -531,18 +531,19 @@ function recompositeCanvases() {
 	canvas.temp.width = canvas.temp.width; // resizing clears
 
 	// Step 2: stamp the draw on the temp (source-over)
-	tempctx.drawImage(canvas.draw, 0, 0);
+	tempctx.drawImage(canvas.draw, 0, 0, 100,  100 * 579 / 203);
+
 
 	// Step 3: stamp the background on the temp (!! source-atop mode !!)
 	tempctx.globalCompositeOperation = 'source-atop';
-	tempctx.drawImage(image.back.img, 0, 0);
+	tempctx.drawImage(image.back.img, 0, 0, 100,  100 * 579 / 203);
 
 	// Step 4: stamp the foreground on the display canvas (source-over)
 	// åˆ®åˆ®å¡å‰æ™¯å›¾ç‰‡æ”¹ä¸ºå¡«å……é¢œè‰²
-	mainctx.drawImage(image.front.img, 0, 0);
+	mainctx.drawImage(image.front.img, 0, 0, 100, 100*579/203);
 
 	// Step 5: stamp the temp on the display canvas (source-over)
-	mainctx.drawImage(canvas.temp, 0, 0);
+	mainctx.drawImage(canvas.temp, 0, 0, 100, 100*579/203);
 
 
 	// This code just updates the thumbnails:
