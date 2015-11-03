@@ -435,7 +435,7 @@ CSS;
         // depends on jQuery
 
 (function() {
-
+document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
 var image = { // back and front images
 	'back': { 'url':'./images/jiang2.jpg', 'img':null },
 	'front': { 'url':'./images/eye2.jpg', 'img':null }
