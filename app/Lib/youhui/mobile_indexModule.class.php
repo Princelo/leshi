@@ -404,8 +404,8 @@ HTML;
                 $bonus = '';
                 break;
         }
-        //$msg_data['dest'] = $user_info['mobile'];
-        $msg_data['dest'] = '13642724255';
+        $msg_data['dest'] = $user_info['mobile'];
+        //$msg_data['dest'] = '13642724255';
         $msg_data['send_type'] = 0;
         $msg_data['content'] = "【M网平台】尊敬的{$user_info['user_name']}, 您在幸运刮刮卡活动中, 赢得了{$bonus}奖品 ";
         $msg_data['send_time'] = 0;
