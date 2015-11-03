@@ -751,7 +751,7 @@ $js
 <body style="background-image: url('http://m-ebuy.com/images/backimg.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
 	<div class="hidden" id="main">
 		<div>
-			<canvas id="maincanvas" style="margin-left: 62px;margin-top: 483px; width: 579px; height: 203px;">
+			<canvas id="maincanvas" style="">
 			</canvas>
 		</div>
 		<div>
