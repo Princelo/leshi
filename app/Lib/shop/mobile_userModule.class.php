@@ -88,7 +88,8 @@ class mobile_userModule extends ShopBaseModule
                 //在此自动登录
                 do_login_user($user_data['email'],$user_data['user_pwd']);
                 //原来为直接挑战 现改为 完善资料
-                showSuccess($GLOBALS['lang']['REGISTER_SUCCESS'],0,APP_ROOT."/");
+                //showSuccess($GLOBALS['lang']['REGISTER_SUCCESS'],0,APP_ROOT."/");
+                showSuccess('请打开蓝牙,然后返回微信周边功能摇一摇,进行刮刮卡抽奖', 0, APP_ROOT."/");
             }
             else
             {
@@ -148,8 +149,9 @@ class mobile_userModule extends ShopBaseModule
                     //end
                     $GLOBALS['tmpl']->display("user_register_email.html");
                 }
-                else
+                else {
                     showSuccess($GLOBALS['lang']['WAIT_VERIFY_USER'],0,APP_ROOT."/");
+                }
             }
         }
         else
