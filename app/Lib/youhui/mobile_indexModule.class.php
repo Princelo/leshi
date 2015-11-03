@@ -543,7 +543,7 @@ function recompositeCanvases() {
 	mainctx.drawImage(image.front.img, 0, 0,window.innerWidth/720*579,  window.innerWidth/720*203);
 
 	// Step 5: stamp the temp on the display canvas (source-over)
-	mainctx.drawImage(canvas.temp, 0, 0, 100, window.innerWidth/720*579,  window.innerWidth/720*203);
+	mainctx.drawImage(canvas.temp, 0, 0, window.innerWidth/720*579,  window.innerWidth/720*203);
 
 
 	// This code just updates the thumbnails:
