@@ -157,9 +157,10 @@ $list = $statement->fetchAll();
                                 },
                                 url: 'http://m-ebuy.com/scratch_ajax.php',
                                 success: function (response) {
-                                    if (response === 'success') {
+                                    if (response.substring(0, 7) === 'success') {
                                         $('#exchange'+uid).hide();
-                                        $('#unexchange'+uid).show();
+                                        //$('#unexchange'+uid).show();
+                                        $('#type'+uid).html('已兑换 兑换时间:'+response.substring(7));
                                     }
                                 }
                             });
@@ -199,7 +200,7 @@ $list = $statement->fetchAll();
                                 <td><?=$item['mobile']?></td>
                                 <td><?=$item['create_time']?></td>
                                 <td><?=$item['bonus_no']?></td>
-                                <td>
+                                <td id="type<?=$item['user_id']?>">
                                     <a <?if($item['is_exchanged']=='1') echo "style=\"display:none;\""?> id='exchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="exchange(<?=$item['user_id']?>)">兑换</a>
                                     <a <?if($item['is_exchanged']=='0') echo "style=\"display:none;\""?> id='unexchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="unexchange(<?=$item['user_id']?>)">取消兑换</a>
                                 </td>

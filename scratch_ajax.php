@@ -12,12 +12,14 @@ $dbh = new PDO('mysql:host=localhost;dbname=leshi', "leshi", "vidagdi");
 
 if ($type == 'exchange') {
     $query = <<<QUERY
-    update fanwe_scratch_bonus set is_exchanged = 1 where user_id = :uid
+    update fanwe_scratch_bonus set is_exchanged = 1, exchange_date = :date where user_id = :uid
 QUERY;
     $statement = $dbh->prepare($query);
     $statement->bindParam(':uid', $uid);
+    $date = date('Y-m-d H:i:s');
+    $statement->bindParam(':date', $date);
     if($statement->execute() === true)
-        exit('success');
+        exit('success '.$date);
 }
 
 if ($type == 'unexchange') {
