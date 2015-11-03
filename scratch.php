@@ -9,9 +9,6 @@ QUERY;
 $statement = $dbh->prepare($query);
 $statement->execute();
 $list = $statement->fetchAll();
-echo "<pre>";
-print_r($list);
-exit;
 ?>
 <html lang="en">
 
