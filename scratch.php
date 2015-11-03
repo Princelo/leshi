@@ -4,7 +4,7 @@ error_reporting(0);
 $dbh = new PDO('mysql:host=localhost;dbname=leshi', "leshi", "vidagdi");
 
 $query = <<<QUERY
-select l.user_id, l.bonus_no, l.create_time, l.is_exchanged, u.user_name, u.mobile from fanwe_scratch_bonus l join fanwe_user u on u.id = l.user_id
+select l.exchange_date,l.user_id, l.bonus_no, l.create_time, l.is_exchanged, u.user_name, u.mobile from fanwe_scratch_bonus l join fanwe_user u on u.id = l.user_id
 QUERY;
 $statement = $dbh->prepare($query);
 $statement->execute();
@@ -202,7 +202,8 @@ $list = $statement->fetchAll();
                                 <td><?=$item['bonus_no']?></td>
                                 <td id="type<?=$item['user_id']?>">
                                     <a <?if($item['is_exchanged']=='1') echo "style=\"display:none;\""?> id='exchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="exchange(<?=$item['user_id']?>)">兑换</a>
-                                    <a <?if($item['is_exchanged']=='0') echo "style=\"display:none;\""?> id='unexchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="unexchange(<?=$item['user_id']?>)">取消兑换</a>
+                                    <a <? echo "style=\"display:none;\""?> id='unexchange<?=$item['user_id']?>' href="javascript:void(0);" onclick="unexchange(<?=$item['user_id']?>)">取消兑换</a>
+                                    <?if($item['is_exchanged']=='1') {?>已兑换 兑换时间:<?=$item['exchange_date']?><?}?>
                                 </td>
                             </tr>
                             <?}?>
