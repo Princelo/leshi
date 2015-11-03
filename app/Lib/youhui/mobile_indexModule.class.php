@@ -598,6 +598,8 @@ function setupCanvases() {
 	canvas.draw = document.createElement('canvas');
 	canvas.temp.width = canvas.draw.width = c.width;
 	canvas.temp.height = canvas.draw.height = c.height;
+	canvas.style.marginTop = window.innerWidth / 720 * 63 + 'px';
+	canvas.style.marginLeft = window.innerWidth / 720 * 503 + 'px';
 
 	// figure thumbnail sizes
 	//thumbwidth = parseInt(c.width * 0.2);
