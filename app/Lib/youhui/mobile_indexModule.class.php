@@ -750,8 +750,8 @@ JS;
 $js
 </script>
 </head>
-<body style="width: 100%; height: 100%;background-image: url('http://m-ebuy.com/images/backimg.jpg'); background-repeat: no-repeat; background-size: 100% 100%;">
-	<div class="hidden" id="main" style="width:100%; height: 100%;">
+<body style="background-image: url('http://m-ebuy.com/images/backimg.jpg'); background-repeat: no-repeat;">
+	<div class="hidden" id="main" style="">
 		<div>
 			<canvas id="maincanvas" style="">
 			</canvas>
@@ -764,8 +764,8 @@ $js
 	<script>
 	alert(window.innerWidth/720 * 1118);
         document.getElementById('main').style.height = window.innerWidth/720 * 1118 + 'px';
-        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 503 + 'px';
-        document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 63 + 'px';
+        document.getElementById('maincanvas').style.marginTop = window.innerWidth / 720 * 505 + 'px';
+        document.getElementById('maincanvas').style.marginLeft = window.innerWidth / 720 * 65 + 'px';
     </script>
 	<!-- main -->
 	<div id="loading"><p>[正在拼命加载中<span class="blink">...</span>]</div>
