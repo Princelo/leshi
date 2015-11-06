@@ -1,0 +1,65 @@
+<div id="header">
+    <ul class="cl">
+        <li><a href="javascript:window.history.go(-1)" style=""><img src="{$TMPL}/images/mobile/sb1.png"></a></li>
+        <li><a href="javascript:;" onClick="showtop('map','search')"><img src="{$TMPL}/images/mobile/tm1.png"></a></li>
+        <li><a href="javascript:;" onClick="showtop('search','map')"><img src="{$TMPL}/images/mobile/tm2.png"></a></li>
+        <li><a href="{$APP_ROOT}/index.php?ctl=uc_center"><img src="{$TMPL}/images/mobile/tm3.png"></a></li>
+    </ul>
+    <h2>
+        <a href="/"><img src="{$TMPL}/images/mobile/logo.png"></a>
+    </h2>
+</div>
+<script>
+    if ('ontouchstart' in window) {
+        $(document).on('focus', 'textarea,input,select', function() {
+            $('#header').css('position', 'absolute');
+        }).on('blur', 'textarea,input,select', function() {
+            $('#header').css('position', 'fixed');
+        });
+    }
+</script>
+<div id="map_menu" style="display:none" class="cis_sitemap"><h3>微店导航</h3><div class="cis_sitenv">
+    <ul class="cl">
+        <li><a href="{$APP_ROOT}/youhui.php?ctl=store"><img src="{$TMPL}/images/mobile/bn1.png" /><br />店铺</a></li>
+        <li><a href="{$APP_ROOT}/index.php?ctl=goods&act=goods_list&cid=0"><img src="{$TMPL}/images/mobile/bn2.png" /><br />新品</a></li>
+        <li><a href="{$APP_ROOT}/youhui.php?ctl=store&aid=&cid=&type=hot"><img src="{$TMPL}/images/mobile/bn3.png" /><br />热门</a></li>
+        <li><a href="{$APP_ROOT}/youhui.php?ctl=store&aid=&cid=&type=recommend"><img src="{$TMPL}/images/mobile/bn4.png" /><br />推荐</a></li>
+        <li><a href="{$APP_ROOT}/youhui.php?ctl=event"><img src="{$TMPL}/images/mobile/bn5.png" /><br />活动</a></li>
+        <li><a href="{$APP_ROOT}/youhui.php?ctl=fcate"><img src="{$TMPL}/images/mobile/bn6.png" /><br />优惠</a></li>
+        <li><a href="{$APP_ROOT}/tuan.php"><img src="{$TMPL}/images/mobile/bn7.png" /><br />团购</a></li>
+        <li><a href="{$APP_ROOT}/index.php?ctl=uc_center"><img src="{$TMPL}/images/mobile/bn8.png" /><br />我的</a></li>
+    </ul>
+</div>
+    <!--<h3>网站地图</h3>
+    <div class="cis_shownv">
+        <ul class="cl">
+            <li><a href="#"><span>自定义</span></a></li>
+            <li><a href="#"><span>自定义</span></a></li>
+            <li><a href="#"><span>自定义</span></a></li>
+            <li><a href="#"><span>自定义</span></a></li>
+        </ul>
+    </div>-->
+</div>
+<div id="search_menu" style="display:none" class="cis_search">
+    <form action="v.php?mod=search" method="get">
+        <input type="hidden" name="id" value="comeing_vshop" />
+        <input type="hidden" name="mod" value="search" />
+        <input type="hidden" name="searchsubmit" value="true" />
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="input"><input type="text" name="keyword" placeholder="请输入要搜索的内容"/></td>
+                <td class="type">
+                    <select name="type">
+                        <option value="shop" selected="selected">找店铺</option>
+                        <option value="goods" >商品</option>
+                        <option value="activitie" >活动</option>
+                        <option value="news" >商讯</option>
+                        <option value="coupon" >优惠</option>
+                    </select>
+                </td>
+                <td class="btn"><button type="submit">搜索</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+

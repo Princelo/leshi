@@ -94,7 +94,7 @@ class mobile_storeModule extends YouhuiBaseModule
         }
         $GLOBALS['tmpl']->caching = true;
         $cache_id  = md5(MODULE_NAME.ACTION_NAME.$id);
-        if (!$GLOBALS['tmpl']->is_cached('store_view.html', $cache_id))
+        if (!$GLOBALS['tmpl']->is_cached('mobile_store_view.html', $cache_id))
         {
             $store_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."supplier_location where id = ".$id." and is_effect = 1");
             if(!$store_info)
@@ -142,11 +142,11 @@ class mobile_storeModule extends YouhuiBaseModule
 
             $cate_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_cate where id = ".$store_info['deal_cate_id']);
 
-            $site_nav[] = array('name'=>$GLOBALS['lang']['HOME_PAGE'],'url'=>url("youhui","index"));
+            /*$site_nav[] = array('name'=>$GLOBALS['lang']['HOME_PAGE'],'url'=>url("youhui","index"));
             $site_nav[] = array('name'=>$GLOBALS['lang']['STORE_LIST'],'url'=>url("youhui","store#index"));
             $site_nav[] = array('name'=>$cate_item['name'],'url'=>url("youhui","store#index",array("cid"=>$cate_item['id'])));
             $site_nav[] = array('name'=>$store_info['name'],'url'=>url("youhui","store#view",array("id"=>$store_info['id'])));
-            $GLOBALS['tmpl']->assign("site_nav",$site_nav);
+            $GLOBALS['tmpl']->assign("site_nav",$site_nav);*/
 
 
 
@@ -159,13 +159,46 @@ class mobile_storeModule extends YouhuiBaseModule
             $GLOBALS['tmpl']->assign("store_info",$store_info);
 
             //输出最新加入的商家
-            $new_stores = $GLOBALS['db']->getAll("select id,name,address from ".DB_PREFIX."supplier_location where city_id = ".$GLOBALS['deal_city']['id']." and is_effect = 1 order by id desc limit 5");
+            /*$new_stores = $GLOBALS['db']->getAll("select id,name,address from ".DB_PREFIX."supplier_location where city_id = ".$GLOBALS['deal_city']['id']." and is_effect = 1 order by id desc limit 5");
             $GLOBALS['tmpl']->assign("new_stores",$new_stores);
             $rec_stores = $GLOBALS['db']->getAll("select id,name,address,avg_point,dp_count from ".DB_PREFIX."supplier_location where city_id = ".$GLOBALS['deal_city']['id']." and is_recommend = 1 and is_effect = 1 order by is_recommend desc limit 5");
-            $GLOBALS['tmpl']->assign("rec_stores",$rec_stores);
+            $GLOBALS['tmpl']->assign("rec_stores",$rec_stores);*/
+            //与商户相关的菜单：团购,优惠,代金,活动
+            $t_sql = "select * from ".DB_PREFIX."deal as d
+					left join ".DB_PREFIX."deal_location_link as l on l.deal_id = d.id
+					where d.is_delete = 0 and d.is_effect = 1 and d.is_shop = 0 and d.time_status in (0,1) and l.location_id = ".$id." order by d.sort desc limit 1";
+
+            $d_sql = "select * from ".DB_PREFIX."deal as d
+					left join ".DB_PREFIX."deal_location_link as l on l.deal_id = d.id
+					where d.is_delete = 0 and d.is_effect = 1 and d.is_shop = 2 and d.time_status in (0,1) and l.location_id = ".$id." order by d.sort desc limit 1";
+            $y_sql = "select * from ".DB_PREFIX."youhui as y
+					left join ".DB_PREFIX."youhui_location_link as l on l.youhui_id  = y.id
+					where y.is_effect = 1 and l.location_id = ".$id." order by y.sort desc limit 1";
+
+            $tcount = $GLOBALS['db']->getAll($t_sql);
+            if (!empty($tcount)) {
+                $tcount = $tcount[0];
+                $tcount['origin_price'] = format_price($tcount['origin_price']);
+                $tcount['current_price'] = format_price($tcount['current_price']);
+                if (!empty($tcount))
+                $GLOBALS['tmpl']->assign("tinfo", $tcount);
+            }
+    		$dcount = $GLOBALS['db']->getAll($d_sql);
+            if (!empty($dcount)) {
+                $dcount = $dcount[0];
+                if (!empty($dcount))
+                $GLOBALS['tmpl']->assign("dinfo", $dcount);
+            }
+    		$ycount = $GLOBALS['db']->getAll($y_sql);
+            if (!empty($ycount)) {
+                $ycount = $ycount[0];
+                if (!empty($ycount))
+                $GLOBALS['tmpl']->assign("yinfo", $ycount);
+            }
+
         }
 
-        $GLOBALS['tmpl']->display("store_view.html",$cache_id);
+        $GLOBALS['tmpl']->display("mobile/mobile_store_view.html",$cache_id);
     }
 
 

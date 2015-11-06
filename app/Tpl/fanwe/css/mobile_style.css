@@ -625,3 +625,285 @@ html[xmlns] .slides { display: block; }
   max-width: 100%;
   padding: 0 10px 0 0;
 }
+
+/***大衆點評****/
+.shop-details .info-address {
+  margin-left: 0;
+}
+.shop-details .details-mode .info-list .item {
+  line-height: 23px;
+}
+.info-list .item {
+  padding-left: 40px;
+  font-size: 16px;
+  line-height: 16px;
+}
+.icon-address {
+  background-position: 0 -24px;
+  background:url('/app/Tpl/fanwe/images/mobile/mix-pic.png');
+}
+.icon-address, .icon-call, .icon-gwran {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-size: 294px;
+  top: 50%;
+  left: 15px;
+  margin-top: -8px;
+}
+.arrowent {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  background-size: 8px 14px;
+  margin-top: -4px;
+  border: #bbb solid 2px;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-bottom: none;
+  border-left: none;
+  -webkit-transform: rotate(45deg);
+}
+.details-mode .aboutPhone {
+  background-image: url(/app/Tpl/fanwe/images/mobile/repeat-x.png);
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+  position: relative;
+}
+.shop-hui-list {
+  padding: 0 0 0 15px;
+  position: relative;
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+}
+.shop-hui-list .hui-igroup {
+  background: url('/app/Tpl/fanwe/images/mobile/mix-pic.png') no-repeat -101px -1px;
+  background-size: 294px;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+.hui-list{
+}
+.shop-hui-list .hui-list .item {
+  padding-left: 30px;
+  position: relative;
+}
+.shop-hui-list .hui-list .item .cnt {
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+  padding: 18px 15px 10px 0;
+  display: box;
+  display: -webkit-box;
+}
+.shop-hui-list .hui-list .item .cnt .content {
+  font-size: 12px;
+  color: #999;
+}
+.shop-hui-list .hui-list .item .cnt .content .newtitle {
+  font-size: 15px;
+  color: #000;
+}
+.shop-hui-list .hui-list .item .cnt .info {
+  padding-top: 2px;
+  color: #999;
+  font-size: 13px;
+}
+.shop-hui-list .hui-list .item .soldNum {
+  color: #999;
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  line-height: 16px;
+  margin-top: -7px;
+}
+.shop-tuan-list {
+  padding: 0 0 0 15px;
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+}
+
+.tag-igroup {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-position: -67px -171px;
+}
+.tag-booking, .tag-card, .tag-igroup, .tag-inpromo, .tag-takeaway {
+  background: url('/app/Tpl/fanwe/images/mobile/mix-pic.png') no-repeat;
+  background-size: 294px;
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+}
+.shop-details .shop-tuan-list .tuan-list .item {
+  padding-left: 30px;
+  position: relative;
+}
+.shop-details .shop-tuan-list .tuan-list .item .cnt {
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+}
+.shop-details .shop-tuan-list .tuan-list .item .pic {
+  margin-right: 10px;
+}
+.shop-tuan-list .tuan-list .content {
+  padding-top: 1px;
+  -webkit-box-flex: 1;
+}
+.shop-tuan-list .tuan-list .newtitle {
+  color: #333;
+  line-height: 20px;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.shop-tuan-list .tuan-list .info {
+  margin-top: 10px;
+  color: #666;
+  font-size: 12px;
+  position: relative;
+  line-height: 10px;
+  display: box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+}
+.shop-tuan-list .tuan-list .symbol {
+  font-size: 12px;
+  color: #f60;
+  display: block;
+}
+..shop-tuan-list .tuan-list .symbol {
+  font-size: 12px;
+  color: #f60;
+  display: block;
+}
+.shop-tuan-list .tuan-list .o-price {
+  line-height: 16px;
+  text-decoration: line-through;
+}
+.shop-details .shop-tuan-list .tuan-list .item .soldNum {
+  color: #999;
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  line-height: 16px;
+  margin-top: -7px;
+}
+.shop-details .standardBord {
+  height: 16px;
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+  background-color: #f0f0f0;
+}
+.details-mode .info-list .item {
+  line-height: 23px;
+}
+.info-list .item {
+  padding-left: 40px;
+  font-size: 16px;
+  line-height: 16px;
+}
+.block .item, .block .title, .bord, .group-list .col-list a, .group-list .deal-tuan-list .item, .group-list .hide-more, .group-list .sub, .group-list .view-more, .groupbuy, .groupbuy .block, .grouphead, .hotel-booking, .hotel-list a, .hotel-note, .index-category, .index-event, .index-rec .group-list .deal-tuan-list .item, .index-rec .home-tuan-list .cnt, .index-rec .tit, .index-topic-event, .index-topic-event .tit, .info-hotel, .leisure-list, .link-list .item, .list-nav .cat, .list-nav .full .item, .list-nav .selector .second-nav, .list-nav .sub .item, .mall .view-more, .modebox, .modebox .tit, .park-detail li, .park-detail ul, .photo-nav .cate, .search-list .item, .shop-details .shop-info, .shop-list .bord, .shop-list .item, .shop-mall .brand li:nth-child(3n), .shop-tuan-list, .sort-list .triggers, .suggest_list a, .timelimit, .tuan-list, header {
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+}
+.link-list .item {
+  padding: 15px 30px 15px 40px;
+  position: relative;
+  display: block;
+  color: #323232;
+  background:#fff;
+  border-bottom:1px solid #ddd;
+}
+.shop-details{background:#fff;}
+.icon-address {
+  background-position: 0 -24px !important;
+}
+.icon-call {
+  background-position: -17px -24px !important;
+  background-image: url('/app/Tpl/fanwe/images/mobile/mix-pic.png');
+  position:absolute;
+  z-index: 99999;
+}
+ .item .cnt {
+  background-image: url('/app/Tpl/fanwe/images/mobile/repeat-x.png');
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+  padding: 18px 15px 10px 0;
+  display: box;
+  display: -webkit-box;
+   background:#fff;
+}
+.shop-details .shop-hui-list .hui-list .item:first-child {
+  display: block;
+}
+.shop-details .shop-hui-list .hui-list .item {
+  padding-left: 30px;
+  position: relative;
+}
+.tag-igroup {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background-position: -67px -171px !important;
+}
+.tuan-list .symbol {
+  font-size: 12px !important;
+  color: #f60 !important;
+  display: block !important;
+}
+.tuan-list .price {
+  font-size: 25px !important;
+  margin-left: 0 !important;
+  vertical-align: -2px !important;
+  margin-right: 3px !important;
+  line-height: 10px !important;
+  display: inline-block !important;
+  color: #f60 !important;
+}
+.tuan-list .o-price {
+  line-height: 16px;
+  text-decoration: line-through;
+}
+.shop-tuan-list{
+  position:relative !important;
+}
+.shop-details .shop-tuan-list .tuan-list .item:first-child {
+  display: block;
+}
+.shop-details .shop-tuan-list .tuan-list .item {
+  padding-left: 30px;
+  position: relative;
+}
+.shop-details .shop-tuan-list .tuan-list .item .cnt {
+  background-image: url(//www.dpfile.com/mod/app-m-style/1.5.3/css/img/repeat-x.png);
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  background-size: auto 1px;
+}
+.shop-tuan-list .tuan-list .cnt {
+  padding: 10px 15px 10px 0;
+  display: box;
+  display: -webkit-box;
+}

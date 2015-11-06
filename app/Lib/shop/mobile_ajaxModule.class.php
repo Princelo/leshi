@@ -1207,6 +1207,12 @@ class mobile_ajaxModule extends ShopBaseModule
 
     public function waterfall_products()
     {
+        if(isset($_GET['store_id']) && $_GET['store_id'] != null) {
+            $store_id = filter_var($_GET['store_id'], FILTER_VALIDATE_INT);
+            $where = " and supplier_id = $store_id ";
+        } else {
+            $where = "";
+        }
         $db_pre = DB_PREFIX;
         if(isset($_GET['type']) && $_GET['type'] != null)
             $type = $_GET['type'];
@@ -1249,7 +1255,7 @@ class mobile_ajaxModule extends ShopBaseModule
                     $result = false;
                 }
                 if($result === false) {
-                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from {$db_pre}deal where is_best = 1
+                    $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from {$db_pre}deal where is_best = 1 {$where}
                                     and buy_type <> 1 and is_effect = 1 and is_delete = 0 order by sort desc limit ".$limit.", 6");
                     if(app_conf('CACHE_ON') == 1)
                         $GLOBALS['cache']->set($key,$result);
@@ -1269,14 +1275,14 @@ class mobile_ajaxModule extends ShopBaseModule
                         $ids = $ids_util->getChildIds($cid);
                         $sub_ids = $ids_util->getChildIds($cid);
                         $sub_ids[] = $cid;
-                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1 and shop_cate_id in (".implode(",",$sub_ids).")
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 $where and buy_type <> 1 and shop_cate_id in (".implode(",",$sub_ids).")
                             order by {$sort} limit ".$limit.", 6");
                         if(app_conf('CACHE_ON') == 1) {
                             $GLOBALS['cache']->set($key,$result);
                         }
 
                     } else {
-                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1
+                        $result = $GLOBALS['db']->getAll("select id,img,sub_name as title,origin_price,current_price,price_score from ".DB_PREFIX."deal where is_delete = 0 and is_effect = 1 and buy_type <> 1 $where
                             order by {$sort} limit ".$limit.", 6");
                         if(app_conf('CACHE_ON') == 1) {
                             $GLOBALS['cache']->set($key,$result);

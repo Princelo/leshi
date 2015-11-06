@@ -1,0 +1,216 @@
+{include file="mobile/inc/mobile_header.html"}
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature2.html"}
+    <div class="cis_shopheader">
+        <div class="cis_shopheaderbg"></div>
+        <div class="cis_shophdc cl">
+            <div class="cis_shoplogo">
+                <a href="{url x="youhui" r="store#view" p="id=20"}">
+                <img src="{function name="get_spec_image" v=$store_info.preview w="140" h="140" gen=1}" style="width:140px; height:140px;">
+                </a>
+            </div>
+            <h1>{$store_info.name}</h1>
+            <p>
+                {if $store_info.tags}
+                {foreach from="$store_info.tags_list" item="tag"}
+                <span>{$tag.name}</span>
+                {/foreach}
+                {/if}
+            </p>
+        </div>
+    </div>
+    <div class="dianping_tag" style="clear:both;">
+    </div>
+    <div class="shop-details">
+    <div class="details-mode info-address">
+        <div class="info-list link-list">
+            <a class="item" href="javascript:void(0);">
+                <i class="icon-address"></i>{$store_info.address}
+                <i class="arrowent"></i>
+            </a>
+
+            <!--两个电话号码 -->
+            <div class="aboutPhone">
+                <i class="icon-call"></i>
+                <div class="aboutPhoneNum">
+                    <a class="item phoneNum" href="tel:{$store_info.tel}">
+                        {$store_info.tel}
+                    </a>
+                </div>
+                <i class="arrowent"></i>
+            </div>
+            <!--一个电话号码 -->
+        </div>
+    </div>
+    {if $yinfo}
+    <div class="shop-hui-list">
+        <div class="hui-igroup"></div>
+        <div class="hui-list">
+            <a class="item" href="javascript:void(0);">
+                <div class="cnt">
+                    <div class="content">
+                        <div class="newtitle">
+                            {$yinfo.name}
+                        </div>
+                        <div class="info">
+                            该优惠目前有效, 赶快使用吧
+                        </div>
+                        <div class="info">
+                                        <span style="color:999999;background-color: ">
+
+                                        </span>
+                        </div>
+                    </div>
+                            <span class="soldNum">
+                                已下载{$yinfo.view_count}次
+                            </span>
+                </div>
+                <span class="arrowent"></span>
+            </a>
+        </div>
+        <div class="dianping_tag" style="clear:both;"></div>
+    </div>
+    {/if}
+    {if $yinfo}
+    <div class="shop-hui-list">
+        <div class="hui-igroup"></div>
+        <div class="hui-list">
+            <a class="item" href="javascript:void(0);">
+                <div class="cnt">
+                    <div class="content">
+                        <div class="newtitle">
+                            {$dinfo.name}
+                        </div>
+                        <div class="info">
+                            该优惠目前有效, 赶快使用吧
+                        </div>
+                        <div class="info">
+                                        <span style="color:999999;background-color: ">
+
+                                        </span>
+                        </div>
+                    </div>
+                            <span class="soldNum">
+                                已使用{$dinfo.view_count}次
+                            </span>
+                </div>
+                <span class="arrowent"></span>
+            </a>
+        </div>
+        <div class="dianping_tag" style="clear:both;"></div>
+    </div>
+    {/if}
+    {if $tinfo}
+    <div class="shop-tuan-list">
+        <div class="tag-igroup"></div>
+        <div class="tuan-list">
+            <a class="item" href="javascript:void(0);">
+                <div class="cnt">
+                    <img class="pic" src="{function name="get_spec_image" v=$tinfo.img w="120" h="120" gen=1}" width="60px">
+                    <div class="content">
+                        <div class="newtitle">{$tinfo.name}</div>
+                        <div class="info">
+                            <span class="symbol"></span><span class="price">{$tinfo.origin_price}</span>
+                            <span class="o-price">{$tinfo.current_price}</span>
+                        </div>
+                    </div>
+                  <span class="soldNum">
+                            已售{$tinfo.buy_count}
+                  </span>
+                </div>
+                <span class="arrowent"></span>
+            </a>
+        </div>
+        <div class="dianping_tag" style="clear:both;"></div>
+    </div>
+    {/if}
+    </div>
+    <div id="container" style="background: #f5f5f5; margin-top:20px;">
+    </div>
+    <script>
+        $('#container').waterfall({
+            itemCls: 'item',
+            colWidth: $(window).width()/100 * 45,
+            gutterWidth: $(window).width()/100 * 1,
+            gutterHeight: $(window).width()/100 * 1,
+            checkImagesLoaded: true,
+            maxPage: undefined,
+            path: function(page) {
+                return '{url x="index" r="ajax", p="act=waterfall_products"}'+'&store_id={$store_info.id}' + '&page=' + page ;
+            },
+            callbacks: {
+                /*
+                 * loadingStart
+                 * @param {Object} loading $('#waterfall-loading')
+                 */
+                loadingStart: function($loading) {
+                    $loading.show();
+                    //console.log('loading', 'start');
+                },
+
+                /*
+                 * loadingFinished
+                 * @param {Object} loading $('#waterfall-loading')
+                 * @param {Boolean} isBeyondMaxPage
+                 */
+                loadingFinished: function($loading, isBeyondMaxPage) {
+                    if ( !isBeyondMaxPage ) {
+                        $loading.fadeOut();
+                        console.log('loading finished');
+                    } else {
+                        console.log('loading isBeyondMaxPage');
+                        $loading.remove();
+                        $('.waterfall-more').show();
+                    }
+                },
+
+                /*
+                 * loadingError
+                 * @param {String} xhr , "end" "error"
+                 */
+                loadingError: function($message, xhr) {
+                    $message.html('Data load faild, please try again later.');
+                },
+
+                /*
+                 * renderData
+                 * @param {String} data
+                 * @param {String} dataType , "json", "jsonp", "html"
+                 */
+                renderData: function (data, dataType) {
+                    var tpl,
+                            template,
+                            resultNum = data.total;
+                    console.log(resultNum);
+                    resultNum = parseInt(resultNum);
+                    if ( resultNum < 6) {
+                        $('#container').waterfall('pause', function() {
+                            console.log('no more data');
+                        });
+                    }
+                    if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+                        tpl = $('#waterfall-tpl').html();
+                        template = Handlebars.compile(tpl);
+
+                        return template(data);
+                    } else { // html format
+                        return data;
+                    }
+                }
+            }
+        });
+    </script>
+    <script id="waterfall-tpl" type="text/x-handlebars-template">
+        {{#result}}
+        <div class="item">
+            <div class="info">
+                <img src="{{img}}" width="100%" height="auto" style="height:auto" />
+                <h2>{{title}}</h2>
+                <h4><strong>￥{{current_price}}</strong><span>￥{{origin_price}}</span></h4>
+            </div>
+        </div>
+        {{/result}}
+    </script>
+
+    {include file="mobile/inc/mobile_footer.html"}
