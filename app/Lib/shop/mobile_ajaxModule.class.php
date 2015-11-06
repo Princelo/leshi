@@ -1248,7 +1248,7 @@ class mobile_ajaxModule extends ShopBaseModule
         $limit = ($page - 1) * 6;
         switch(strval($type)) {
             case "home":
-                $key = md5($limit.'products_home');
+                $key = md5($limit.'products_home'.$where);
                 if(app_conf('CACHE_ON') == 1) {
                     $result = $GLOBALS['cache']->get($key);
                 } else {
@@ -1262,7 +1262,7 @@ class mobile_ajaxModule extends ShopBaseModule
                 }
                 break;
             default :
-                $key = md5($limit.$type.$cid);
+                $key = md5($limit.$type.$cid.$where);
                 if(app_conf('CACHE_ON') == 1) {
                     $result = $GLOBALS['cache']->get($key);
                 } else {
