@@ -1209,7 +1209,7 @@ class mobile_ajaxModule extends ShopBaseModule
     {
         if(isset($_GET['store_id']) && $_GET['store_id'] != null) {
             $store_id = filter_var($_GET['store_id'], FILTER_VALIDATE_INT);
-            $where = " and supplier_id = $store_id ";
+            $where = " and supplier_id = (select supplier_id from ".DB_PRE."supplier_location where id = $store_id limit 1) ";
         } else {
             $where = "";
         }
