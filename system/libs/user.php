@@ -118,7 +118,7 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		if(isset($user_data['sex']))
 		$user['sex'] = intval($user_data['sex']);
 		$user['my_intro'] = addslashes(trim($user_data['my_intro']));
-		if(isset($user_data['bdate']) && count(explode('-', $user_data['bdate'])) == 3)
+		/*if(isset($user_data['bdate']) && count(explode('-', $user_data['bdate'])) == 3)
 		{
 			$bdate = explode('-', $user_data['bdate']);
 			$user_data['byear'] = $bdate[0];
@@ -128,13 +128,13 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			showErr('出生日期无效');
 		}
 		if(!checkdate($bdate[1], $bdate[2], $bdate[0]))
-			showErr('出生日期无效');
-		if(isset($user_data['byear']))
+			showErr('出生日期无效');*/
+		/*if(isset($user_data['byear']))
 		$user['byear'] = intval($user_data['byear']);
 		if(isset($user_data['bmonth']))
 		$user['bmonth'] = intval($user_data['bmonth']);
 		if(isset($user_data['bday']))
-		$user['bday'] = intval($user_data['bday']);
+		$user['bday'] = intval($user_data['bday']);*/
 		
 		if(isset($user_data['is_merchant']))
 		{

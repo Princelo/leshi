@@ -38,6 +38,7 @@ class mobile_userModule extends ShopBaseModule
         {
             $user_data[$k] = htmlspecialchars(addslashes($v));
         }
+        $user_data['email'] = intval($_REQUEST['mobile']).'@m-ebuy.com';
 
         if(trim($user_data['user_pwd'])!=trim($user_data['user_pwd_confirm']))
         {
@@ -51,15 +52,15 @@ class mobile_userModule extends ShopBaseModule
         {
             showErr('请填写性别');
         }
-        if(!checkdate($user_data['bmonth'], $user_data['bday'], $user_data['byear']))
-            showErr('请正确填写出身日期');
+        /*if(!checkdate($user_data['bmonth'], $user_data['bday'], $user_data['byear']))
+            showErr('请正确填写出身日期');*/
         if(!check_mobile($user_data['mobile']))
         {
             showErr('请正确填写手机号');
         }
         if(!check_email(trim($user_data['email'])))
         {
-            showErr('请正确填写电子邮箱');
+            showErr('请正确填写手机号');
         }
         $sms_verification = $GLOBALS['db']->getOne("select count(1) from ".DB_PREFIX."sms_verification where mobile = '{$user_data['mobile']}'
 		and code = '{$user_data['code']}'");

@@ -53,7 +53,8 @@ class userModule extends ShopBaseModule
 		{
 			$user_data[$k] = htmlspecialchars(addslashes($v));
 		}
-		
+		$user_data['email'] = intval($_REQUEST['mobile']).'@m-ebuy.com';
+
 		if(trim($user_data['user_pwd'])!=trim($user_data['user_pwd_confirm']))
 		{
 			showErr($GLOBALS['lang']['USER_PWD_CONFIRM_ERROR']);
