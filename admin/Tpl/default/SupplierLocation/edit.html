@@ -192,7 +192,8 @@ var red_point = "__ROOT__/system/red_point.png";
 	<tr>
 		<td class="item_title">{%LOCATION_BRIEF}:</td>
 		<td class="item_input">
-		 <html:editor id="brief" name="brief" type="KINDEDITOR" content="{$vo.brief}" />
+			<!--<bakhtml:bakeditor id="brief" name="brief" type="KINDEDITOR"  />-->
+			<html:editor id="brief" name="brief" type="textarea" style="width:750px;height:350px" /><br>
 		</td>
 	</tr>
 	<tr>
