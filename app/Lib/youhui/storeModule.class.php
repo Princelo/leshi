@@ -415,6 +415,7 @@ class storeModule extends YouhuiBaseModule
 			$GLOBALS['tmpl']->assign("page_keyword",$seo_keyword.",");
 			$seo_description = $store_info['seo_description']?$store_info['seo_description']:$store_info['name'];
 			$GLOBALS['tmpl']->assign("page_description",$seo_description.",");
+			$store_info['brief'] = nl2br($store_info['brief']);
 			$GLOBALS['tmpl']->assign("store_info",$store_info);
 			
 			//输出最新加入的商家
