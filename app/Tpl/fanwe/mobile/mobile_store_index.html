@@ -68,7 +68,7 @@
                         }
                         $('#listtableid .item').each(function(){
                             $(this).width($(window).width());
-                            $(this).height($(window).width()/709*220);
+                            //$(this).height($(window).width()/709*220);
                         });
                     },
 
@@ -130,7 +130,7 @@
                 <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
                 <td>
                     <h4>{{name}}</h4>
-                    <p style="background:url('/app/Tpl/fanwe/images/store_info_logo_bg.png'); background-size: 100%;">
+                    <p style="background:url('/app/Tpl/fanwe/images/store_info_logo_bg.png'); background-size: 100%; height: 120px;">
                         <img src="/images/storelist/id={{id}}.jpg" style="width: 100%;"/>
                     </p>
                 </td>
