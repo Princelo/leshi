@@ -67,7 +67,8 @@
                             $('.waterfall-more').show();
                         }
                         $('#listtableid .item').each(function(){
-                            //$(this).width($(window).width());
+                            $(this).width($(window).width() / 100 * 96);
+                            $(this).marginLeft($(window).width()/50);
                             //$(this).height($(window).width()/709*220);
                         });
                     },
