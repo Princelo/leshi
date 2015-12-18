@@ -105,7 +105,8 @@ class ShopBaseModule{
                 MODULE_NAME=="mobile_ajax"&&ACTION_NAME=="waterfall_products"||
                 MODULE_NAME=="mobile_user"&&ACTION_NAME=="register" ||
                 MODULE_NAME=="mobile_user"&&ACTION_NAME=="doregister" ||
-                MODULE_NAME=="mobile_user"&&ACTION_NAME=="dologin"
+                MODULE_NAME=="mobile_user"&&ACTION_NAME=="dologin" ||
+                MODULE_NAME=="goods"&&ACTION_NAME=="index"||
                 /*MODULE_NAME=="acate"&&ACTION_NAME=="index"||
                 MODULE_NAME=="article"&&ACTION_NAME=="index"||
                 MODULE_NAME=="brand"&&ACTION_NAME=="index"||
