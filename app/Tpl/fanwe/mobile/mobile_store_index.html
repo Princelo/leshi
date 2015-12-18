@@ -107,7 +107,7 @@
                 }
             });
         </script>
-        <script id="waterfall-tpl" type="text/x-handlebars-template">
+        <bscript id="waterfall-tpl" type="text/x-handlebars-template">
             {{#result}}
             <tbody class="item">
             <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
@@ -120,6 +120,18 @@
             <p class="score"><span><em style="width:87%"></em></span></p>
             </td>
             </tr>
+            </tbody>
+            {{/result}}
+        </bscript>
+        <script id="waterfall-tpl" type="text/x-handlebars-template">
+            {{#result}}
+            <tbody class="item">
+                <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
+                <td>
+                    <h4>{{name}}</h4>
+                    <p style="background:url('/app/Tpl/fanwe/images/store_info_logo_bg.png'); background-size: 100%;"><img src="/images/storelist/id={{id}}.jpg" style="width: 100%;"/></p>
+                </td>
+                </tr>
             </tbody>
             {{/result}}
         </script>
