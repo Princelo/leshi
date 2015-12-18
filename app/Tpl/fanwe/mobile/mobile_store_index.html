@@ -126,10 +126,10 @@
         </bscript>
         <script id="waterfall-tpl" type="text/x-handlebars-template">
             {{#result}}
-            <tbody class="item" style="width: 96%; margin-left: 2%; margin-right: 2%;">
+            <tbody class="item" style="">
                 <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
                 <td>
-                    <h4>{{name}}</h4>
+                    <h4 style="padding-left: 2%;">{{name}}</h4>
                     <p style="background:url('/app/Tpl/fanwe/images/store_info_logo_bg.png'); background-size: 100%; height: 130px; margin-left:2%;">
                         <img src="/images/storelist/id={{id}}.jpg" style="width: 98%; margin-left: 1%;"/>
                     </p>
