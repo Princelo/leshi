@@ -35,7 +35,7 @@
             $('#listtableid').waterfall({
                 itemCls: 'item',
                 colWidth: $(window).width(),
-                gutterWidth: 0,
+                gutterWidth: 1,
                 gutterHeight: 0,
                 checkImagesLoaded: true,
                 maxPage: undefined,
@@ -67,7 +67,7 @@
                             $('.waterfall-more').show();
                         }
                         $('#listtableid .item').each(function(){
-                            $(this).width($(window).width() / 100 * 98);
+                            $(this).width($(window).width());
                             //$(this).height($(window).width()/709*220);
                         });
                     },
