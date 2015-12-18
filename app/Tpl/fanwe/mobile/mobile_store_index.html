@@ -108,7 +108,7 @@
                 }
             });
         </script>
-        <bscript id="bwaterfall-tpl" type="btext/x-handlebars-template">
+        <!--<bscript id="bwaterfall-tpl" type="btext/x-handlebars-template">
             {{#result}}
             <tbody class="item">
             <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
@@ -123,10 +123,10 @@
             </tr>
             </tbody>
             {{/result}}
-        </bscript>
+        </bscript>-->
         <script id="waterfall-tpl" type="text/x-handlebars-template">
             {{#result}}
-            <tbody class="item" style="">
+            <tbody class="item" style="padding-top: 5px;">
                 <tr onclick="goto('{url x="youhui" r="store#view"}'+'&id={{id}}')">
                 <td>
                     <h4 style="padding-left: 2%;">{{name}}</h4>
