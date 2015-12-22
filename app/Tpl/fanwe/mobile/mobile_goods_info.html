@@ -1,0 +1,352 @@
+{include file="mobile/inc/mobile_header.html"}
+<div class="fade-panel" style="display:none;"></div>
+<script src="/js/countdown.js"></script>
+<script src="/js/ios-prompt.js"></script>
+<script>
+    function check_content(obj)
+    {
+
+        if($(obj).find("*[name='content']").val()=='')
+        {
+            alert({
+                content: "内容不能为空",
+                boxClass: "custom-alert"
+            }, function () {
+            });
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    function add_cart(id,attr)
+    {
+        var ajaxurl = "/shop.php?ctl=cart&act=addcart&id="+id;
+        if(attr&&attr != '')
+        {
+            ajaxurl += attr;
+
+        }
+        else
+        {
+            attrs = $("select[name='attr[]']");
+            for(i=0;i<attrs.length;i++)
+            {
+                ajaxurl += "&attr[]="+$(attrs[i]).val();
+            }
+
+        }
+        //var number = $("input[name='number']").val();
+        var number = $("#buy_number").val();
+        console.log(number);
+        if(number)
+            ajaxurl+="&number="+number;
+
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            success: function(obj){
+                if(obj.open_win == 1)
+                {
+                    /*if($(".dialog-mask").css("display")=='block')
+                    {
+                        $(".dialog-mask,.dialog-box").remove();
+                    }*/
+
+                    if(obj.err == 1){
+                        alert(obj.html);
+                    }
+                        //$.weeboxs.open("<span class='cart-error'>"+obj.html+"</span>", {contentType:'text',showButton:false,title:LANG['ADD_CART_ERR'],width:570,type:'wee'});
+                    else {
+                        alert(obj.html);
+                    }
+                }
+                else if(obj.open_win == 2)
+                {
+                    //$.showErr(obj.info);
+                    alert(obj.info);
+                }
+                else
+                {
+                    $("#cart_count").html(parseInt(obj.number));
+                    confirm({
+                        content: "成功加入到购物车",
+                        okText: "查看购物车",
+                        cancelText: "继续购物",
+                        boxClass: "custom-confirm"
+                    }, function (flag) {
+                        if (flag) {
+                            window.location.href='{url x="shop" r="cart"}';
+                        } else {
+                        }
+                    });
+                }
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+
+    }
+
+    function score_add_cart(id)
+    {
+        var ajaxurl = "/shop.php?ctl=ajax&act=check_login_status";
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            type: "POST",
+            success: function(ajaxobj){
+                if(ajaxobj.status==0)
+                {
+                    alert({
+                        content: "你尚未登录",
+                        boxClass: "custom-alert"
+                    }, function () {
+                        window.location.href='{url x="shop" r="user#login"}';
+                    });
+
+                }
+                else
+                {
+                    score_add_cart_execute(id);
+                }
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+    }
+
+    function score_add_cart_execute(id,attr)
+    {
+        var ajaxurl = "/shop.php?ctl=cart&act=scoreaddcart&id="+id;
+        if(attr&&attr != '')
+        {
+            ajaxurl += attr;
+
+        }
+        else
+        {
+            attrs = $("select[name='attr[]']");
+            for(i=0;i<attrs.length;i++)
+            {
+                ajaxurl += "&attr[]="+$(attrs[i]).val();
+            }
+
+        }
+        var number = $("#buy_number").val();
+        if(number)
+            ajaxurl+="&number="+number;
+
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            success: function(obj){
+                if(obj.open_win == 1)
+                {
+                    if(obj.err == 1)
+                        alert(obj.html);
+                    else
+                        alert(obj.html);
+                }
+                else if(obj.open_win == 2)
+                {
+                    //$.showErr(obj.info);
+                    alert(obj.info);
+                }
+                else
+                {
+                    $("#cart_count").html(parseInt(obj.number));
+                    confirm({
+                        content: "成功加入到购物车",
+                        okText: "查看购物车",
+                        cancelText: "继续购物",
+                        boxClass: "custom-confirm"
+                    }, function (flag) {
+                        if (flag) {
+                            window.location.href='{url x="shop" r="cart"}';
+                        } else {
+                        }
+                    });
+                }
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+
+    }
+</script>
+<style>
+
+
+
+
+
+
+
+</style>
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature2.html"}
+    <div class="cis_wp" id="wp_menu">
+        <section class="cis_slide cl">
+        <div class="flexslider">
+            <ul class="slides cl">
+                {foreach from=$goods.image_list key=key item=image}
+                <li class="{if $key eq 0}act {/if}pic_{$key}" rel="{$key}">
+                    <img src="{function name="get_spec_image" v=$image.img w="640" h="240"}">
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+        </section>
+        <script type="text/javascript">
+            function ngrid_sel(obj, show) {
+                jQuery(obj).parent().addClass('active');
+                jQuery(obj).parent().siblings().removeClass('active');
+                jQuery(show).show();
+                jQuery(show).siblings().hide();
+            }
+
+            jQuery(window).load(function(){
+                jQuery('.flexslider').flexslider({
+                    animation: "slide",
+                    directionNav: false,
+                    start: function(slider){
+                        jQuery('body').removeClass('loading');
+                    }
+                });
+            });
+        </script>
+    <div class="dianping_tag" style="clear:both;">
+    </div>
+        <div class="inner_wrapper">
+            <div class="pd_box-border">
+                <div class="pd_product-title-wrap">
+                    <div class="pd_product-title-box">
+                        <h2 class="pd_product-title" id="pd_product-title" title="">{$goods.name}</h2>
+                        <h3 class="pd_product-subtitle" id="pd_product-subtitle" title="">{$goods.sub_name}</h3>
+                    </div>
+                </div>
+                <div class="pd_product-price" id="current_price">
+                    <span class="pd_product-price-tag" id="priceLabel">商城价</span>
+                    <strong class="pd_product-price-num">{$goods.current_price_format}</strong>
+<span class="icon icon-expensive_2"></span>
+</span>
+<span class="tips tips_save" id="comparePcPrice" style="display:none;">
+<span class="icon icon-cell_phone_2"></span>
+</span>
+                </div>
+                <div class="pd_product-price" id="current_price">
+                    <span class="pd_product-price-tag" id="priceLabel">积分价</span>
+                    <span class="pd_product-price-decimal">{$goods.price_score} 分</span>
+                </div>
+                <div class="pd_landing-page" id="pd_landing-page-time" style="display:none;"><span class="icon icon-history"></span> 离活动结束还剩 <span id="countdown"><span class="num">19</span> 时<span class="num">54</span> 分<span class="num">36</span> 秒</span></div>
+                <!-- 以旧换新 -->
+                <a href="javascript:;" class="pd_favorable-comment">
+<span class="item">
+{$comment_count}条评论
+</span>
+                    <!--<span class="icon_arrow icon-right_arrow"></span>-->
+                    <i class="arrowent"></i>
+                </a>
+            </div><!-- pd_box-border -->
+            <!-- 促销-->
+            <div class="pd_box-border" style="background-color:#f6f6f6;">
+            <!-- pd_product-desc -->
+            <div class="pd_brand-search" style="position: relative;">
+                <a href="http://search.m.yhd.com/search/c0-0/kMaryya/mb0" data-tpa="H5_DETAIL_CLICKBRAND" data-trackersend="1" style="width:90%">
+                    <img src="{function name="get_spec_image" v=$goods.supplier_info.preview w="60" h="60"}">
+<span class="text">
+查看
+<em>{$goods.supplier_info.name}</em>
+相关产品
+</span>
+                    <!--<span class="icon_arrow icon-right_arrow"></span>-->
+                </a>
+                <i class="arrowent"></i>
+            </div>
+                <div class="pd_product-recommend" id="pd_buy-also-look">
+                </div>
+            <div class="pd_detail-tab">
+                <div class="tab">
+                    <a href="javascript:;" class="item {if $type != 'comment'}cur{/if}" data-tpa="H5_DETAIL_DESC" data-trackersend="1" t="desc">图文详情</a>
+                    <a href="javascript:;" class="item {if $type == 'comment'}cur{/if}" data-tpa="H5_DETAIL_REVIEW" data-trackersend="1" t="comment">评论 {$comment_count}
+                    </a>
+                </div>
+            </div>
+            <div class="pd_detail-wrap" style="min-height: 558px;">
+                <!-- desc -->
+                <div class="pd_detail-tab-con desc" data-load="0" {if $type == 'comment'}style="display:none;"{/if}>
+                    <style type="text/css">
+                        img{max-width:none;}
+                        .leftBckBtn{position:absolute; display:block; width:110px; height:70px; line-height:70px; left:-15px; top:-10px; text-indent:20px; text-decoration:none; font-size:28px;
+                        }
+                    </style>
+                    {$goods.description}
+                </div>
+                <!-- parameter -->
+                <div class="pd_detail-tab-con parameter" data-load="0">
+                </div>
+                <!-- comment -->
+                <div class="pd_detail-tab-con comment" id="detail_box" data-load="0" {if $type != 'comment'}style="display:none;"{/if}>
+                    {insert name='load_goods_comment'} {* 动态团购点评 *}
+                </div>
+                <!-- after_service -->
+                <div class="pd_detail-tab-con after_service" data-load="0">
+                </div>
+                <div class="pd_detail-tab-loading">
+                    <span></span>
+                </div>
+            </div> </div>
+            <script>
+                $('.form_face').hide();
+                if ({$current_time} < {$goods.end_time} && {$goods.end_time} > 0) {
+                    $('#pd_landing-page-time').show();
+                    var clock1 = document.getElementById('countdown')
+                            , targetDate = {$goods.end_time}*1000;
+
+                    clock1.innerHTML = countdown(targetDate).toString();
+                    setInterval(function(){
+                        clock1.innerHTML = countdown(targetDate).toString();
+                    }, 1000);
+                }
+                $('.tab .item').bind('click', function(){
+                    $('.tab .item').removeClass('cur');
+                    $(this).addClass('cur');
+                    $('.pd_detail-tab-con').hide();
+                    $('.pd_detail-tab-con.'+$(this).attr('t')).show();
+                });
+            </script>
+    <div class="pd_product-buy-num show" id="product-buy-num">
+        <div class="pd_product-num-wrap">
+            <span class="pd_product-num-minus pd_product-num_disable" data-tpa="H5_DETAIL_AMOUNTSELECT" data-trackersend="1" onclick="minus()"></span>
+            <input class="pd_product-num-form" type="number" min="1" max="999" value="1" id="buy_number" required="">
+            <span class="pd_product-num-plus" data-tpa="H5_DETAIL_AMOUNTSELECT" data-trackersend="1" onclick="plus()"></span>
+        </div>
+        <a href="javascript:void(0);" class="pd_add-cart" id="addcart" data-tpa="H5_DETAIL_ADD_CARD" data-trackersend="1" onclick="add_cart({$goods.id})">立即购买</a>
+        <a href="javascript:void(0);" class="pd_add-cart" id="addcart" data-tpa="H5_DETAIL_ADD_CARD" data-trackersend="1" onclick="score_add_cart({$goods.id})">积分购买</a>
+        <a class="pd_shop-cart icon-shop_cart" href="{url x="shop" r="cart#index"}" data-tpa="H5_DETAIL_ENTER_CART">
+            <span class="num" style="display:none;" id="cart_count"></span>
+        </a>
+        <div class="tips_purchase" style="display:none;"></div>
+    </div>
+    <script>
+        var minus = function () {
+            if (parseInt($('#buy_number').val())>1)
+                $('#buy_number').val(parseInt($('#buy_number').val()) - 1)
+        }
+        var plus = function () {
+            $('#buy_number').val(parseInt($('#buy_number').val()) + 1)
+        }
+    </script>
+    {include file="mobile/inc/mobile_footer.html"}

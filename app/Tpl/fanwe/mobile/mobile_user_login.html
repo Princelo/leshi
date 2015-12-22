@@ -1,4 +1,5 @@
 {include file="mobile/inc/mobile_header.html"}
+<script src="/js/ios-prompt.js"></script>
 <body id="cis_list">
 <div class="body">
     {include file="mobile/inc/header_feature1.html"}
@@ -9,7 +10,7 @@
 
                 <div id="js-sign-flow" class="desk-front sign-flow clearfix" style="display: block;">
                     <div class="view view-signup selected">
-                        <form class="zu-side-login-box" action="{url x="shop" r="user#dologin"}" id="sign-form-1" autocomplete="off" novalidate_bak="novalidate" method="post">
+                        <form class="zu-side-login-box" _action="{url x="shop" r="user#dologin"}" id="sign-form-1" autocomplete="off" novalidate_bak="novalidate" method="post">
                         <div class="title">
                             <a class="js-signin signin-switch with-icon" href="{url x="shop" r="user#register"}">注册<i class="icon-sign icon-sign-arrow"></i></a>
                             <a class="with-icon return" onclick="history.go(-1);"><i class="icon-sign icon-sign-arrow-l"></i><span class="js-title-label">返回</span></a>
@@ -20,9 +21,10 @@
                         <div class="name input-wrapper">
                             <input required="" type="password" name="user_pwd" placeholder="密码">
                         </div>
+                        <input type="hidden" name="ajax" value="1">
                         <div class="failure" id="summary"><ul></ul></div>
                         <div class="button-wrapper command">
-                            <button class="sign-button submit" type="submit">登录M网</button>
+                            <button class="sign-button submit" btype="submit">登录M网</button>
                         </div>
                         <div class="weibo-signup-wrapper" style="display: none;">
                             社交帐号登录 &nbsp;
@@ -36,4 +38,55 @@
         </div>
     </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $("button[btype='submit']").click(function(){
+
+                if($.trim($("input[name='email']").val()).length == 0)
+                {
+                    alert("电子邮箱格式错误，请重新输入或者帐号格式错误，请重新输入");
+                    return false;
+                }
+                var ajaxurl = '{url x="shop" r="user#dologin"}';
+                var query = $("form.zu-side-login-box").serialize() ;
+
+                $.ajax({
+                    url: ajaxurl,
+                    dataType: "json",
+                    data:query,
+                    type: "POST",
+                    success: function(ajaxobj){
+                        console.log(ajaxobj);
+                        if(ajaxobj.status==1)
+                        {
+
+                            alert({
+                                content: ajaxobj.info,
+                                boxClass: "custom-alert"
+                            }, function () {
+                                if(ajaxobj.jump!='')
+                                    location.href = ajaxobj.jump;
+                                else
+                                    location.reload();
+                            });
+                        }
+                        else
+                        {
+                            alert(ajaxobj.info);
+                        }
+                    },
+                    error:function(ajaxobj)
+                    {
+//						if(ajaxobj.responseText!='')
+//						alert(ajaxobj.responseText);
+                    }
+                });
+
+                return false;
+
+            });
+        });
+
+
+    </script>
     {include file="mobile/inc/mobile_footer.html"}

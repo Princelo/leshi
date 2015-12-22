@@ -52,7 +52,7 @@ class mobile_goodsModule extends ShopBaseModule
 
         $GLOBALS['tmpl']->caching = true;
         $cache_id  = md5(MODULE_NAME.ACTION_NAME.trim($_REQUEST['id']).$GLOBALS['deal_city']['id'].$preview);
-        if (!$GLOBALS['tmpl']->is_cached('goods_info.html', $cache_id))
+        if (!$GLOBALS['tmpl']->is_cached('mobile_goods_info.html', $cache_id))
         {
             $id = intval($_REQUEST['id']);
             //获取当前页的团购商品
@@ -210,8 +210,22 @@ class mobile_goodsModule extends ShopBaseModule
             $GLOBALS['tmpl']->assign("locations",$locations);
 
         }
-
-        $GLOBALS['tmpl']->display("mobile/goods_info.html",$cache_id);
+        require APP_ROOT_PATH."app/Lib/message.php";
+        $goods_id = intval($_REQUEST['id']);
+        $uname = addslashes(trim($_REQUEST['id']));
+        if($goods_id==0&&$uname!='')
+        {
+            $goods_id = $GLOBALS['db']->getOne("select id from ".DB_PREFIX."deal where uname = '".$uname."'");
+        }
+        $page = 1;
+        $is_buy = intval($_REQUEST['is_buy']);
+        $limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
+        $result = get_message_list_shop($limit," rel_table='deal' and rel_id = ".$goods_id." and is_buy = ".$is_buy);
+        $GLOBALS['tmpl']->assign('comment_count', $result['count']);
+        $GLOBALS['tmpl']->assign('current_time', time());
+        $is_comment = $_REQUEST['type'];
+        $GLOBALS['tmpl']->assign('type', $is_comment);
+        $GLOBALS['tmpl']->display("mobile/mobile_goods_info.html",$cache_id);
     }
 
     public function goods_list()

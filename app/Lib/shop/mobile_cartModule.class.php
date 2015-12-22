@@ -266,6 +266,308 @@ class mobile_cartModule extends ShopBaseModule
         }
     }
 
+    public function scoremodifycart()
+    {
+        $id=intval($_REQUEST['id']);
+        $cart_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_cart where id=".$id);
+        $number = intval($_REQUEST['number']);
+        if($number<=0)
+        {
+            $result['info'] = $GLOBALS['lang']["BUY_COUNT_NOT_GT_ZERO"]."|".$cart_item['deal_id'];
+            $result['status'] = 0;
+            ajax_return($result);
+        }
+        $add_number = $number - $cart_item['number'];
+
+
+        $check = check_deal_number($cart_item['deal_id'],$add_number);
+        if($check['status']==0)
+        {
+            $result['info'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']]."|".$cart_item['deal_id'];
+
+            $result['status'] = 0;
+            ajax_return($result);
+        }
+
+        //属性库存的验证
+
+        $attr_setting_str = '';
+        if($cart_item['attr']!='')
+        {
+            $attr_setting_str = $cart_item['attr_str'];
+        }
+
+
+
+        if($attr_setting_str!='')
+        {
+            $check = check_deal_number_attr($cart_item['deal_id'],$attr_setting_str,$add_number);
+            if($check['status']==0)
+            {
+                $result['info'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']]."|".$cart_item['deal_id']."|".$check['attr'];
+                $result['status'] = 0;
+                ajax_return($result);
+            }
+        }
+
+        //属性库存的验证
+
+        $GLOBALS['db']->query("update ".DB_PREFIX."deal_cart set number =".$number.",price_total_score=".$number."*price_score, return_total_score = ".$number."* return_score, return_total_money = ".$number."* return_money where id =".$id);
+        $cart_list = $GLOBALS['db']->getAll("select c.*,d.icon from ".DB_PREFIX."deal_cart as c left join ".DB_PREFIX."deal as d on c.deal_id = d.id where c.session_id = '".es_session::id()."' and c.user_id = ".intval($GLOBALS['user_info']['id']));
+
+        $GLOBALS['tmpl']->assign("cart_list",$cart_list);
+        $GLOBALS['tmpl']->assign('total_price',$GLOBALS['db']->getOne("select sum(total_price) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id'])));
+        $GLOBALS['tmpl']->assign('price_total_score',$GLOBALS['db']->getOne("select sum(return_total_score) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id'])));
+
+        $result['html'] = $GLOBALS['tmpl']->fetch("mobile/inc/mobile_inc_cart_list.html");
+        $result['status'] = 1;
+        ajax_return($result);
+    }
+
+    public function scoreaddcart()
+    {
+        $id = intval($_REQUEST['id']);
+
+        $is_lottery = $GLOBALS['db']->getOne("select is_lottery from ".DB_PREFIX."deal where id = ".$id);
+        if(!$GLOBALS['user_info']&&$is_lottery==1)
+        {
+            $GLOBALS['tmpl']->assign("ajax",1);
+            $html = $GLOBALS['tmpl']->fetch("inc/login_form.html");
+            //弹出窗口处理
+            $res['open_win'] = 1;
+            $res['html'] = $html;
+            ajax_return($res);
+        }
+
+        $check = check_deal_time($id);
+        if($check['status'] == 0)
+        {
+            $res['open_win'] = 2;
+            $res['info'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']];
+            ajax_return($res);
+        }
+
+        $attr = $_REQUEST['attr'];
+
+        $deal_info = load_auto_cache("cache_deal_cart",array("id"=>$id));
+
+        if(!$deal_info)
+        {
+            $res['open_win'] = 1;
+            $res['err'] = 1;
+            $res['html'] = "没有可以购买的产品";
+
+            ajax_return($res);
+        }
+
+        if(!$attr&&$deal_info['deal_attr_list'])
+        {
+            $GLOBALS['tmpl']->assign("deal_info",$deal_info);
+            if(intval(app_conf("ATTR_SELECT"))==0)
+                $html = $GLOBALS['tmpl']->fetch("deal_attr.html");
+            else
+                $html = $GLOBALS['tmpl']->fetch("deal_attr_check.html");
+            //弹出窗口处理
+            $res['open_win'] = 1;
+            $res['html'] = $html;
+            ajax_return($res);
+        }
+        else
+        {
+            //加入购物车处理，有提交属性， 或无属性时
+            $attr_str = '0';
+            $attr_name = '';
+            $attr_name_str = '';
+            if($attr)
+            {
+                foreach($attr as $kk=>$vv)
+                {
+                    $attr[$kk] = intval($vv);
+                }
+                $attr_str = addslashes(implode(",",$attr));
+                $attr_names = $GLOBALS['db']->getAll("select name from ".DB_PREFIX."deal_attr where id in(".$attr_str.")");
+                $attr_name = '';
+                foreach($attr_names as $attr)
+                {
+                    $attr_name .=$attr['name'].",";
+                    $attr_name_str.=$attr['name'];
+                }
+                $attr_name = substr($attr_name,0,-1);
+            }
+            $verify_code = md5($id."_".$attr_str);
+            $session_id = es_session::id();
+
+            if(app_conf("CART_ON")==0)
+            {
+                $GLOBALS['db']->query("delete from ".DB_PREFIX."deal_cart where session_id = '".$session_id."' and user_id = ".intval($GLOBALS['user_info']['id']));
+            }
+
+            $cart_item = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_cart where session_id='".$session_id."' and user_id = ".intval($GLOBALS['user_info']['id'])." and verify_code = '".$verify_code."' and buy_type = 1");
+            $add_number = $number = intval($_REQUEST['number'])<=0?1:intval($_REQUEST['number']);
+
+
+            //开始运算购物车的验证
+            if($cart_item)
+            {
+
+                $check = check_deal_number($cart_item['deal_id'],$add_number);
+                if($check['status']==0)
+                {
+                    $res['open_win'] = 1;
+                    $res['err'] = 1;
+                    $res['html'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']];
+                    $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+                    ajax_return($res);
+                }
+
+                //属性库存的验证
+                $attr_setting_str = '';
+                if($cart_item['attr']!='')
+                {
+                    $attr_setting_str = $cart_item['attr_str'];
+                }
+
+
+
+                if($attr_setting_str!='')
+                {
+                    $check = check_deal_number_attr($cart_item['deal_id'],$attr_setting_str,$add_number);
+                    if($check['status']==0)
+                    {
+                        $res['err'] = 1;
+                        $res['open_win'] = 1;
+                        $res['html'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']];
+                        $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+                        ajax_return($res);
+                    }
+                }
+                //属性库存的验证
+            }
+            else //添加时的验证
+            {
+                $check = check_deal_number($deal_info['id'],$add_number);
+                if($check['status']==0)
+                {
+                    $res['open_win'] = 1;
+                    $res['err'] = 1;
+                    $res['html'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']];
+                    $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+                    ajax_return($res);
+                }
+
+                //属性库存的验证
+                $attr_setting_str = '';
+                if($attr_name_str!='')
+                {
+                    $attr_setting_str =$attr_name_str;
+                }
+
+
+
+                if($attr_setting_str!='')
+                {
+                    $check = check_deal_number_attr($deal_info['id'],$attr_setting_str,$add_number);
+                    if($check['status']==0)
+                    {
+                        $res['err'] = 1;
+                        $res['open_win'] = 1;
+                        $res['html'] = $check['info']." ".$GLOBALS['lang']['DEAL_ERROR_'.$check['data']];
+                        $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+                        ajax_return($res);
+                    }
+                }
+                //属性库存的验证
+            }
+
+            if($deal_info['return_score']<0 || true)
+            {
+                //需要积分兑换
+                $user_score = intval($GLOBALS['db']->getOne("select score from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id'])));
+                if($user_score < abs(intval($deal_info['price_score'])*$add_number))
+                {
+                    $res['err'] = 1;
+                    $res['open_win'] = 1;
+                    $res['html'] = $check['info']." ".$GLOBALS['lang']['NOT_ENOUGH_SCORE'];
+                    $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+                    ajax_return($res);
+                }
+            }
+
+            //验证over
+
+            if(!$cart_item)
+            {
+                $attr_price = $GLOBALS['db']->getOne("select sum(price) from ".DB_PREFIX."deal_attr where id in($attr_str)");
+
+                $cart_item['session_id'] = $session_id;
+                $cart_item['user_id'] = intval($GLOBALS['user_info']['id']);
+                $cart_item['deal_id'] = $id;
+                //属性
+                if($attr_name != '')
+                {
+                    $cart_item['name'] = $deal_info['name']." [".$attr_name."]";
+                    $cart_item['sub_name'] = $deal_info['sub_name']." [".$attr_name."]";
+                }
+                else
+                {
+                    $cart_item['name'] = $deal_info['name'];
+                    $cart_item['sub_name'] = $deal_info['sub_name'];
+                }
+                $cart_item['name'] = addslashes($cart_item['name']);
+                $cart_item['sub_name'] = addslashes($cart_item['sub_name']);
+                $cart_item['attr'] = $attr_str;
+                $cart_item['unit_price'] = $deal_info['current_price'] + $attr_price;
+                $cart_item['number'] = $number;
+                $cart_item['total_price'] = 0;
+                $cart_item['verify_code'] = $verify_code;
+                $cart_item['create_time'] = get_gmtime();
+                $cart_item['update_time'] = get_gmtime();
+                $cart_item['price_score'] = $deal_info['price_score'];
+                $cart_item['price_total_score'] = $deal_info['price_score'] * $cart_item['number'];
+                $cart_item['return_score'] = "-".$deal_info['price_score'];
+                $cart_item['return_total_score'] = "-".($deal_info['price_score'] * $cart_item['number']);
+                $cart_item['return_money'] = $deal_info['return_money'];
+                $cart_item['return_total_money'] = $deal_info['return_money'] * $cart_item['number'];
+                $cart_item['buy_type']	=	'1';
+                $cart_item['supplier_id']	=	$deal_info['supplier_id'];
+                $cart_item['attr_str'] = $attr_name_str;
+
+                $GLOBALS['db']->autoExecute(DB_PREFIX."deal_cart",$cart_item);
+            }
+            else
+            {
+                if($number>0)
+                {
+                    $cart_item['number'] += $number;
+                    $cart_item['total_price'] = 0;
+                    $cart_item['price_total_score'] = $deal_info['price_score'] * $cart_item['number'];
+                    $cart_item['return_total_score'] = "-".bcmul($deal_info['price_score'], $cart_item['number'], 0);
+                    $cart_item['return_total_money'] = $deal_info['return_money'] * $cart_item['number'];
+                    $GLOBALS['db']->autoExecute(DB_PREFIX."deal_cart",$cart_item,"UPDATE","id=".$cart_item['id']);
+                }
+            }
+
+            require './system/libs/cart.php';
+            syn_cart(); //同步购物车中的状态 cart_type
+            $res['open_win'] = 0;
+            $cart_item['img'] = $GLOBALS['db']->getOne("select icon from ".DB_PREFIX."deal where id = ".$cart_item['deal_id']);
+            $cart_item['add_number'] = $number;
+            $cart_item['add_total_price'] = $number * $cart_item['unit_price'];
+            $cart_item['add_total_score'] = $number * $cart_item['return_score'];
+            $cart_item['add_total_price_score'] = $number * $cart_item['price_score'];
+            $GLOBALS['tmpl']->assign("cart_item",$cart_item);
+            $res['html'] = $GLOBALS['tmpl']->fetch("inc/inc_cart_item_score.html");
+            $res['number'] = $GLOBALS['db']->getOne("select sum(number) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+
+            ajax_return($res);
+        }
+    }
+
     public function modifycart()
     {
         $id=intval($_REQUEST['id']);
@@ -318,7 +620,7 @@ class mobile_cartModule extends ShopBaseModule
         $GLOBALS['tmpl']->assign("cart_list",$cart_list);
         $GLOBALS['tmpl']->assign('total_price',$GLOBALS['db']->getOne("select sum(total_price) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id'])));
 
-        $result['html'] = $GLOBALS['tmpl']->fetch("inc/inc_cart_list.html");
+        $result['html'] = $GLOBALS['tmpl']->fetch("mobile/inc/mobile_inc_cart_list.html");
         $result['status'] = 1;
         ajax_return($result);
     }
@@ -332,7 +634,7 @@ class mobile_cartModule extends ShopBaseModule
         {
             $GLOBALS['tmpl']->assign("cart_list",$cart_list);
             $GLOBALS['tmpl']->assign('total_price',$GLOBALS['db']->getOne("select sum(total_price) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id'])));
-            $result['html'] = $GLOBALS['tmpl']->fetch("inc_cart_list.html");
+            $result['html'] = $GLOBALS['tmpl']->fetch("mobile/inc/mobile_inc_cart_list.html");
             $result['status'] = 1;
             ajax_return($result);
         }

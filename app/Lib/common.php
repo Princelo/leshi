@@ -1394,44 +1394,87 @@ function get_notice($limit=0,$notice_page=array(0))
 
 function jump_deal($goods,$module)
 {
-	
-	if($goods['buy_type']==1)
-	{
-				if($goods['uname']!='')
+
+	if(is_mobile() === false) {
+
+		if($goods['buy_type']==1)
+		{
+			if($goods['uname']!='')
 				$url = url("shop","exchange#index",array("id"=>$goods['uname']));
-				else
-				$url = url("shop","exchange#index",array("id"=>$goods['id']));		
-				if($module!="exchange")		
+			else
+				$url = url("shop","exchange#index",array("id"=>$goods['id']));
+			if($module!="exchange")
 				app_redirect($url);
-	}
-	else 
-	{
-		if($goods['is_shop']==0)
+		}
+		else
 		{
-					if($goods['uname']!='')
+			if($goods['is_shop']==0)
+			{
+				if($goods['uname']!='')
 					$url = url("tuan","deal#index",array("id"=>$goods['uname']));
-					else
-					$url = url("tuan","deal#index",array("id"=>$goods['id']));		
-					if($module!="deal")		
+				else
+					$url = url("tuan","deal#index",array("id"=>$goods['id']));
+				if($module!="deal")
 					app_redirect($url);
-		}
-		if($goods['is_shop']==1)
-		{
-					if($goods['uname']!='')
+			}
+			if($goods['is_shop']==1)
+			{
+				if($goods['uname']!='')
 					$url = url("shop","goods",array("id"=>$goods['uname']));
-					else
-					$url = url("shop","goods",array("id"=>$goods['id']));	
-					if($module!="goods")				
+				else
+					$url = url("shop","goods",array("id"=>$goods['id']));
+				if($module!="goods")
 					app_redirect($url);
-		}
-		if($goods['is_shop']==2)
-		{
-					if($goods['uname']!='')
+			}
+			if($goods['is_shop']==2)
+			{
+				if($goods['uname']!='')
 					$url = url("youhui","ydetail",array("id"=>$goods['uname']));
-					else
+				else
 					$url = url("youhui","ydetail",array("id"=>$goods['id']));
-					if($module!="ydetail")					
+				if($module!="ydetail")
 					app_redirect($url);
+			}
+		}
+	} else {
+		if($goods['buy_type']==1)
+		{
+			if($goods['uname']!='')
+				$url = url("shop","exchange#index",array("id"=>$goods['uname']));
+			else
+				$url = url("shop","exchange#index",array("id"=>$goods['id']));
+			if($module!="mobile_exchange")
+				app_redirect($url);
+		}
+		else
+		{
+			if($goods['is_shop']==0)
+			{
+				if($goods['uname']!='')
+					$url = url("tuan","deal#index",array("id"=>$goods['uname']));
+				else
+					$url = url("tuan","deal#index",array("id"=>$goods['id']));
+				if($module!="mobile_deal")
+					app_redirect($url);
+			}
+			if($goods['is_shop']==1)
+			{
+				if($goods['uname']!='')
+					$url = url("shop","goods",array("id"=>$goods['uname']));
+				else
+					$url = url("shop","goods",array("id"=>$goods['id']));
+				if($module!="mobile_goods")
+					app_redirect($url);
+			}
+			if($goods['is_shop']==2)
+			{
+				if($goods['uname']!='')
+					$url = url("youhui","ydetail",array("id"=>$goods['uname']));
+				else
+					$url = url("youhui","ydetail",array("id"=>$goods['id']));
+				if($module!="mobile_ydetail")
+					app_redirect($url);
+			}
 		}
 	}
 }

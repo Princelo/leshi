@@ -108,7 +108,7 @@ class userModule extends ShopBaseModule
 				//在此自动登录
 				do_login_user($user_data['email'],$user_data['user_pwd']);
 				//原来为直接挑战 现改为 完善资料
-				showSuccess($GLOBALS['lang']['REGISTER_SUCCESS'],0,APP_ROOT."/");
+				showSuccess($GLOBALS['lang']['REGISTER_SUCCESS'],0,get_gopreview());
 				//app_redirect(url("shop","user#stepone"));
 			}
 			else

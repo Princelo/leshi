@@ -497,6 +497,30 @@ function insert_load_cart_index()
 			return $GLOBALS['tmpl']->fetch("inc/insert/load_cart_index.html");
 }
 
+function insert_load_cart_index_mobile()
+{
+	//增加输出购物车中产品是否参加抽奖
+	$is_lottery = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."deal_cart as dc left join ".DB_PREFIX."deal as d on dc.deal_id = d.id where d.is_lottery = 1 and session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id']));
+	$GLOBALS['tmpl']->assign("is_lottery",$is_lottery);
+
+	if(!$GLOBALS['user_info']&&$is_lottery>0) //购物车中有抽奖商品时必需先登录
+	{
+		showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],$ajax,url("shop","user#login"));
+	}
+
+	$GLOBALS['db']->query("update ".DB_PREFIX."deal_cart set update_time=".get_gmtime().",user_id = ".intval($GLOBALS['user_info']['id'])." where session_id = '".es_session::id()."'");
+	$cart_list = $GLOBALS['db']->getAll("select c.*,d.icon from ".DB_PREFIX."deal_cart as c left join ".DB_PREFIX."deal as d on c.deal_id = d.id where c.session_id = '".es_session::id()."' and c.user_id = ".intval($GLOBALS['user_info']['id']));
+
+	$GLOBALS['tmpl']->assign("cart_list",$cart_list);
+	$GLOBALS['tmpl']->assign('total_price',$GLOBALS['db']->getOne("select sum(total_price) from ".DB_PREFIX."deal_cart where session_id = '".es_session::id()."' and user_id = ".intval($GLOBALS['user_info']['id'])));
+
+	//输出抽奖验证过的用户手机号
+	$lottery_mobile = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));
+	$GLOBALS['tmpl']->assign("lottery_mobile",$lottery_mobile['lottery_mobile']);
+	$GLOBALS['tmpl']->assign("is_verify",$lottery_mobile['lottery_verify']==''?true:false);
+	return $GLOBALS['tmpl']->fetch("mobile/inc/insert/mobile_load_cart_index.html");
+}
+
 //加载产品的剩余库存
 function insert_get_goods_stock($para)
 {

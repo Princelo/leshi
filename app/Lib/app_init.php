@@ -122,13 +122,13 @@ if(check_ipop_limit(get_client_ip(),"auto_refresh_data",30,intval($user_info['id
 	$GLOBALS['db']->query("update ".DB_PREFIX."user set lottery_mobile = '',lottery_verify = '', verify_create_time = '' where verify_create_time > 0 and lottery_verify <> '' and ".get_gmtime()." - verify_create_time > 1800");
 }
 //判断用户是否已经设置过资料
-if($GLOBALS["user_info"])
+/*if($GLOBALS["user_info"])
 {
 	if($GLOBALS["user_info"]['step']==0&&strtolower($_REQUEST['ctl'])!='user'&&strtolower($_REQUEST['ctl'])!='avatar'&&strtolower($_REQUEST['ctl'])!='uc_account'&&strtolower($_REQUEST['ctl'])!='ajax')
 	{
 		$redirect = url("shop","user#stepone");
 		app_redirect($redirect);
 	}
-}
+}*/
 
 ?>

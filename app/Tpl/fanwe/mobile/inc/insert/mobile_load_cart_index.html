@@ -1,0 +1,12 @@
+{if $cart_list}
+{include file="mobile/inc/mobile_inc_cart_list.html"}
+{else}
+<div class="blank"></div>
+<div class="nogoodsbg">
+    <div class="nogoodsimg"><img src="{$TMPL}/images/nogoods.jpg"></div>
+    <div class="nogoodstxt"><p class="empty">{$LANG.CART_EMPTY_TIP}</p>
+        <p class="color_blue">{$LANG.GO_TO_PICK}[ <a href="{$APP_ROOT}/">{$LANG.PICK_GOODS_TO_CART}</a> ]，{$LANG.OR_GO_TO} [ <a href="{url x="shop" r="uc_collect"}">{$LANG.MY_COLLECT}</a> ] {$LANG.FOR_CHECK}。
+            <br></p><br><br><br><br></div>
+    <div class="blank"></div>
+</div>
+{/if}

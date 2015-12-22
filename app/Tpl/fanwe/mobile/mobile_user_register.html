@@ -1,4 +1,5 @@
 {include file="mobile/inc/mobile_header.html"}
+<script src="/js/ios-prompt.js"></script>
 <body id="cis_list">
 <div class="body">
     {include file="mobile/inc/header_feature1.html"}
@@ -18,7 +19,7 @@
                             <input required="" type="email" name="email" placeholder="电子邮箱">
                         </div>-->
                         <div class="email input-wrapper">
-                            <input required="" type="text" name="user_name" placeholder="帐号（3到15位字符）" aria-haspopup="true" autocomplete="off">
+                            <input required="" type="text" name="user_name" placeholder="帐号（5到15位字符）" aria-haspopup="true" autocomplete="off">
                         </div>
                     <div class="item-info-page"><span>性别</span><div class="L-select" id="E_sex">
                         <select id="sex" class="L-list-select" name="sex">
@@ -171,5 +172,41 @@
             else
                 $('#gender').html('男');
         });
+        /*$(document).ready(function(){
+
+            $("button[type='submit']").click(function(){
+
+                if(!$.minLength($("input[name='user_name']").val(),5,true))
+                {
+                    alert("{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_USER_NAME}");
+                    return false;
+                }
+
+                if(!$.maxLength($("input[name='user_name']").val(),16,true))
+                {
+                    alert("{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_USER_NAME}");
+                    return false;
+                }
+
+                if(!$.minLength($("input[name='user_pwd']").val(),4,false))
+                {
+                    alert("{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_USER_PWD}");
+                    return false;
+                }
+
+                if($("input[name='user_pwd_confirm']").val() != $("input[name='user_pwd']").val())
+                {
+                    alert("{$LANG.USER_PWD_CONFIRM_ERROR}");
+                    return false;
+                }
+                tel = $('input[name="mobile"]').val();
+                var telReg = !!tel.match(/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/);
+                if(telReg == false){
+                    alert('请输入正确手机号');
+                    return false;
+                }
+
+            });
+        });*/
     </script>
 {include file="mobile/inc/mobile_footer.html"}
