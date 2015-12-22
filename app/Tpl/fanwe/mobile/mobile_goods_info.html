@@ -252,7 +252,7 @@
                 </div>
                 <div class="pd_landing-page" id="pd_landing-page-time" style="display:none;"><span class="icon icon-history"></span> 离活动结束还剩 <span id="countdown"><span class="num">19</span> 时<span class="num">54</span> 分<span class="num">36</span> 秒</span></div>
                 <!-- 以旧换新 -->
-                <a href="javascript:;" class="pd_favorable-comment">
+                <a href="{url x="shop" r="goods"}&id={$goods.id}&type=comment#detail_box" class="pd_favorable-comment">
 <span class="item">
 {$comment_count}条评论
 </span>
@@ -264,7 +264,7 @@
             <div class="pd_box-border" style="background-color:#f6f6f6;">
             <!-- pd_product-desc -->
             <div class="pd_brand-search" style="position: relative;">
-                <a href="http://search.m.yhd.com/search/c0-0/kMaryya/mb0" data-tpa="H5_DETAIL_CLICKBRAND" data-trackersend="1" style="width:90%">
+                <a href="{url x="shop" r="store#view"}&id={$goods.supplier_info.id}" data-tpa="H5_DETAIL_CLICKBRAND" data-trackersend="1" style="width:90%">
                     <img src="{function name="get_spec_image" v=$goods.supplier_info.preview w="60" h="60"}">
 <span class="text">
 查看
