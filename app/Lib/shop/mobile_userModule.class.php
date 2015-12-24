@@ -251,7 +251,7 @@ class mobile_userModule extends ShopBaseModule
             else
             {
                 $jump_url = get_gopreview();
-                if($ajax==1)
+                if($ajax==1 && false)
                 {
                     $return['status'] = 1;
                     $return['info'] = $GLOBALS['lang']['LOGIN_SUCCESS'];
