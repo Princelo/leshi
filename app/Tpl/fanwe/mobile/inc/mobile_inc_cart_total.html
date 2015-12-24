@@ -1,0 +1,42 @@
+    <span class="order_totol_cost" style="width: 100%;">
+            {$LANG.DEAL_TOTAL_PRICE}：<span class="cost">{function name="format_price" value=$result.total_price}</span>
+            {if $result.delivery_fee gt 0}
+            + {$LANG.DELIVERY_FEE}：<span class="cost">{function name="format_price" value=$result.delivery_fee}</span>
+            {/if}
+            {if $result.user_discount gt 0}
+            - {$LANG.USER_DISCOUNT}：<span class="cost">{function name="format_price" value=$result.user_discount}</span>
+            {/if}
+            {if $result.payment_fee gt 0}
+            + {$LANG.PAYMENT_FEE}：<span class="cost">{function name="format_price" value=$result.payment_fee}</span>
+            {/if}
+            {if $result.paid_account_money gt 0}
+            - {$LANG.ACCOUNT_PAY_AMOUNT}：<span class="cost">{function name="format_price" value=$result.paid_account_money}</span>
+            {/if}
+            {if $result.paid_ecv_money gt 0}
+            - {$LANG.ECV_PAY_AMOUNT}：<span class="cost">{function name="format_price" value=$result.paid_ecv_money}</span>
+            {/if}
+            <span class="" style="display:none;">{function name="format_price" value=$result.pay_total_price}</span>
+        <p style="text-align: right; line-height: 24px; display:none;">
+
+            {if $result.account_money gt 0}
+            - {$LANG.ACCOUNT_PAY}：{function name="format_price" value=$result.account_money} <br>
+            {/if}
+
+            {if $result.ecv_money gt 0}
+            - {$LANG.ECV_PAY}：{function name="format_price" value=$result.ecv_money} <br>
+            {/if}
+
+            = {$LANG.PAY_TOTAL_PRICE_ORDER}：{if $result.payment_info} {function name="sprintf" value=$LANG.PAYMENT_BY p=$result.payment_info.name}{/if}
+            <span class="red">{function name="format_price" value=$result.pay_price}</span>&nbsp;
+            <br>
+        </p>
+        <p style="text-align: right; line-height: 24px; display:none;">
+            {if $result.return_total_money ne 0}
+            {$LANG.RETURN_TOTAL_MONEY}： {function name="format_price" value=$result.return_total_money} <br>
+            {/if}
+            {if $result.return_total_score ne 0}
+            {$LANG.RETURN_TOTAL_SCORE}：  {function name="format_score" value=$result.return_total_score}
+            {/if}
+        </p>
+    </span>
+    <a href="javascript:;" onclick="$('#cart_form').submit();" class="yhd_submit">提交订单</a>

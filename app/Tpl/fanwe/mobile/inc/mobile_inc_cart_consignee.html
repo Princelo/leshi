@@ -1,0 +1,107 @@
+<div class="yhd_payment" data-tpa="CHANGE_PAYMENT" data-trackersend="1">
+    <div class="yhd_pay_way">
+        <div class="yhd_content">
+            配送地址
+        </div>
+        <div class="blank"></div>
+    </div>
+    <div class="address_add_content">
+        <ul>
+            <li>
+                <input type="text" name="consignee" id="receiverName" value="{$consignee_info.consignee}" placeholder="收货人姓名" maxlength="20">
+            </li>
+            <li>
+                <select name="region_lv1" style="margin-right:30px; display:none;">
+                    <option value="1">{$LANG.SELECT_PLEASE}省份</option>
+                    {foreach from=$region_lv1 item=lv1}
+                    <option {if $lv1.selected eq 1}selected="selected"{/if} value="{$lv1.id}">{$lv1.name}</option>
+                    {/foreach}
+                </select>
+                <select name="region_lv2" style="margin-right: 30px;">
+                    <option value="0">{$LANG.SELECT_PLEASE}省份</option>
+                    {foreach from=$region_lv2 item=lv2}
+                    <option {if $lv2.selected eq 1}selected="selected"{/if} value="{$lv2.id}">{$lv2.name}</option>
+                    {/foreach}
+                </select>
+                <select name="region_lv3">
+                    <option value="0">{$LANG.SELECT_PLEASE}城市</option>
+                    {foreach from=$region_lv3 item=lv3}
+                    <option {if $lv3.selected eq 1}selected="selected"{/if} value="{$lv3.id}">{$lv3.name}</option>
+                    {/foreach}
+                </select>
+            </li>
+            <li>
+                <select name="region_lv4">
+                    <option value="0">{$LANG.SELECT_PLEASE}县区</option>
+                    {foreach from=$region_lv4 item=lv4}
+                    <option {if $lv4.selected eq 1}selected="selected"{/if} value="{$lv4.id}">{$lv4.name}</option>
+                    {/foreach}
+                </select>
+            </li>
+            <li>
+                <input type="text" value="{$consignee_info.address}" class="f-input" name="address" size="30" placeholder="详细地址">
+            </li>
+            <li>
+                <input type="text" value="{$consignee_info.mobile}" class="f-input" name="mobile" size="30" placeholder="手机号">
+            </li>
+            <div class="blank"></div>
+        </ul>
+        <div class="blank"></div>
+    </div>
+    <div class="blank"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        {if $lv1.selected neq 1}load_select("1");{/if}
+        $("select[name='region_lv2']").bind("change",function(){
+            load_select("2");
+        });
+        $("select[name='region_lv3']").bind("change",function(){
+            load_select("3");
+        });
+        $("select[name='region_lv4']").bind("change",function(){
+            load_select("4");
+        });
+    });
+
+    function load_select(lv)
+    {
+        var name = "region_lv"+lv;
+        var next_name = "region_lv"+(parseInt(lv)+1);
+        var id = $("select[name='"+name+"']").val();
+
+        if(lv==1)
+            var evalStr="regionConf.r"+id+".c";
+        if(lv==2)
+            var evalStr="regionConf.r"+$("select[name='region_lv1']").val()+".c.r"+id+".c";
+        if(lv==3)
+            var evalStr="regionConf.r"+$("select[name='region_lv1']").val()+".c.r"+$("select[name='region_lv2']").val()+".c.r"+id+".c";
+
+        if(id==0)
+        {
+            var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+        }
+        else
+        {
+            var regionConfs=eval(evalStr);
+            evalStr+=".";
+            var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+            for(var key in regionConfs)
+            {
+                html+="<option value='"+eval(evalStr+key+".i")+"'>"+eval(evalStr+key+".n")+"</option>";
+            }
+        }
+        $("select[name='"+next_name+"']").html(html);
+
+        if(lv == 4)
+        {
+            mobile_load_delivery();
+        }
+        else
+        {
+            load_select(parseInt(lv)+1);
+        }
+
+
+    }
+</script>

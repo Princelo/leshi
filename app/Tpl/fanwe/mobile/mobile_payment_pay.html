@@ -1,0 +1,60 @@
+{include file="mobile/inc/mobile_header.html"}
+<script src="/js/ios-prompt.js"></script>
+<style>
+    .paybutton{
+        font-size: 1.2em;
+        height: 35px;
+        line-height: 35px;
+        margin: 0 auto;
+        margin-top: 12px;
+        border: 1px solid #ff2f00;
+        width: 50%;
+        background: #ee552f;
+        color: #fff;
+        font-weight:bold;
+        border-radius: 3px;
+
+    }
+    .paybutton {display:block;}
+</style>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".paybutton,.payLink").bind("click",function(){
+            alert({
+                content: "完成支付",
+                boxClass: "custom-alert"
+            }, function () {
+                window.location.href='{url x="shop" r="payment#tip"}&id={payment_motice.id}';
+            });
+        });
+    });
+</script>
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature1.html"}
+    <div class="inc_main pd10" style="margin-top: 100px; ">
+
+
+        <div class="msg_box">
+            <p style="padding: 20px 0pt; text-align: center;">
+                {$LANG.PAY_NOW}
+                [&nbsp;&nbsp;{$LANG.NOTICE_SN} ：<span class="red" style="color:#ff2f00;">{$payment_notice.notice_sn}</span>&nbsp;&nbsp;]
+            </p>
+
+            <div style="padding: 20px 0pt; text-align: center; color: #ff2f00;" class="order-check-form totol_cost">
+                {$payment_code}
+            </div>
+            <div style="padding: 20px 0pt; text-align: center; display: none;" >
+                <a href="{url x="shop" r="uc_order#modify" p="id=$order.id"}">
+                » {$LANG.MODIFY_PAYMENT_TYPE}
+                </a>&nbsp;&nbsp;&nbsp;
+                <a href="{url x="shop" r="uc_order#index"}">» {$LANG.MY_ORDERS}</a>
+            </div>
+        </div>
+
+    </div><!--end inc_main-->
+    <div class="inc_foot"></div>
+</div>
+
+
+{include file="mobile/inc/mobile_footer.html"}

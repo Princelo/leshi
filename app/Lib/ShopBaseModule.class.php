@@ -103,6 +103,7 @@ class ShopBaseModule{
                 MODULE_NAME=="mobile_index"&&ACTION_NAME=="index"||
                 MODULE_NAME=="mobile_index"&&ACTION_NAME=="scratch_bonus"||
                 MODULE_NAME=="mobile_ajax"&&ACTION_NAME=="waterfall_products"||
+                MODULE_NAME=="mobile_uc_center"&&ACTION_NAME=="index"||
                 MODULE_NAME=="mobile_goods"&&ACTION_NAME=="index"
                 /*MODULE_NAME=="acate"&&ACTION_NAME=="index"||
                 MODULE_NAME=="article"&&ACTION_NAME=="index"||

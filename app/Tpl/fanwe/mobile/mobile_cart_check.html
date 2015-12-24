@@ -1,4 +1,144 @@
 {include file="mobile/inc/mobile_header.html"}
+<script type="text/javascript">
+    var order_id = {function name="intval" value=$order_info.id};
+
+
+    function mobile_count_buy_total()
+    {
+        //$("#order_done").attr("disabled",true);
+        var query = new Object();
+
+        //获取配送方式
+        var delivery_id = $("input[name='delivery']:checked").val();
+
+        if(!delivery_id)
+        {
+            delivery_id = 0;
+        }
+        query.delivery_id = delivery_id;
+
+        //配送地区
+        var select_last_node = $("#cart_consignee").find("select[value!='0']");
+        if(select_last_node.length>0)
+        {
+            var region_id = $(select_last_node[select_last_node.length - 1]).val();
+        }
+        else
+        {
+            var region_id = 0;
+        }
+        query.region_id = region_id;
+
+        //余额支付
+        var account_money = $("input[name='account_money']").val();
+        if(!account_money||$.trim(account_money)=='')
+        {
+            account_money = 0;
+        }
+        query.account_money = account_money;
+
+        //全额支付
+        if($("#check-all-money").attr("checked"))
+        {
+            query.all_account_money = 1;
+        }
+        else
+        {
+            query.all_account_money = 0;
+        }
+
+        //代金券
+        var ecvsn = $("input[name='ecvsn']").val();
+        if(!ecvsn)
+        {
+            ecvsn = '';
+        }
+        var ecvpassword = $("input[name='ecvpassword']").val();
+        if(!ecvpassword)
+        {
+            ecvpassword = '';
+        }
+        query.ecvsn = ecvsn;
+        query.ecvpassword = ecvpassword;
+
+        //支付方式
+        var payment = $("input[name='payment']:checked").val();
+        if(!payment)
+        {
+            payment = 0;
+        }
+        query.payment = payment;
+        query.bank_id = $("input[name='payment']:checked").attr("rel");
+        if(!isNaN(order_id)&&order_id>0)
+            var ajaxurl = "/shop.php?ctl=ajax&act=count_order_total&id="+order_id;
+        else
+            var ajaxurl = "/shop.php?ctl=ajax&act=count_buy_total";
+        $.ajax({
+            url: ajaxurl,
+            data:query,
+            type: "POST",
+            dataType: "json",
+            success: function(data){
+                $("#cart_total").html(data.html);
+                $("input[name='account_money']").val(data.account_money);
+                if(data.pay_price == 0)
+                {
+                    $("input[name='payment']").attr("checked",false);
+                }
+                //$("#order_done").attr("disabled",false);
+                //$('.yhd_sumit').addClass('yhd_disabled');
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(LANG['REFRESH_TOO_FAST']);
+            }
+        });
+    }
+    function mobile_load_delivery()
+    {
+        var select_last_node = $("#cart_consignee").find("select[value!='0']");
+        if(select_last_node.length>0)
+        {
+            var region_id = $(select_last_node[select_last_node.length - 1]).val();
+        }
+        else
+        {
+            var region_id = 0;
+        }
+
+        var ajaxurl = "/shop.php?ctl=ajax&act=load_delivery&id="+region_id+"&order_id="+$("input[name='id']").val();
+        $.ajax({
+            url: ajaxurl,
+            success: function(html){
+                $("#cart_delivery").html(html);
+                mobile_count_buy_total();  //加载完配送方式重新计算总价
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(LANG['REFRESH_TOO_FAST']);
+            }
+        });
+    }
+    function mobile_load_consignee(consignee_id)
+    {
+        var ajaxurl = "/shop.php?ctl=ajax&act=load_consignee&id="+consignee_id;
+        $.ajax({
+            url: ajaxurl,
+            success: function(html){
+                $("#cart_consignee").html(html);
+                mobile_load_delivery();
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(LANG['REFRESH_TOO_FAST']);
+            }
+        });
+    }
+</script>
+<script src="/js/ios-prompt.js"></script>
 <style>
     .field {
         margin-top: 5px;
@@ -138,8 +278,7 @@
     /*order*/
     .order-ldetail{display: block;color: #6d6d6d;margin:0px 10px;padding:10px 0px;}
 
-    .order-lcnt{font-size:14px;margin-bottom: 25px;
-        background: #fff;}
+    .order-lcnt{font-size:14px;}
     .order-ltlt,.order-lcnt-shop{padding:8px 10px;}
     .order-lcnt-shop p{padding:3px 0px;}
 
@@ -185,91 +324,83 @@
     .order-delivery-shipcode {}
     .order-delivery-infolist {}
     .order-delivery-infolist li {margin:15px; border-bottom:1px dotted #ccc; font-size:13px;}
-    </style>
+</style>
 <body id="cis_list">
 <div class="body">
     {include file="moible/inc/header_feature2.html"}
-<div class="inc" style="padding-top: 50px;">
-    <div class="inc_top button" style="margin-bottom: 10px; text-align: center; background-color: #ececec; color:#25a8e3; border-bottom:1px solid #25a8e3">
-        {$page_title}</div>
-    <div class="inc_main">
-        <!--<div class="sub_nav">
-            <span {if $ACTION_NAME eq 'index'}class="act"{/if}><a href="{url x="shop" r="uc_order#index"}">{$LANG.UC_ORDER}</a></span>
-            <span {if $ACTION_NAME eq 'lottery'}class="act"{/if}><a href="{url x="shop" r="uc_order#lottery"}">{$LANG.UC_LOTTERY}</a></span>
-
-        </div>-->
-        <div class="blank1"></div>
-        <div  class="uc-table">
-            <div class="order-list">
-
-                <ul>
-
-                    {foreach from=$list item=order key=key}
-                    <li class="gray-order-skin " onclick="window.location.href='{url x="shop" r="uc_order#view" p="id=$order.id"}'">
-                        <div class="order-ltlt">
-                            <p>
-                                {$LANG.ORDER_CREATE_TIME}：
-                                {function name="to_date" value=$order.create_time}
-                            </p>
-                        </div>
-
-                        <div class="order-lcnt">
-                            <div class="order-lcnt-shop">
-                                <p>{$LANG.ORDER_SN}： {$order.order_sn} </p>
-                            </div>
-                            <div class="order-shop-pd">
-
-                                <a class="order-ldetail clearfix " href="http://m.kakasell.com/tmpl/product_detail.html?goods_id=361">
-                                    <div class="order-pdinfor">
-                                        {function name="get_order_item_list" value=$order.id}
-                                    </div>
-                                </a>
-
-                            </div>
-                            <div class="order-shop-total">
-                                <p class="clr-c07">{$LANG.PAY_TOTAL_PRICE}： <span style="color:#ff2f00">{function name="format_price" value=$order.total_price} </span></p>
-                                <p class="mt5">
-
-                                    <span class="ot-cancel-bak">
-
-                    <?PHP echo "<span class='pd_product-price-tag'>".$this->_var['LANG']['ORDER_PAY_STATUS_'.$this->_var['order']['pay_status']]."</span>";?>
-                                        <?PHP echo "<span class='pd_product-price-tag'>".$this->_var['LANG']['ORDER_DELIVERY_STATUS_'.$this->_var['order']['delivery_status']]."</span>";?>
-                                        <?PHP echo "<span class='pd_product-price-tag'>".$this->_var['LANG']['ORDER_ORDER_STATUS_'.$this->_var['order']['order_status']]."</span>";?>
-
-                    {if $order.after_sale gt 0}
-                                        <?PHP echo "<span class='pd_product-price-tag'>".$this->_var['LANG']['AFTER_SALE_'.$this->_var['order']['after_sale']]."</span>";?>
-                    {/if}
-                                    </span>
-                                </p>
-                                <p class="mt5">
-
-
-                                    {if $order.pay_status eq 0}
-                                    <a class="btn pd_add-cart" href="{url x="shop" r="uc_order#del" p="id=$order.id"}">{$LANG.CANCEL}</a>
-                                    {/if}
-
-                                </p>
-                            </div>
-                        </div>
-
-
-                    </li>
-                    {/foreach}
-
-
-
-
-
-
-                </ul>
-
-            </div>
-
+    <div class="inc" style="padding-top: 50px;">
+        <div class="inc_top button" style="margin-bottom: 10px; text-align: center; background-color: #ececec; color:#25a8e3; border-bottom:1px solid #25a8e3">
+            {$page_title}</div>
+        <div class="inc_main pd10">
             <div class="blank"></div>
-            <div class="pages">{$pages}</div>
-        </div>
 
+            <div class="inc cart">
+                <div class="inc_main pd10" id="cart_check">
+                    <form name="cart_form" id="cart_form" action="{if $order_info}{url x="shop" r="cart#order_done"}{else}{url x="shop" r="cart#done"}{/if}" method="post" />
+
+                    <div id="cart_list">
+                        {include file="mobile/inc/mobile_inc_cart_check_list.html"}
+                    </div>
+                    {if $is_delivery}
+                    {* 配送 *}
+                    <script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/region.js"></script>
+                    <script type="text/javascript">
+                        mobile_load_consignee({$consignee_id});
+                    </script>
+                    <div class="blank"></div>
+                    <div id="cart_consignee"></div>
+                    {* 配送 *}
+                    <div class="blank"></div>
+                    <div id="cart_delivery"></div>
+                    {else}
+                    <script type="text/javascript">
+                        $(document).ready(function(){count_buy_total();});
+                    </script>
+                    {/if}
+                    <div class="blank"></div>
+                    <div id="cart_message">
+                        {include file="mobile/inc/mobile_inc_cart_message.html"}
+                    </div>
+                    <div class="blank"></div>
+                    <div id="cart_payment">
+                        {if $show_payment}
+                        {include file="mobile/inc/mobile_inc_cart_payment.html"}
+                        {/if}
+                    </div>
+                    <div id="_cart_total" style="width: 100%; height: 60px;">
+
+                    </div>
+
+                    <div id="cart_submit yhd_payment">
+                        <div class="order-check-form yhd_pay_way"><div class="yhd_content"></div></div>
+
+                        </div>
+                        <p class="check-act">
+                            <input type="hidden" value="{function name="intval" value=$order_info.id}" name="id" />
+                            {if $is_coupon}
+                            {$LANG.COUPON_MOBILE}：<input type="text" name="coupon_mobile" value="{$user_info.mobile}" class="f-input" />
+                            {/if}
+                            <input type="button" class="formbutton" value="{$LANG.CONFIRM_ORDER_AND_PAY}" id="order_done" style="display:none;">
+                            {if !$order_info}
+                            <!--<a style="margin-left: 1em;" href="{url x="shop" r="cart"}">{$LANG.BACK_MODIFY_CART}</a>-->
+                            {/if}
+                            {if $is_coupon}
+                            <br />
+                            <span style="font-size:12px; color:#666;">{function name="sprintf" value=$LANG.COUPON_MOBILE_TIP p=$coupon_name}</span>
+                            {/if}
+                        </p>
+                    </div><!--cart_submit-->
+
+                    </form>
+
+                </div><!--end inc_main-->
+                <div class="inc_foot"></div>
+            </div>
+        </div><!--end inc_main-->
+        <div class="inc_foot"></div>
     </div>
-    <div class="inc_foot"></div>
-</div>
+
+
 {include file="mobile/inc/mobile_footer.html"}
+
+

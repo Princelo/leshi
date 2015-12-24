@@ -32,7 +32,7 @@ class mobile_ajaxModule extends ShopBaseModule
             $GLOBALS['tmpl']->assign("region_lv1",$region_lv1);
         }
 
-        $GLOBALS['tmpl']->display("inc/inc_cart_consignee.html");
+        $GLOBALS['tmpl']->display("mobile/inc/mobile_inc_cart_consignee.html");
     }
 
     public function load_delivery()
@@ -42,7 +42,7 @@ class mobile_ajaxModule extends ShopBaseModule
         require_once APP_ROOT_PATH."system/libs/cart.php";
         $delivery_list = load_support_delivery($region_id,$order_id);
         $GLOBALS['tmpl']->assign("delivery_list",$delivery_list);
-        $GLOBALS['tmpl']->display("inc/inc_cart_delivery.html");
+        $GLOBALS['tmpl']->display("mobile/inc/mobile_inc_cart_delivery.html");
     }
 
     public function count_buy_total()
@@ -65,7 +65,7 @@ class mobile_ajaxModule extends ShopBaseModule
 
 
         $GLOBALS['tmpl']->assign("result",$result);
-        $html = $GLOBALS['tmpl']->fetch("inc/inc_cart_total.html");
+        $html = $GLOBALS['tmpl']->fetch("mobile/inc/mobile_inc_cart_total.html");
         $data = $result;
         $data['html'] = $html;
 
@@ -115,7 +115,7 @@ class mobile_ajaxModule extends ShopBaseModule
         $result = count_buy_total($region_id,$delivery_id,$payment,$account_money,$all_account_money,$ecvsn,$ecvpassword,$goods_list,$order_info['account_money'],$order_info['ecv_money'],$bank_id);
 
         $GLOBALS['tmpl']->assign("result",$result);
-        $html = $GLOBALS['tmpl']->fetch("inc/inc_cart_total.html");
+        $html = $GLOBALS['tmpl']->fetch("mobile/inc/mobile_inc_cart_total.html");
         $data = $result;
         $data['html'] = $html;
 

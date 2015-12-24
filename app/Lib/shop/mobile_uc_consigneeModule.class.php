@@ -55,7 +55,7 @@ class mobile_uc_consigneeModule extends ShopBaseModule
         }
         if(trim($_REQUEST['zip'])=='')
         {
-            showErr($GLOBALS['lang']['FILL_CORRECT_ZIP']);
+            //showErr($GLOBALS['lang']['FILL_CORRECT_ZIP']);
         }
         if(trim($_REQUEST['mobile'])=='')
         {
@@ -74,7 +74,7 @@ class mobile_uc_consigneeModule extends ShopBaseModule
         $consignee_data['address'] = addslashes(trim(htmlspecialchars($_REQUEST['address'])));
         $consignee_data['mobile'] = addslashes(trim(htmlspecialchars($_REQUEST['mobile'])));
         $consignee_data['consignee'] = addslashes(trim(htmlspecialchars($_REQUEST['consignee'])));
-        $consignee_data['zip'] = addslashes(trim(htmlspecialchars($_REQUEST['zip'])));
+        $consignee_data['zip'] = '000000';
 
         $consignee_id = intval($_REQUEST['id']);
         if($consignee_id == 0)

@@ -28,6 +28,14 @@
         .menu-list li p { font-size: .75em; color: #6a6a6a; text-align: center; line-height: 1.35em; }
         .list-title { margin-top: 10px; color: #6a6a6a; padding-left: 15px; font-size: .8125em; height: 2.384615em;
             line-height: 2.384615em; vertical-align: middle; background-color: #FFF; }
+        .yhd_logout {    display: block;
+            color: #fff;
+            height: 40px;
+            line-height: 40px;
+            margin: 20px 21px;
+            text-align: center;
+            background: #fe5955;
+            border-radius: 3px;}
     </style>
     <div class="" style="padding-top: 50px;">
     <div class="member-info">
@@ -67,7 +75,7 @@
                 </a>
             </li>
             <li style="">
-                <a href="javascript:void(0);" style="border-top: 1px solid #ddd;">
+                <a href="{url x="shop" r="cart#index"}" style="border-top: 1px solid #ddd;">
                     <p>
                         <span id="expoints2">{insert name='load_cart_count'}</span>
                     </p>
@@ -149,5 +157,6 @@
     </div>
 
     </div>
+    <a href="{url x="shop" r="user#loginout"}" data-tpa="1456" class="yhd_logout">退出当前账户</a>
 
 {include file="mobile/inc/mobile_footer.html"}

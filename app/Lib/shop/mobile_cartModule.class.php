@@ -897,7 +897,7 @@ class mobile_cartModule extends ShopBaseModule
             if($cart_total_price > 0 || $delivery_count > 0)
                 $GLOBALS['tmpl']->assign("show_payment",true);
             //购物车检测页
-            $GLOBALS['tmpl']->display("cart_check.html");
+            $GLOBALS['tmpl']->display("mobile/mobile_cart_check.html");
         }
     }
 
@@ -1018,10 +1018,10 @@ class mobile_cartModule extends ShopBaseModule
             {
                 showErr($GLOBALS['lang']['FILL_CORRECT_ADDRESS']);
             }
-            if(trim($_REQUEST['zip'])=='')
+            /*if(trim($_REQUEST['zip'])=='')
             {
                 showErr($GLOBALS['lang']['FILL_CORRECT_ZIP']);
-            }
+            }*/
             if(trim($_REQUEST['mobile'])=='')
             {
                 showErr($GLOBALS['lang']['FILL_MOBILE_PHONE']);
@@ -1063,7 +1063,7 @@ class mobile_cartModule extends ShopBaseModule
         $order['address']	=	htmlspecialchars(addslashes(trim($_REQUEST['address'])));
         $order['mobile']	=	htmlspecialchars(addslashes(trim($_REQUEST['mobile'])));
         $order['consignee']	=	htmlspecialchars(addslashes(trim($_REQUEST['consignee'])));
-        $order['zip']	=	htmlspecialchars(addslashes(trim($_REQUEST['zip'])));
+        $order['zip']	=	'000000';
         $order['deal_total_price'] = $data['total_price'];   //团购商品总价
         $order['discount_price'] = $data['user_discount'];
         $order['delivery_fee'] = $data['delivery_fee'];
@@ -1133,7 +1133,7 @@ class mobile_cartModule extends ShopBaseModule
             $user_consignee['address']	=	htmlspecialchars(addslashes(trim($_REQUEST['address'])));
             $user_consignee['mobile']	=	htmlspecialchars(addslashes(trim($_REQUEST['mobile'])));
             $user_consignee['consignee']	=	htmlspecialchars(addslashes(trim($_REQUEST['consignee'])));
-            $user_consignee['zip']	=	htmlspecialchars(addslashes(trim($_REQUEST['zip'])));
+            $user_consignee['zip']	=	'000000';
             $user_consignee['user_id']	=	$user_id;
             if(intval($user_consignee['id'])==0)
             {
@@ -1194,6 +1194,8 @@ class mobile_cartModule extends ShopBaseModule
 
     public function order_done()
     {
+        echo "<pre>";
+        print_r($_POST);exit;
         $user_info = $GLOBALS['user_info'];
         $id = intval($_REQUEST['id']); //订单号
         $order = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_order where id = ".$id." and is_delete = 0");
@@ -1272,10 +1274,10 @@ class mobile_cartModule extends ShopBaseModule
             {
                 showErr($GLOBALS['lang']['FILL_CORRECT_ADDRESS']);
             }
-            if(trim($_REQUEST['zip'])=='')
+            /*if(trim($_REQUEST['zip'])=='')
             {
                 showErr($GLOBALS['lang']['FILL_CORRECT_ZIP']);
-            }
+            }*/
             if(trim($_REQUEST['mobile'])=='')
             {
                 showErr($GLOBALS['lang']['FILL_MOBILE_PHONE']);
@@ -1308,7 +1310,7 @@ class mobile_cartModule extends ShopBaseModule
         $order['address']	=	htmlspecialchars(addslashes(trim($_REQUEST['address'])));
         $order['mobile']	=	htmlspecialchars(addslashes(trim($_REQUEST['mobile'])));
         $order['consignee']	=	htmlspecialchars(addslashes(trim($_REQUEST['consignee'])));
-        $order['zip']	=	htmlspecialchars(addslashes(trim($_REQUEST['zip'])));
+        $order['zip']	=	'000000';
         $order['delivery_fee'] = $data['delivery_fee'];
         $order['delivery_id'] = $data['delivery_info']['id'];
         $order['payment_id'] = $data['payment_info']['id'];
@@ -1334,7 +1336,7 @@ class mobile_cartModule extends ShopBaseModule
             $user_consignee['address']	=	htmlspecialchars(addslashes(trim($_REQUEST['address'])));
             $user_consignee['mobile']	=	htmlspecialchars(addslashes(trim($_REQUEST['mobile'])));
             $user_consignee['consignee']	=	htmlspecialchars(addslashes(trim($_REQUEST['consignee'])));
-            $user_consignee['zip']	=	htmlspecialchars(addslashes(trim($_REQUEST['zip'])));
+            $user_consignee['zip']	=	'000000';
             $user_consignee['user_id']	=	$order['user_id'];
             if(intval($user_consignee['id'])==0)
             {

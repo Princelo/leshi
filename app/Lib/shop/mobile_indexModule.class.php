@@ -55,6 +55,9 @@ class mobile_indexModule extends ShopBaseModule
         $GLOBALS['tmpl']->assign("event_list",$event_list);
         return $GLOBALS['tmpl']->fetch("mobile/index/event_home.html");
     }
+    public function goback(){
+        app_recirect_preview();
+    }
 
 }
 ?>
