@@ -1,0 +1,53 @@
+<script src="/js/ios-prompt.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#incharge_done").click(function(){
+            if(!($("input[name='money']").val()!=''&&!isNaN($("input[name='money']").val())&&$("input[name='money']").val()>0))
+            {
+                alert("{$LANG.PLEASE_INPUT_CORRECT_INCHARGE}");
+                return false;
+            }
+            else if(!$("input[name='payment']:checked").val())
+            {
+                alert("{$LANG.PLEASE_SELECT_PAYMENT}");
+                return false;
+            }
+        });
+    });
+</script>
+<div class="yhd_payment" style="padding-bottom: 12px;">
+    <div class="yhd_pay_way">
+        <div class="yhd_content">
+            {$page_title}
+        </div>
+    </div>
+    <div  class="uc-table">
+
+        <form name="incharge_form" id="incharge_form" action="{url x="shop" r="uc_money#incharge_done"}" method="post" />
+        <div class="sect cf" style="line-height: 70px; padding: 20px;">
+            {foreach from=$payment_list item=payment_item}
+            {$payment_item.display_code}
+            <div class="blank"></div>
+            {/foreach}
+            <div style="text-align: center; padding: 0px 10px; float:left; width: 100%;">
+                <input type="text" class="f-input" id="money" name="money" style="    padding: 7px 50px 7px 10px;
+    width: 50%;
+    color: #49525c;
+    font-size: 14px;
+    line-height: 17px;
+    background-color: #e1eaf2;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    outline: 0;
+    box-sizing: border-box;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;" placeholder="充值金额">
+                <input type="submit" id="incharge_done" value="{$LANG.DO_INCHARGE}" class="formbutton pd_add-cart" style="width: 50%; margin: 0 auto; margin-bottom: 50px; margin-top: 10px;">
+                <!--<input type="submit" class="pd_add-cart" value="保存" style="width: 50%; margin:0 auto; margin-bottom: 50px; margin-top: 40px;" >-->
+            </div>
+        </div><!--end sect-->
+        </form>
+
+    </div>
+    <div class="blank"></div>
+</div>

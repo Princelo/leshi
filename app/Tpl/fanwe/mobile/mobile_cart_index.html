@@ -185,6 +185,137 @@
     .order-delivery-infolist {}
     .order-delivery-infolist li {margin:15px; border-bottom:1px dotted #ccc; font-size:13px;}
 </style>
+<script>
+    function mobile_modify_cart(id,htmlobj)
+    {
+        var number = $(htmlobj).val();
+        if ($(htmlobj).attr('buy_type') == '0')
+            var ajaxurl = "/shop.php?ctl=cart&act=modifycart&id="+id+"&number="+number;
+        else if ($(htmlobj).attr('buy_type') == '1')
+            var ajaxurl = "/shop.php?ctl=cart&act=scoremodifycart&id="+id+"&number="+number;
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            success: function(obj){
+                if(obj.status == 1)
+                {
+                    $("#mobile_cart_list").html(obj.html);
+                }
+                else
+                {
+                    var str = obj.info.split("|");
+                    var msg = str[0];
+                    $.showErr(msg);
+                    $(".deal_cart_row").removeClass("cart_warn");
+                    if(str[2])
+                        $("li[rel*='cart_"+str[1]+"_"+str[2]+"']").addClass("cart_warn");
+                    else
+                        $(".deal_"+str[1]).addClass("cart_warn");
+                }
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+    }
+    function mobile_del_cart(id)
+    {
+        var ajaxurl = "/shop.php?ctl=cart&act=delcart&id="+id;
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            success: function(obj){
+                location.href = '';
+                /*if(obj.status == 1)
+                 {
+                 $("#cart_list").html(obj.html);
+                 }
+                 else
+                 {
+                 location.href = CART_URL;
+                 }*/
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+    }
+    function mobile_clear_cart()
+    {
+        var ajaxurl = "/shop.php?ctl=cart&act=clear_cart";
+
+        $.ajax({
+            url: ajaxurl,
+            success: function(obj){
+                location.href= location.href;
+            },
+            error:function(ajaxobj)
+            {
+//						if(ajaxobj.responseText!='')
+//						alert(ajaxobj.responseText);
+            }
+        });
+    }
+    function mobile_submit_cart()
+    {
+        var verify_code = $("input[name='verify_code']").val();
+        var mobile = $("input[name='lottery_mobile']").val();
+        var ajaxurl = "/shop.php?ctl=cart&act=check&ajax=1&verify="+verify_code+"&mobile="+mobile;
+
+        $.ajax({
+            url: ajaxurl,
+            dataType: "json",
+            success: function(obj){
+                if(obj.status == 1)
+                {
+                    location.href = '{url x="shop" r="cart#check"}';
+                }
+                else
+                {
+                    if(obj.open_win == 1)
+                    {
+                        alert({
+                            content: '你还未登录',
+                            boxClass: "custom-alert"
+                        }, function () {
+                            window.location.href = '{url x="shop" r="user#login"}';
+                        });
+                    }
+                    else
+                    {
+                        var str = obj.info.split("|");
+                        var msg = str[0];
+                        alert(msg);
+                        $(".mobile_deal_cart_row").removeClass("mobile_cart_warn");
+                        if(str[2])
+                            $("li[rel*='cart_"+str[1]+"_"+str[2]+"']").addClass("mobile_cart_warn");
+                        else
+                            $(".deal_"+str[1]).addClass("mobile_cart_warn");
+                    }
+                }
+            },
+            error:function(ajaxobj)
+            {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+            }
+        });
+    }
+    var minus = function (id) {
+        if (parseInt($('#buy_number'+id).val())>1) {
+            $('#buy_number'+id).val(parseInt($('#buy_number'+id).val()) - 1)
+            mobile_modify_cart(id, '#buy_number'+id);
+        }
+    }
+    var plus = function (id) {
+        $('#buy_number'+id).val(parseInt($('#buy_number'+id).val()) + 1)
+        mobile_modify_cart(id, '#buy_number'+id);
+    }
+</script>
 <body id="cis_list">
         <div class="body">
         {include file="moible/inc/header_feature2.html"}

@@ -1,0 +1,71 @@
+<div class="yhd_payment" data-tpa="CHANGE_PAYMENT" data-trackersend="1">
+    <div class="yhd_pay_way">
+        <div class="yhd_content">
+            {$page_title}
+        </div>
+        <div class="blank"></div>
+    </div>
+    <div class="address_add_content">
+        <div class="blank"></div>
+        <div class="money_box">
+            <ul class="mobile-padding-list" style="width: 100% !important; margin-top: 12px;">
+                <li style="">
+                    <a href="javascript:void(0);">
+                        <p>
+                            <span id="point">{function name="format_price" value=$user_info.money}</span>
+                        </p>
+                        <p>{$LANG.YOUR_TOTAL_MONEY}</p>
+                    </a>
+                </li>
+                <li style="">
+                    <a href="javascript:void(0);">
+                        <p>
+                            <span id="predepoit">{function name="format_score" value=$user_info.score}</span>
+                        </p>
+                        <p>{$LANG.YOUR_TOTAL_SCORE}</p>
+                    </a>
+                </li>
+                <li style="border-top: 1px solid #ddd;">
+                    <a href="javascript:void(0);" style="">
+                    <p>
+                        <span id="v_count">{$user_info.point}</span>
+                    </p>
+                    <p>当前经验值</p>
+                    </a>
+                </li>
+                <li style="border-top: 1px solid #ddd;">
+                    <a href="javascript:void(0);" style="">
+                    <p>
+                        <span id="expoints2">{$user_data.user_level}{if $user_data.discount neq 10}{$LANG.DISCOUNT}：{$user_data.discount}{$LANG.DISCOUNT_OFF}{/if}{if $user_data.point_level}[{$user_data.point_level}]{/if}
+                    </p>
+                    <p>当前等级</p>
+                    </a>
+                </li>
+            </ul>
+            <div class="blank"></div>
+            <a href="{url x="shop" r="uc_money#incharge"}" class="pd_add-cart" style="margin-top: 12px; margin-bottom: 20px;">{$LANG.UC_MONEY_INCHARGE}</a>
+        </div>
+
+    </div>
+    <div class="blank"></div>
+    <!--<input type="submit" class="pd_add-cart" value="保存" style="width: 50%; margin:0 auto; margin-bottom: 50px; margin-top: 40px;" >-->
+</div>
+<div class="yhd_payment" style="padding-bottom: 12px;">
+    <div class="yhd_pay_way">
+        <div class="yhd_content">
+            {$LANG.UC_LOGS}
+        </div>
+    </div>
+    <ul class="mobile-padding-list mobile-table-list" style="width: 100% !important; margin-top: 12px;">
+        {foreach from=$list item=log key=key}
+        <li {if $key mod 2 eq  0}class="alt"{/if}>
+        <label style="text-align:left; width: 100%;">{$log.log_info}</label>
+        {if $t eq '' or $t eq 'money'}<p>{function name="format_price" value=$log.money}<br>{$LANG.PRICE_AMOUNT}</p>{/if}
+        {if $t eq '' or $t eq 'score'}<p>{function name="format_score" value=$log.score}<br>{$LANG.SCORE}</p>{/if}
+        {if $t eq '' or $t eq 'point'}<p>{$log.point}<br>经验</p>{/if}
+        <p>{function name="to_date" value=$log.log_time}</p>
+        </li>
+        {/foreach}
+    </ul>
+    <div class="blank"></div>
+</div>
