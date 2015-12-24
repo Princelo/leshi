@@ -1207,7 +1207,7 @@ class mobile_ajaxModule extends ShopBaseModule
 
     public function waterfall_products()
     {
-        $where = " is_shop = 1 and buy_type <> 1 ";
+        $where = " and is_shop = 1 and buy_type <> 1 ";
         if(isset($_GET['store_id']) && $_GET['store_id'] != null) {
             $store_id = filter_var($_GET['store_id'], FILTER_VALIDATE_INT);
             $where .= " and supplier_id = (select supplier_id from fanwe_supplier_location where id = $store_id limit 1) ";
