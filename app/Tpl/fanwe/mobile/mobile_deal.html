@@ -1,0 +1,402 @@
+{include file="mobile/inc/mobile_header.html"}
+<!--<script src="/js/countdown.js"></script>-->
+<script src="/js/ios-prompt.js"></script>
+
+{if $deal.time_status eq 0} {*/未开始/*}
+<script>
+    alert('{$LANG.DEAL_NOT_BEGIN}');
+</script>
+{/if}
+{if $deal.time_status eq 1}{*/已开始/*}
+{if $deal.buy_status eq 2} {*/卖光/*}
+<script>
+    alert('本团购已售罄');
+</script>
+{else}
+				<!--						<a href="javascript:void(0);" onclick="add_cart({$deal.id})">
+                                            {if $deal.is_lottery eq 1 and $deal.current_price eq 0}
+                                            <img src="{$TMPL}/images/tuan/button-deal-lottery.gif">
+                                            {else}
+                                            {if $deal.buy_type eq 0}
+                                            <img src="{$TMPL}/images/tuan/button-deal-buy.gif">
+                                            {/if}
+                                            {if $deal.buy_type eq 2}
+                                            <img src="{$TMPL}/images/tuan/button-deal-order.gif">
+                                            {/if}
+                                            {if $deal.buy_type eq 3}
+                                            <img src="{$TMPL}/images/tuan/button-deal-second.gif">
+                                            {/if}
+                                            {/if}
+                                        </a>-->
+<script>
+    $(document).ready(function() {
+        $('#product-buy-num').show();
+    });
+</script>
+{/if}
+{/if}
+{if $deal.time_status eq 2} {*/已过期/*}
+{if $deal.buy_status eq 2} {*/卖光/*}
+<script>
+    alert('本团购已售罄');
+</script>
+{else}
+<script>
+    alert('本团购已结束');
+</script>
+{/if}
+{/if}
+<!--end button status-->
+<body id="cis_list">
+<div class="body">
+    {include file="mobile/inc/header_feature2.html"}
+    <div class="cis_wp" id="wp_menu">
+        <section class="cis_slide cl">
+            <div class="flexslider">
+                <ul class="slides cl">
+                    {foreach from=$deal.image_list key=key item=image}
+                    <li class="{if $key eq 0}act {/if}pic_{$key}" rel="{$key}">
+                        <img src="{function name="get_spec_image" v=$image.img w="640" h="240"}">
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+        </section>
+        <script type="text/javascript">
+            function ngrid_sel(obj, show) {
+                jQuery(obj).parent().addClass('active');
+                jQuery(obj).parent().siblings().removeClass('active');
+                jQuery(show).show();
+                jQuery(show).siblings().hide();
+            }
+
+            jQuery(window).load(function(){
+                jQuery('.flexslider').flexslider({
+                    animation: "slide",
+                    directionNav: false,
+                    start: function(slider){
+                        jQuery('body').removeClass('loading');
+                    }
+                });
+            });
+        </script>
+        <div class="dianping_tag" style="clear:both;">
+        </div>
+        <div class="inner_wrapper">
+            <div class="pd_box-border">
+                <div class="pd_product-title-wrap">
+                    <div class="pd_product-title-box">
+                        <h2 class="pd_product-title" id="pd_product-title" title="">{$deal.name}</h2>
+                        <h3 class="pd_product-subtitle" id="pd_product-subtitle" title="">
+                        {if $deal.buy_type eq 0}
+                        {$LANG.DEAL_CURRENT}
+                        {/if}
+                        {if $deal.buy_type eq 2}
+                        {$LANG.DEAL_ORDER}
+                        {/if}
+                        {if $deal.buy_type eq 3}
+                        {$LANG.DEAL_SECOND}
+                        {/if}
+                        </h3>
+                    </div>
+                </div>
+                <div class="pd_product-price" id="current_price">
+                    <span class="pd_product-price-tag" id="priceLabel">原价</span>
+                    <span class="pd_product-price-decimal" style="text-decoration:line-through ">{$deal.origin_price_format}</span>
+                    <span class="icon icon-expensive_2"></span>
+                    </span>
+<span class="tips tips_save" id="comparePcPrice" style="display:none;">
+<span class="icon icon-cell_phone_2"></span>
+</span>
+                </div>
+                <div class="pd_product-price" id="current_price">
+                    <span class="pd_product-price-tag" id="priceLabel">团购价</span>
+                    <strong class="pd_product-price-num">{$deal.current_price_format}</strong>
+                </div>
+                <div class="pd_landing-page" id="pd_landing-page-time" style="display:none;"><span class="icon icon-history"></span> 离活动结束还剩 <span id="countdown"><span class="num">19</span> 时<span class="num">54</span> 分<span class="num">36</span> 秒</span></div>
+                <div class="mobile-tuan-status">
+                    {if ($deal.begin_time ne 0 and $deal.time_status eq 0) or ($deal.end_time ne 0 and $deal.time_status eq 1)} {* 时间 *}
+                    <div id="deal-timeleft-box" style="padding:5px;">
+                        <div id="deal-timeleft" class="deal-timeleft deal-on">
+                            <h3 class="remain_clock">{$LANG.TIME_LEFT}</h3>
+                            <div class="limitdate">
+                                <ul id="counter"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dotted_line"></div>
+                    {elseif $deal.time_status eq 2}
+                    <div class="tuan_end_tip">
+                        <?php echo sprintf($GLOBALS['lang']['TUAN_END_DATETIME'], to_date($this->_var['deal']['end_time']));?>
+                    </div>
+                    <div class="dotted_line"></div>
+                    {/if}
+                    <!--status-->
+                    <div id=deal-status class="deal-status deal-status-open pd_product-subtitle" style="padding-left: 12px; height: auto; color: #666 !important;">
+
+                        {if $deal.time_status eq 0}{*/未开始/*}
+                        <div style="font-size:12px;">{$LANG.DEAL_NOT_BEGIN}</div>
+                        <div class="not-begin"></div>
+                        {/if}
+                        {if $deal.time_status eq 1} {*/进行中/*}
+                        {if $deal.buy_status eq 0} {*/未成功/*}
+                        <p class="deal-buy-tip-notice">{$deal.deal_success_num}{$deal.success_less}</p>
+                        <div class="progress-pointer" style="padding-left:<?php echo $this->_var['deal']['current_bought'] / $this->_var['deal']['min_bought'] * 194 -5; ?>px;"><span></span></div>
+                        <div class="progress-bar">
+
+                            <div class="progress-left" style="width:<?php echo $this->_var['deal']['current_bought'] / $this->_var['deal']['min_bought'] * 194; ?>px;"></div>
+                            <div class="progress-right "></div>
+                        </div>
+                        <div class="cf">
+                            <div class="min">0</div>
+                            <div class="max">{$deal.min_bought}</div>
+                        </div>
+
+                        {/if}
+                        {if $deal.buy_status eq 1} {*/成功/*}
+                        <p class=deal-buy-tip-top>{$deal.deal_success_num}</p>
+                        <p class="deal-buy-tip-notice">
+                            {if $deal.is_lottery eq 0}
+                            <?PHP
+										$c_deal = $this->_var['deal'];
+                            if($c_deal['max_bought'] != 0 && $c_deal['max_bought'] - $c_deal['buy_count'] <= 20)
+                            {
+                            echo sprintf($GLOBALS['lang']['REMAIN_TIP'],$c_deal['max_bought'] - $c_deal['buy_count']);
+                            }
+                            ?>
+                            {$LANG.DEAL_LIMIT_TIP}
+                            {else}
+                            {function name="sprintf" f=$LANG.TOTAL_LOTTERY_COUNT p=$deal.lottery_count}
+                            <br /> <a href="{url x="shop" r="uc_order#lottery"}" style="color:#f30;">{$LANG.INVITE_LOTTERY_DEAL_TIP}</a>
+                            {/if}
+                        </p>
+                        {if $deal.is_lottery eq 0}
+                        <p class=deal-buy-on>{$LANG.DEAL_SUCCESS_CONTINUE_BUY}</p>
+                        {/if}
+                        {/if}
+                        {if $deal.buy_status eq 2} {*/卖光/*}
+                        <p class=deal-buy-tip-top>{$deal.deal_success_num}</p>
+                        <img src="{$TMPL}/images/tuan/bg-sold-out.gif">
+                        {/if}
+                        {/if}
+                        {if $deal.time_status eq 2} {*/过期/*}
+                        {if $deal.buy_status eq 0} {*/失败/*}
+                        <p class=deal-buy-tip-top>{$deal.deal_success_num}</p>
+                        <img src="{$TMPL}/images/tuan/bg-deal-expired-fail.gif">
+                        {/if}
+                        {if $deal.buy_status eq 1} {*/成功/*}
+                        <p class=deal-buy-tip-top>{$deal.deal_success_num}</p>
+                        <img src="{$TMPL}/images/tuan/bg-deal-expired-success.gif">
+                        {/if}
+                        {if $deal.buy_status eq 2} {*/卖光/*}
+                        <p class=deal-buy-tip-top>{$deal.deal_success_num}</p>
+                        <img src="{$TMPL}/images/tuan/bg-sold-out.gif">
+                        {/if}
+                        {/if}
+                </div>
+                <!-- 以旧换新 -->
+                <a href="{url x="tuan" r="deal"}&id={$deal.id}&type=comment#detail_box" class="pd_favorable-comment">
+<span class="item">
+{$comment_count}条评论
+</span>
+                <!--<span class="icon_arrow icon-right_arrow"></span>-->
+                <i class="arrowent"></i>
+                </a>
+            </div><!-- pd_box-border -->
+            <!-- 促销-->
+            <div class="pd_box-border" style="background-color:#f6f6f6;">
+                <!-- pd_product-desc -->
+                <div class="pd_brand-search" style="position: relative;">
+                    <a href="{url x="youhui" r="store#view"}&id={$deal.supplier_info.id}" data-tpa="H5_DETAIL_CLICKBRAND" data-trackersend="1" style="width:90%">
+                    <img src="{function name="get_spec_image" v=$deal.supplier_info.preview w="60" h="60"}">
+<span class="text">
+查看
+<em>{$deal.supplier_info.name}</em>
+相关产品
+</span>
+                    <!--<span class="icon_arrow icon-right_arrow"></span>-->
+                    </a>
+                    <i class="arrowent"></i>
+                </div>
+                <div class="pd_product-recommend" id="pd_buy-also-look">
+                </div>
+                <div class="pd_detail-tab">
+                    <div class="tab">
+                        <a href="javascript:;" class="item {if $type neq 'comment'}cur{/if}" data-tpa="H5_DETAIL_DESC" data-trackersend="1" t="desc">图文详情</a>
+                        <a href="javascript:;" class="item {if $type eq 'comment'}cur{/if}" data-tpa="H5_DETAIL_REVIEW" data-trackersend="1" t="comment">评论 {$comment_count}
+                        </a>
+                    </div>
+                </div>
+                <div class="pd_detail-wrap" style="min-height: 558px;">
+                    <!-- desc -->
+                    <div class="pd_detail-tab-con desc" data-load="0" {if $type eq 'comment'}style="display:none;"{/if}>
+                    <style type="text/css">
+                        img{max-width:none;}
+                        .leftBckBtn{position:absolute; display:block; width:110px; height:70px; line-height:70px; left:-15px; top:-10px; text-indent:20px; text-decoration:none; font-size:28px;
+                        }
+                    </style>
+                    <div class="mobile-tuan-brief">
+                        {$deal.brief}
+                    </div>
+                    <div class="mobile-tuan-description">
+                        {$deal.description}
+                    </div>
+                </div>
+                <!-- parameter -->
+                <div class="pd_detail-tab-con parameter" data-load="0">
+                </div>
+                <!-- comment -->
+                <div class="pd_detail-tab-con comment" id="detail_box" data-load="0" {if $type neq 'comment'}style="display:none;"{/if}>
+                {insert name='load_goods_comment'} {* 动态团购点评 *}
+            </div>
+            <!-- after_service -->
+            <div class="pd_detail-tab-con after_service" data-load="0">
+            </div>
+            <div class="pd_detail-tab-loading">
+                <span></span>
+            </div>
+        </div> </div>
+    </script>
+    <div class="pd_product-buy-num show" id="product-buy-num" style="display:none;">
+        <div class="pd_product-num-wrap">
+            <span class="pd_product-num-minus pd_product-num_disable" data-tpa="H5_DETAIL_AMOUNTSELECT" data-trackersend="1" onclick="minus()"></span>
+            <input class="pd_product-num-form" type="number" min="1" max="999" value="1" id="buy_number" required="">
+            <span class="pd_product-num-plus" data-tpa="H5_DETAIL_AMOUNTSELECT" data-trackersend="1" onclick="plus()"></span>
+        </div>
+        <a href="javascript:void(0);" class="pd_add-cart" id="addcart" data-tpa="H5_DETAIL_ADD_CARD" data-trackersend="1" onclick="add_cart({$goods.id})">立即抢购</a>
+        <a class="pd_shop-cart icon-shop_cart" href="{url x="shop" r="cart#index"}" data-tpa="H5_DETAIL_ENTER_CART">
+        <span class="num" style="display:none;" id="cart_count"></span>
+        </a>
+    </div>
+    <script>
+            function add_cart(id,attr)
+            {
+                var ajaxurl = "/shop.php?ctl=cart&act=addcart&id="+id;
+                if(attr&&attr != '')
+                {
+                    ajaxurl += attr;
+
+                }
+                else
+                {
+                    attrs = $("select[name='attr[]']");
+                    for(i=0;i<attrs.length;i++)
+                    {
+                        ajaxurl += "&attr[]="+$(attrs[i]).val();
+                    }
+
+                }
+                //var number = $("input[name='number']").val();
+                var number = $("#buy_number").val();
+                console.log(number);
+                if(number)
+                    ajaxurl+="&number="+number;
+
+                $.ajax({
+                    url: ajaxurl,
+                    dataType: "json",
+                    success: function(obj){
+                        if(obj.open_win == 1)
+                        {
+                            /*if($(".dialog-mask").css("display")=='block')
+                             {
+                             $(".dialog-mask,.dialog-box").remove();
+                             }*/
+
+                            if(obj.err == 1){
+                                alert(obj.html);
+                            }
+                            //$.weeboxs.open("<span class='cart-error'>"+obj.html+"</span>", {contentType:'text',showButton:false,title:LANG['ADD_CART_ERR'],width:570,type:'wee'});
+                            else {
+                                alert(obj.html);
+                            }
+                        }
+                        else if(obj.open_win == 2)
+                        {
+                            //$.showErr(obj.info);
+                            alert(obj.info);
+                        }
+                        else
+                        {
+                            $("#cart_count").html(parseInt(obj.number));
+                            confirm({
+                                content: "成功加入到购物车",
+                                okText: "查看购物车",
+                                cancelText: "继续购物",
+                                boxClass: "custom-confirm"
+                            }, function (flag) {
+                                if (flag) {
+                                    window.location.href='{url x="shop" r="cart"}';
+                                } else {
+                                }
+                            });
+                        }
+                    },
+                    error:function(ajaxobj)
+                    {
+//			if(ajaxobj.responseText!='')
+//			alert(ajaxobj.responseText);
+                    }
+                });
+
+            }
+    $('.form_face').hide();
+    $('.tab .item').bind('click', function(){
+        $('.tab .item').removeClass('cur');
+        $(this).addClass('cur');
+        $('.pd_detail-tab-con').hide();
+        $('.pd_detail-tab-con.'+$(this).attr('t')).show();
+    });
+    $('.comment .sub_nav > span > a').each(function(){
+        $(this).attr('href', $(this).attr('href').replace('index','tuan').replace('goods','deal'))
+    });
+        </script>
+    <script>
+        var minus = function () {
+            if (parseInt($('#buy_number').val())>1)
+                $('#buy_number').val(parseInt($('#buy_number').val()) - 1)
+        }
+        var plus = function () {
+            $('#buy_number').val(parseInt($('#buy_number').val()) + 1)
+        }
+
+        {if ($deal.begin_time ne 0 and $deal.time_status eq 0) or ($deal.end_time ne 0 and $deal.time_status eq 1)} {* 时间 *}
+        {if $deal.time_status eq 1} {*/结束倒计时/*}
+        var endTime = {$deal.end_time}000;
+        var nowTime = {function name=get_gmtime}000;
+        var sysSecond = (endTime - nowTime) / 1000;
+        {/if}
+        {if $deal.time_status eq 0} {*/开始倒计时/*}
+        var beginTime = {$deal.begin_time}000;
+        var nowTime = {function name=get_gmtime}000;
+        var sysSecond = (beginTime - nowTime) / 1000;
+        {/if}
+        var interValObj;
+        setRemainTime();
+        function setRemainTime()
+        {
+            if (sysSecond > 0)
+            {
+                var second = Math.floor(sysSecond % 60);              // 计算秒
+                var minite = Math.floor((sysSecond / 60) % 60);       //计算分
+                var hour = Math.floor((sysSecond / 3600) % 24);       //计算小时
+                var day = Math.floor((sysSecond / 3600) / 24);        //计算天
+                var timeHtml = "<span>"+hour+"</span>"+LANG['HOUR']+"<span>"+minite+"</span>"+LANG['MIN']+"";
+                if(day > 0)
+                    timeHtml ="<span>"+day+"</span>"+LANG['DAY']+"" + timeHtml;
+
+                timeHtml+="<span>"+second+"</span>"+LANG['SEC']+"";
+
+                try
+                {
+                    $("#counter").html(timeHtml);
+                    sysSecond--;
+                }
+                catch(e){}}
+            else
+            {window.clearTimeout(interValObj);}
+            interValObj = window.setTimeout("setRemainTime()", 1000);
+        }
+        {/if}
+    </script>
+{include file="mobile/inc/mobile_footer.html"}
