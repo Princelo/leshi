@@ -236,6 +236,14 @@ class mobile_goodsModule extends ShopBaseModule
         $GLOBALS['tmpl']->display('mobile/mobile_goods_list.html');
     }
 
+    public function tuans_list()
+    {
+        $list_type = intval($_REQUEST['list_type']);
+        $tag_list = get_cate_tree();
+        $GLOBALS['tmpl']->assign('tag_list', $tag_list);
+        $GLOBALS['tmpl']->display('mobile/mobile_tuans_list.html');
+    }
+
     function load_goods_time_status()
     {
         //获取当前页的团购商品

@@ -162,5 +162,13 @@ class mobile_dealModule extends TuanBaseModule
             $GLOBALS['tmpl']->display("no_deal.html");
         }
     }
+
+    public function tuans_list()
+    {
+        $list_type = intval($_REQUEST['list_type']);
+        $tag_list = get_cate_tree();
+        $GLOBALS['tmpl']->assign('tag_list', $tag_list);
+        $GLOBALS['tmpl']->display('mobile/mobile_tuans_list.html');
+    }
 }
 ?>

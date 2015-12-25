@@ -66,7 +66,8 @@ class TuanBaseModule{
             $GLOBALS['dynamic_cache'] = $GLOBALS['fcache']->get("APP_DYNAMIC_CACHE_" . APP_INDEX . "_" . MODULE_NAME . "_" . ACTION_NAME);
             $GLOBALS['fcache']->set_dir(APP_ROOT_PATH . "public/runtime/data/avatar_cache/");
             $GLOBALS['dynamic_avatar_cache'] = $GLOBALS['fcache']->get("AVATAR_DYNAMIC_CACHE"); //头像的动态缓存
-            if (//MODULE_NAME == "deal" && ACTION_NAME == "index" ||
+            if (MODULE_NAME == "deal" && ACTION_NAME == "index" ||
+                MODULE_NAME == "deal" && ACTION_NAME == "tuans_list" ||
                 //MODULE_NAME == "deals" && ACTION_NAME == "index" ||
                 //MODULE_NAME == "dhapi" && ACTION_NAME == "index" ||
                 MODULE_NAME == "mobile_index" && ACTION_NAME == "index" //||
